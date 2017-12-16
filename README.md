@@ -3,7 +3,7 @@
 
 ## Demo
 
-[https://github.com/chenxuan0000/vue-seamless-scroll/examples](htmlpreview.github.io/?https://github.com/chenxuan0000/vue-seamless-scroll/examples/index.html)
+[https://github.com/chenxuan0000/vue-seamless-scroll/index.html](https://github.com/chenxuan0000/vue-seamless-scroll/index.html)
 
 ## Installation
 
