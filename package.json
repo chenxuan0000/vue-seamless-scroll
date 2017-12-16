@@ -1,8 +1,8 @@
 {
   "name": "vue-seamless-scroll",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple, Seamless scrolling for Vue.js",
-  "main": "index.js",
+  "main": "dist/vue-seamless-scroll.min.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.dev.js --open --inline --hot",
     "build:debug": "cross-env NODE_ENV=debug webpack --config build/webpack.dist.js",
@@ -11,6 +11,10 @@
     "build:all": "npm run build:debug && npm run build:prod && npm run build:examples"
   },
   "author": "chenxuan",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/chenxuan0000/vue-seamless-scroll"
+  },
   "keywords": [
     "vue",
     "vuejs",
