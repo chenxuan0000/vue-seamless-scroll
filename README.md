@@ -5,7 +5,9 @@
 [![npm](https://img.shields.io/npm/dw/chenxuan0000/vue-seamless-scroll.svg)]()
 [![Build Status](https://img.shields.io/appveyor/ci/gruntjs/grunt/master.svg) ![LICENSE MIT](https://img.shields.io/npm/l/express.svg)](https://www.npmjs.com/package/vue-seamless-scroll) ![](https://img.shields.io/npm/v/vue-seamless-scroll.svg)
                                          
-                                          
+<p align="center">
+    <a href="https://lets-blade.com"><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1513438288&di=7501d9cbb876dbf8e189d846e72dc1f0&src=http://easyread.ph.126.net/e09BC9VNjw0fmSDrvpjVog==/7916749801802782271.jpg" width="550"/></a>
+</p>                                          
 
 ## Demo
 
@@ -50,7 +52,7 @@ Example:
     <vue-seamless-scroll></vue-seamless-scroll>
   </div>
   <script src="vue.js"></script>
-  <script src="vue-simple-spinner.js"></script>
+  <script src="vue-seamless-scroll"></script>
   <script>
     new Vue({
       el: '#app'
