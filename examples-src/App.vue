@@ -23,37 +23,56 @@
             <my-class :data="listData" :classOption="classOption" @copyData="listData = listData.concat(listData)"
                       class="warp">
                 <ul class="item">
-                    <li v-for="item in listData"><span class="title">{{item.title}}</span><span class="date">{{item.date}}</span></li>
+                    <li v-for="item in listData"><span class="title">{{item.title}}</span><span class="date">{{item.date}}</span>
+                    </li>
                 </ul>
             </my-class>
         </div>
         <div class="flex wd800">
             <div class="options" style="color:#357edd;">
-                <p><b>demo2</b> limitMoveNum过大不滚动</p>
+                <p><b>demo2</b> limitMoveNum过大不滚动 开启了openWatch</p>
                 var option = {<br/>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limitMoveNum: 10<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limitMoveNum: 7<br/>
                 }
             </div>
             <my-class :data="listData1" :classOption="classOption1" @copyData="listData1 = listData1.concat(listData1)"
                       class="warp">
                 <ul class="item">
-                    <li v-for="item in listData1"><span class="title">{{item.title}}</span><span class="date">{{item.date}}</span></li>
+                    <li v-for="item in listData1"><span class="title">{{item.title}}</span><span
+                            class="date">{{item.date}}</span></li>
                 </ul>
             </my-class>
         </div>
         <div class="flex wd800">
             <div class="options" style="color:#357edd;">
-                <p><b>demo3</b> 向下滚动,禁止了hover悬停</p>
+                <p><b>demo3</b> limitMoveNum过大不滚动 关闭了openWatch</p>
+                var option = {<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limitMoveNum: 7<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;openWatch: false<br/>
+                }
+            </div>
+            <my-class :data="listData2" :classOption="classOption2" @copyData="listData2 = listData2.concat(listData2)"
+                      class="warp">
+                <ul class="item">
+                    <li v-for="item in listData2"><span class="title">{{item.title}}</span><span
+                            class="date">{{item.date}}</span></li>
+                </ul>
+            </my-class>
+        </div>
+        <div class="flex wd800">
+            <div class="options" style="color:#357edd;">
+                <p><b>demo4</b> 向下滚动,禁止了hover悬停</p>
                 var option = {<br/>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limitMoveNum: 5,<br/>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;direction: 0,<br/>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hoverStop: false,<br/>
                 }
             </div>
-            <my-class :data="listData2" :classOption="classOption2" @copyData="listData2 = listData2.concat(listData2)"
+            <my-class :data="listData3" :classOption="classOption3" @copyData="listData3 = listData3.concat(listData3)"
                       class="warp">
                 <ul class="item">
-                    <li v-for="item in listData2"><span class="title">{{item.title}}</span><span class="date">{{item.date}}</span></li>
+                    <li v-for="item in listData3"><span class="title">{{item.title}}</span><span
+                            class="date">{{item.date}}</span></li>
                 </ul>
             </my-class>
         </div>
@@ -132,6 +151,25 @@
         }, {
           'title': '无缝滚动第六行无缝滚动第六行',
           'date': '2017-12-16'
+        }],
+        listData3: [{
+          'title': '无缝滚动第一行无缝滚动第一行',
+          'date': '2017-12-16'
+        }, {
+          'title': '无缝滚动第二行无缝滚动第二行',
+          'date': '2017-12-16'
+        }, {
+          'title': '无缝滚动第三行无缝滚动第三行',
+          'date': '2017-12-16'
+        }, {
+          'title': '无缝滚动第四行无缝滚动第四行',
+          'date': '2017-12-16'
+        }, {
+          'title': '无缝滚动第五行无缝滚动第五行',
+          'date': '2017-12-16'
+        }, {
+          'title': '无缝滚动第六行无缝滚动第六行',
+          'date': '2017-12-16'
         }, {
           'title': '无缝滚动第七行无缝滚动第七行',
           'date': '2017-12-16'
@@ -150,10 +188,16 @@
       },
       classOption1 () {
         return {
-          limitMoveNum: 10
+          limitMoveNum: 7
         }
       },
       classOption2 () {
+        return {
+          limitMoveNum: 7,
+          openWatch: false
+        }
+      },
+      classOption3 () {
         return {
           limitMoveNum: 5,
           direction: 0,
@@ -163,6 +207,38 @@
     },
     components: {
       myClass
+    },
+    created () {
+      setTimeout(() => {
+        this.listData1 = this.listData2 = [{
+          'title': '无缝滚动第一行无缝滚动第一行',
+          'date': '2017-12-16'
+        }, {
+          'title': '无缝滚动第二行无缝滚动第二行',
+          'date': '2017-12-16'
+        }, {
+          'title': '无缝滚动第三行无缝滚动第三行',
+          'date': '2017-12-16'
+        }, {
+          'title': '无缝滚动第四行无缝滚动第四行',
+          'date': '2017-12-16'
+        }, {
+          'title': '无缝滚动第五行无缝滚动第五行',
+          'date': '2017-12-16'
+        }, {
+          'title': '无缝滚动第六行无缝滚动第六行',
+          'date': '2017-12-16'
+        }, {
+          'title': '无缝滚动第七行无缝滚动第七行',
+          'date': '2017-12-16'
+        }, {
+          'title': '无缝滚动第八行无缝滚动第八行',
+          'date': '2017-12-16'
+        }, {
+          'title': '无缝滚动第九行无缝滚动第九行',
+          'date': '2017-12-16'
+        }]
+      }, 3000)
     }
   }
 </script>
@@ -171,6 +247,7 @@
     #app {
         padding-bottom: 100px;
     }
+
     .flex-fill {
         -ms-flex: 1 1;
         flex: 1 1;

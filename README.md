@@ -67,7 +67,8 @@ Example:
           step: 1, //步长 越大滚动速度越快
           limitMoveNum: 5, //启动无缝滚动最小数据量 this.dataList.length
           hoverStop: true, //是否启用鼠标hover控制
-          direction: 1 //1 往上 0 往下
+          direction: 1, //1 往上 0 往下
+          openWatch: true //开启data实时监听
         }
       }
 ```

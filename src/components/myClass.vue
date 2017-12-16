@@ -34,7 +34,8 @@
           step: 1, //步长
           limitMoveNum: 5, //启动无缝滚动最小数据数
           hoverStop: true, //是否启用鼠标hover控制
-          direction: 1 //1 往上 0 往下
+          direction: 1, //1 往上 0 往下
+          openWatch: true //开启data实时监听
         }
       },
       options () {
@@ -47,11 +48,11 @@
     },
     methods: {
       enter () {
-        if (!this.options.hoverStop || this.moveSwitch) return
+        if (!this.options.openWatch || !this.options.hoverStop || this.moveSwitch) return
         cancelAnimationFrame(this.reqFrame)
       },
       leave () {
-        if (!this.options.hoverStop || this.moveSwitch) return
+        if (!this.options.openWatch || !this.options.hoverStop || this.moveSwitch) return
         this._move()
       },
       _move () {
@@ -93,7 +94,9 @@
     },
     watch: {
       data (newData, oldData) {
+        if (!this.options.openWatch) return
         if (!arrayEqual(newData, oldData.concat(oldData))) {
+          console.log(111)
           cancelAnimationFrame(this.reqFrame)
           this._initMove()
         }

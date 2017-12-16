@@ -334,7 +334,8 @@ exports.default = {
         step: 1,
         limitMoveNum: 5,
         hoverStop: true,
-        direction: 1 };
+        direction: 1,
+        openWatch: true };
     },
     options: function options() {
       return (0, _assign2.default)({}, this.defaultOption, this.classOption);
@@ -345,11 +346,11 @@ exports.default = {
   },
   methods: {
     enter: function enter() {
-      if (!this.options.hoverStop || this.moveSwitch) return;
+      if (!this.options.openWatch || !this.options.hoverStop || this.moveSwitch) return;
       cancelAnimationFrame(this.reqFrame);
     },
     leave: function leave() {
-      if (!this.options.hoverStop || this.moveSwitch) return;
+      if (!this.options.openWatch || !this.options.hoverStop || this.moveSwitch) return;
       this._move();
     },
     _move: function _move() {
@@ -394,7 +395,9 @@ exports.default = {
 
   watch: {
     data: function data(newData, oldData) {
+      if (!this.options.openWatch) return;
       if (!arrayEqual(newData, oldData.concat(oldData))) {
+        console.log(111);
         cancelAnimationFrame(this.reqFrame);
         this._initMove();
       }
