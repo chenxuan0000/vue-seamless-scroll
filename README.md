@@ -38,10 +38,8 @@ new Vue({
 
 ### 普通模式 (script tag)
 
-Add a script tag pointing to `dist/vue-seamless-scroll.min.js` *after* adding Vue.
-
 Example:
-
+> 具体参考[example-src/App.vue](https://github.com/chenxuan0000/vue-seamless-scroll/blob/master/examples-src/App.vue)
 ```html
 <html>
 <head>
