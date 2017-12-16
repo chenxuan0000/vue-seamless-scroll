@@ -1,9 +1,15 @@
 # vue-seamless-scroll 
 > A simple, Seamless scrolling for Vue.js
 
+[![GitHub forks](https://img.shields.io/github/forks/chenxuan0000/vue-seamless-scroll.svg?style=social&label=Fork)](https://www.npmjs.com/package/vue-seamless-scroll)[![GitHub stars](https://img.shields.io/github/stars/chenxuan0000/vue-seamless-scroll.svg?style=social&label=Stars)](https://www.npmjs.com/package/vue-seamless-scroll)
+[![npm](https://img.shields.io/npm/dw/chenxuan0000/vue-seamless-scroll.svg)]()
+[![Build Status](https://img.shields.io/appveyor/ci/gruntjs/grunt/master.svg) ![LICENSE MIT](https://img.shields.io/npm/l/express.svg)](https://www.npmjs.com/package/vue-seamless-scroll) ![](https://img.shields.io/npm/v/vue-seamless-scroll.svg)
+                                         
+                                          
+
 ## Demo
 
-[https://github.com/chenxuan0000/vue-seamless-scroll/index.html](https://github.com/chenxuan0000/vue-seamless-scroll/index.html)
+[https://github.com/chenxuan0000/vue-seamless-scroll/index.html](https://chenxuan0000.github.io/vue-seamless-scroll/)
 
 ## Installation
 
