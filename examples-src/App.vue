@@ -80,10 +80,12 @@
         </div>
         <div class="flex wd800">
             <div class="options" style="color:#357edd;">
-                <p><b>demo1</b> 向上无缝滚动,单条停止一段时间</p>
+                <p><b>demo5</b> 向上无缝滚动,单条停止一段时间</p>
                 var option = {<br/>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;step: 0.5,<br/>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limitMoveNum: 5<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;singleHeight: 30,<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;waitTime: 1000<br/>
                 }
             </div>
             <my-class :data="listData4" :classOption="classOption4" @copyData="listData4 = listData4.concat(listData4)"
