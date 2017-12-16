@@ -68,7 +68,9 @@ Example:
           limitMoveNum: 5, //启动无缝滚动最小数据量 this.dataList.length
           hoverStop: true, //是否启用鼠标hover控制
           direction: 1, //1 往上 0 往下
-          openWatch: true //开启data实时监听
+          openWatch: true, //开启data实时监听
+          singleHeight: 0, //单条数据高度有值hoverStop关闭
+          waitTime: 1000 //单步停止等待时间
         }
       }
 ```

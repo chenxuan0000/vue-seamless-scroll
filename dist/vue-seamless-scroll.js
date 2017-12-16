@@ -335,7 +335,9 @@ exports.default = {
         limitMoveNum: 5,
         hoverStop: true,
         direction: 1,
-        openWatch: true };
+        openWatch: true,
+        singleHeight: 0,
+        waitTime: 1000 };
     },
     options: function options() {
       return (0, _assign2.default)({}, this.defaultOption, this.classOption);
@@ -346,17 +348,18 @@ exports.default = {
   },
   methods: {
     enter: function enter() {
-      if (!this.options.openWatch || !this.options.hoverStop || this.moveSwitch) return;
+      if (!this.options.openWatch || !!this.options.singleHeight || !this.options.hoverStop || this.moveSwitch) return;
       cancelAnimationFrame(this.reqFrame);
     },
     leave: function leave() {
-      if (!this.options.openWatch || !this.options.hoverStop || this.moveSwitch) return;
+      if (!this.options.openWatch || !!this.options.singleHeight || !this.options.hoverStop || this.moveSwitch) return;
       this._move();
     },
     _move: function _move() {
       var _this = this;
 
       this.reqFrame = requestAnimationFrame(function () {
+        var timer = void 0;
         var h = _this.$refs.wrapper.offsetHeight / 2;
         var direction = _this.options.direction;
         if (direction === 1) {
@@ -369,7 +372,18 @@ exports.default = {
         } else {
           _this.yPos += _this.options.step;
         }
-        _this._move();
+        if (!!_this.options.singleHeight) {
+          if (Math.abs(_this.yPos) % _this.options.singleHeight === 0) {
+            if (timer) clearTimeout(timer);
+            timer = setTimeout(function () {
+              _this._move();
+            }, _this.options.waitTime);
+          } else {
+            _this._move();
+          }
+        } else {
+          _this._move();
+        }
       });
     },
     _initMove: function _initMove() {
@@ -397,7 +411,6 @@ exports.default = {
     data: function data(newData, oldData) {
       if (!this.options.openWatch) return;
       if (!arrayEqual(newData, oldData.concat(oldData))) {
-        console.log(111);
         cancelAnimationFrame(this.reqFrame);
         this._initMove();
       }

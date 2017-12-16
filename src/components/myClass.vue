@@ -35,7 +35,9 @@
           limitMoveNum: 5, //启动无缝滚动最小数据数
           hoverStop: true, //是否启用鼠标hover控制
           direction: 1, //1 往上 0 往下
-          openWatch: true //开启data实时监听
+          openWatch: true, //开启data实时监听
+          singleHeight: 0, //单条数据高度有值hoverStop关闭
+          waitTime: 1000 //单步停止等待时间
         }
       },
       options () {
@@ -48,16 +50,17 @@
     },
     methods: {
       enter () {
-        if (!this.options.openWatch || !this.options.hoverStop || this.moveSwitch) return
+        if (!this.options.openWatch || !!this.options.singleHeight ||!this.options.hoverStop || this.moveSwitch) return
         cancelAnimationFrame(this.reqFrame)
       },
       leave () {
-        if (!this.options.openWatch || !this.options.hoverStop || this.moveSwitch) return
+        if (!this.options.openWatch || !!this.options.singleHeight ||!this.options.hoverStop || this.moveSwitch) return
         this._move()
       },
       _move () {
         this.reqFrame = requestAnimationFrame(
           () => {
+            let timer
             let h = this.$refs.wrapper.offsetHeight / 2
             let direction = this.options.direction
             if (direction === 1) {
@@ -70,7 +73,18 @@
             } else {
               this.yPos += this.options.step
             }
-            this._move()
+            if (!!this.options.singleHeight) {
+              if (Math.abs(this.yPos) % this.options.singleHeight === 0) {
+                if (timer) clearTimeout(timer)
+                timer = setTimeout(() => {
+                  this._move()
+                }, this.options.waitTime)
+              } else {
+                this._move()
+              }
+            }else {
+              this._move()
+            }
           }
         )
       },
@@ -96,7 +110,6 @@
       data (newData, oldData) {
         if (!this.options.openWatch) return
         if (!arrayEqual(newData, oldData.concat(oldData))) {
-          console.log(111)
           cancelAnimationFrame(this.reqFrame)
           this._initMove()
         }

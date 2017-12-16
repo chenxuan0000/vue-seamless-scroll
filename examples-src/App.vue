@@ -31,6 +31,7 @@
         <div class="flex wd800">
             <div class="options" style="color:#357edd;">
                 <p><b>demo2</b> limitMoveNum过大不滚动 开启了openWatch</p>
+                <p>3s后data增加到9条</p>
                 var option = {<br/>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limitMoveNum: 7<br/>
                 }
@@ -46,6 +47,7 @@
         <div class="flex wd800">
             <div class="options" style="color:#357edd;">
                 <p><b>demo3</b> limitMoveNum过大不滚动 关闭了openWatch</p>
+                <p>3s后data增加到9条</p>
                 var option = {<br/>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limitMoveNum: 7<br/>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;openWatch: false<br/>
@@ -73,6 +75,22 @@
                 <ul class="item">
                     <li v-for="item in listData3"><span class="title">{{item.title}}</span><span
                             class="date">{{item.date}}</span></li>
+                </ul>
+            </my-class>
+        </div>
+        <div class="flex wd800">
+            <div class="options" style="color:#357edd;">
+                <p><b>demo1</b> 向上无缝滚动,单条停止一段时间</p>
+                var option = {<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;step: 0.5,<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limitMoveNum: 5<br/>
+                }
+            </div>
+            <my-class :data="listData4" :classOption="classOption4" @copyData="listData4 = listData4.concat(listData4)"
+                      class="warp">
+                <ul class="item">
+                    <li v-for="item in listData4"><span class="title">{{item.title}}</span><span class="date">{{item.date}}</span>
+                    </li>
                 </ul>
             </my-class>
         </div>
@@ -176,7 +194,35 @@
         }, {
           'title': '无缝滚动第八行无缝滚动第八行',
           'date': '2017-12-16'
-        }]
+        }],
+        listData4: [{
+          'title': '无缝滚动第一行无缝滚动第一行',
+          'date': '2017-12-16'
+        }, {
+          'title': '无缝滚动第二行无缝滚动第二行',
+          'date': '2017-12-16'
+        }, {
+          'title': '无缝滚动第三行无缝滚动第三行',
+          'date': '2017-12-16'
+        }, {
+          'title': '无缝滚动第四行无缝滚动第四行',
+          'date': '2017-12-16'
+        }, {
+          'title': '无缝滚动第五行无缝滚动第五行',
+          'date': '2017-12-16'
+        }, {
+          'title': '无缝滚动第六行无缝滚动第六行',
+          'date': '2017-12-16'
+        }, {
+          'title': '无缝滚动第七行无缝滚动第七行',
+          'date': '2017-12-16'
+        }, {
+          'title': '无缝滚动第八行无缝滚动第八行',
+          'date': '2017-12-16'
+        }, {
+          'title': '无缝滚动第九行无缝滚动第九行',
+          'date': '2017-12-16'
+        }],
       }
     },
     computed: {
@@ -202,6 +248,14 @@
           limitMoveNum: 5,
           direction: 0,
           hoverStop: false
+        }
+      },
+      classOption4 () {
+        return {
+          step: 0.5,
+          limitMoveNum: 5,
+          singleHeight: 30,
+          waitTime: 1000
         }
       }
     },
@@ -258,7 +312,12 @@
         margin-right: 60px;
         p {
             color: #000;
+            font-size: 14px;
             margin-bottom: 30px;
+            b {
+                font-size: 16px;
+                font-style: italic;
+            }
         }
     }
 
