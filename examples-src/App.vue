@@ -353,19 +353,22 @@
     }
 
     @media screen and (max-width: 770px) {
+        .warp {
+            width: 90%;
+            margin: 0 auto;
+        }
         body {
             background-color: lightblue;
         }
         .wd800 {
             width: 100%;
-            margin: 30px auto;
         }
         .flex.wd800 {
             display: block;
         }
         .options {
-            padding-left: 25px;
-            margin-bottom:30px;
+            width: 90%;
+            margin: 20px auto;
             p {
                 margin-bottom:0;
             }
