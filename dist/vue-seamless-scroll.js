@@ -393,7 +393,7 @@ exports.default = {
         cancelAnimationFrame(this.reqFrame);
         this.yPos = 0;
       } else {
-        this.$emit('copyData');
+        this.$emit('copy-data');
         if (this.options.direction !== 1) {
           setTimeout(function () {
             _this2.yPos = _this2.$refs.wrapper.offsetHeight / 2 * -1;

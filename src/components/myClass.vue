@@ -93,7 +93,7 @@
           cancelAnimationFrame(this.reqFrame)
           this.yPos = 0
         } else {
-          this.$emit('copyData')
+          this.$emit('copy-data')
           if (this.options.direction !== 1) {
             setTimeout(() => {
               this.yPos = this.$refs.wrapper.offsetHeight / 2 * -1

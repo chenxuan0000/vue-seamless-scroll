@@ -20,10 +20,10 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limitMoveNum: 5<br/>
                 }
             </div>
-            <my-class :data="listData" :classOption="classOption" @copyData="listData = listData.concat(listData)"
+            <my-class :data="listData" :class-option="classOption" @copy-data="listData = listData.concat(listData)"
                       class="warp">
                 <ul class="item">
-                    <li v-for="item in listData"><span class="title">{{item.title}}</span><span class="date">{{item.date}}</span>
+                    <li v-for="item in listData"><span class="title" v-text="item.title"></span><span class="date" v-text="item.date"></span>
                     </li>
                 </ul>
             </my-class>
@@ -36,11 +36,11 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limitMoveNum: 7<br/>
                 }
             </div>
-            <my-class :data="listData1" :classOption="classOption1" @copyData="listData1 = listData1.concat(listData1)"
+            <my-class :data="listData1" :class-option="classOption1" @copy-data="listData1 = listData1.concat(listData1)"
                       class="warp">
                 <ul class="item">
-                    <li v-for="item in listData1"><span class="title">{{item.title}}</span><span
-                            class="date">{{item.date}}</span></li>
+                    <li v-for="item in listData1"><span class="title" v-text="item.title"></span><span
+                            class="date" v-text="item.date"></span></li>
                 </ul>
             </my-class>
         </div>
@@ -53,11 +53,11 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;openWatch: false<br/>
                 }
             </div>
-            <my-class :data="listData2" :classOption="classOption2" @copyData="listData2 = listData2.concat(listData2)"
+            <my-class :data="listData2" :class-option="classOption2" @copy-data="listData2 = listData2.concat(listData2)"
                       class="warp">
                 <ul class="item">
-                    <li v-for="item in listData2"><span class="title">{{item.title}}</span><span
-                            class="date">{{item.date}}</span></li>
+                    <li v-for="item in listData2"><span class="title" v-text="item.title"></span><span
+                            class="date" v-text="item.date"></span></li>
                 </ul>
             </my-class>
         </div>
@@ -70,11 +70,11 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hoverStop: false,<br/>
                 }
             </div>
-            <my-class :data="listData3" :classOption="classOption3" @copyData="listData3 = listData3.concat(listData3)"
+            <my-class :data="listData3" :class-option="classOption3" @copy-data="listData3 = listData3.concat(listData3)"
                       class="warp">
                 <ul class="item">
-                    <li v-for="item in listData3"><span class="title">{{item.title}}</span><span
-                            class="date">{{item.date}}</span></li>
+                    <li v-for="item in listData3"><span class="title" v-text="item.title"></span><span
+                            class="date" v-text="item.date"></span></li>
                 </ul>
             </my-class>
         </div>
@@ -88,10 +88,10 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;waitTime: 1000<br/>
                 }
             </div>
-            <my-class :data="listData4" :classOption="classOption4" @copyData="listData4 = listData4.concat(listData4)"
+            <my-class :data="listData4" :class-option="classOption4" @copy-data="listData4 = listData4.concat(listData4)"
                       class="warp">
                 <ul class="item">
-                    <li v-for="item in listData4"><span class="title">{{item.title}}</span><span class="date">{{item.date}}</span>
+                    <li v-for="item in listData4"><span class="title" v-text="item.title"></span><span class="date" v-text="item.date"></span>
                     </li>
                 </ul>
             </my-class>
@@ -311,10 +311,10 @@
 
     .options {
         width: 300px;
+        font-size: 15px;
         margin-right: 60px;
         p {
             color: #000;
-            font-size: 14px;
             margin-bottom: 30px;
             b {
                 font-size: 16px;
