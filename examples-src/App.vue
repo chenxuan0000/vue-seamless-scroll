@@ -1,8 +1,6 @@
 <template>
     <div id="app">
         <div class="fixed top-0 w-100 z-1 flex-none flex flex-row items-center pv3 ph4 bg-blue white">
-            <div class="flex-fill"><a href="https://github.com/chenxuan0000/vue-seamless-scroll"
-                                      class="white no-underline underline-hover">vue-seamless-scroll</a></div>
             <div class="flex-none"><a href="https://github.com/chenxuan0000/vue-seamless-scroll" rel="noopener"
                                       target="_blank" title="View on Github">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="white" width="32" height="32" viewBox="0 0 16 16">
@@ -10,6 +8,8 @@
                 </svg>
             </a>
             </div>
+            <div class="flex-none" style="margin-left: 10px;"><a href="https://github.com/chenxuan0000/vue-seamless-scroll"
+                                      class="white no-underline underline-hover">vue-seamless-scroll</a></div>
         </div>
         <p class="pt5 f2" style="text-align: center;">无缝滚动demo</p>
         <div class="flex wd800">
@@ -23,7 +23,8 @@
             <my-class :data="listData" :class-option="classOption" @copy-data="listData = listData.concat(listData)"
                       class="warp">
                 <ul class="item">
-                    <li v-for="item in listData"><span class="title" v-text="item.title"></span><span class="date" v-text="item.date"></span>
+                    <li v-for="item in listData"><span class="title" v-text="item.title"></span><span class="date"
+                                                                                                      v-text="item.date"></span>
                     </li>
                 </ul>
             </my-class>
@@ -36,7 +37,8 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limitMoveNum: 7<br/>
                 }
             </div>
-            <my-class :data="listData1" :class-option="classOption1" @copy-data="listData1 = listData1.concat(listData1)"
+            <my-class :data="listData1" :class-option="classOption1"
+                      @copy-data="listData1 = listData1.concat(listData1)"
                       class="warp">
                 <ul class="item">
                     <li v-for="item in listData1"><span class="title" v-text="item.title"></span><span
@@ -53,7 +55,8 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;openWatch: false<br/>
                 }
             </div>
-            <my-class :data="listData2" :class-option="classOption2" @copy-data="listData2 = listData2.concat(listData2)"
+            <my-class :data="listData2" :class-option="classOption2"
+                      @copy-data="listData2 = listData2.concat(listData2)"
                       class="warp">
                 <ul class="item">
                     <li v-for="item in listData2"><span class="title" v-text="item.title"></span><span
@@ -70,7 +73,8 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hoverStop: false,<br/>
                 }
             </div>
-            <my-class :data="listData3" :class-option="classOption3" @copy-data="listData3 = listData3.concat(listData3)"
+            <my-class :data="listData3" :class-option="classOption3"
+                      @copy-data="listData3 = listData3.concat(listData3)"
                       class="warp">
                 <ul class="item">
                     <li v-for="item in listData3"><span class="title" v-text="item.title"></span><span
@@ -88,10 +92,12 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;waitTime: 1000<br/>
                 }
             </div>
-            <my-class :data="listData4" :class-option="classOption4" @copy-data="listData4 = listData4.concat(listData4)"
+            <my-class :data="listData4" :class-option="classOption4"
+                      @copy-data="listData4 = listData4.concat(listData4)"
                       class="warp">
                 <ul class="item">
-                    <li v-for="item in listData4"><span class="title" v-text="item.title"></span><span class="date" v-text="item.date"></span>
+                    <li v-for="item in listData4"><span class="title" v-text="item.title"></span><span class="date"
+                                                                                                       v-text="item.date"></span>
                     </li>
                 </ul>
             </my-class>
@@ -342,6 +348,26 @@
                 display: flex;
                 justify-content: space-between;
                 font-size: 15px;
+            }
+        }
+    }
+
+    @media screen and (max-width: 770px) {
+        body {
+            background-color: lightblue;
+        }
+        .wd800 {
+            width: 100%;
+            margin: 30px auto;
+        }
+        .flex.wd800 {
+            display: block;
+        }
+        .options {
+            padding-left: 25px;
+            margin-bottom:30px;
+            p {
+                margin-bottom:0;
             }
         }
     }

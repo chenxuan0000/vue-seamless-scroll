@@ -311,6 +311,7 @@ exports.default = {
   data: function data() {
     return {
       yPos: 0,
+      delay: 0,
       reqFrame: null
     };
   },
@@ -327,7 +328,7 @@ exports.default = {
   },
   computed: {
     pos: function pos() {
-      return { transform: 'translate(0,' + this.yPos + 'px)' };
+      return { transform: 'translate(0,' + this.yPos + 'px)', transition: 'all ease-in ' + this.delay + 'ms' };
     },
     defaultOption: function defaultOption() {
       return {
@@ -347,6 +348,58 @@ exports.default = {
     }
   },
   methods: {
+    touchStart: function touchStart(e) {
+      var _this = this;
+
+      if (!this.options.openWatch) return;
+      var timer = void 0;
+      var touch = e.targetTouches[0];
+      this.startPos = {
+        x: touch.pageX,
+        y: touch.pageY
+      };
+      this.startPosY = this.yPos;
+      if (!!this.options.singleHeight) {
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(function () {
+          cancelAnimationFrame(_this.reqFrame);
+        }, this.options.waitTime + 20);
+      } else {
+        cancelAnimationFrame(this.reqFrame);
+      }
+    },
+    touchMove: function touchMove(e) {
+      if (!this.options.openWatch || e.targetTouches.length > 1 || e.scale && e.scale !== 1) return;
+      var touch = e.targetTouches[0];
+      this.endPos = {
+        x: touch.pageX - this.startPos.x,
+        y: touch.pageY - this.startPos.y
+      };
+      var direction = Math.abs(this.endPos.x) < Math.abs(this.endPos.y) ? 1 : 0;
+      if (direction === 1) {
+        event.preventDefault();
+        this.yPos = this.startPosY + this.endPos.y;
+      }
+    },
+    touchEnd: function touchEnd() {
+      var _this2 = this;
+
+      if (!this.options.openWatch) return;
+      var timer = void 0;
+      var direction = this.options.direction;
+      this.delay = 50;
+      if (direction === 1) {
+        if (this.yPos > 0) this.yPos = 0;
+      } else {
+        var h = this.$refs.wrapper.offsetHeight / 2 * -1;
+        if (this.yPos < h) this.yPos = h;
+      }
+      if (timer) clearTimeout(timer);
+      timer = setTimeout(function () {
+        _this2.delay = 0;
+        _this2._move();
+      }, this.delay);
+    },
     enter: function enter() {
       if (!this.options.openWatch || !!this.options.singleHeight || !this.options.hoverStop || this.moveSwitch) return;
       cancelAnimationFrame(this.reqFrame);
@@ -356,38 +409,38 @@ exports.default = {
       this._move();
     },
     _move: function _move() {
-      var _this = this;
+      var _this3 = this;
 
       this.reqFrame = requestAnimationFrame(function () {
         var timer = void 0;
-        var h = _this.$refs.wrapper.offsetHeight / 2;
-        var direction = _this.options.direction;
+        var h = _this3.$refs.wrapper.offsetHeight / 2;
+        var direction = _this3.options.direction;
         if (direction === 1) {
-          if (Math.abs(_this.yPos) >= h) _this.yPos = 0;
+          if (Math.abs(_this3.yPos) >= h) _this3.yPos = 0;
         } else {
-          if (_this.yPos >= 0) _this.yPos = h * -1;
+          if (_this3.yPos >= 0) _this3.yPos = h * -1;
         }
         if (direction === 1) {
-          _this.yPos -= _this.options.step;
+          _this3.yPos -= _this3.options.step;
         } else {
-          _this.yPos += _this.options.step;
+          _this3.yPos += _this3.options.step;
         }
-        if (!!_this.options.singleHeight) {
-          if (Math.abs(_this.yPos) % _this.options.singleHeight === 0) {
+        if (!!_this3.options.singleHeight) {
+          if (Math.abs(_this3.yPos) % _this3.options.singleHeight === 0) {
             if (timer) clearTimeout(timer);
             timer = setTimeout(function () {
-              _this._move();
-            }, _this.options.waitTime);
+              _this3._move();
+            }, _this3.options.waitTime);
           } else {
-            _this._move();
+            _this3._move();
           }
         } else {
-          _this._move();
+          _this3._move();
         }
       });
     },
     _initMove: function _initMove() {
-      var _this2 = this;
+      var _this4 = this;
 
       if (this.moveSwitch) {
         cancelAnimationFrame(this.reqFrame);
@@ -396,7 +449,7 @@ exports.default = {
         this.$emit('copy-data');
         if (this.options.direction !== 1) {
           setTimeout(function () {
-            _this2.yPos = _this2.$refs.wrapper.offsetHeight / 2 * -1;
+            _this4.yPos = _this4.$refs.wrapper.offsetHeight / 2 * -1;
           }, 20);
         }
         this._move();
@@ -917,7 +970,10 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   return _c('div', {
     on: {
       "mouseenter": _vm.enter,
-      "mouseleave": _vm.leave
+      "mouseleave": _vm.leave,
+      "touchstart": _vm.touchStart,
+      "touchmove": _vm.touchMove,
+      "touchend": _vm.touchEnd
     }
   }, [_c('div', {
     ref: "wrapper",

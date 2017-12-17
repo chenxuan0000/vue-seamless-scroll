@@ -9,6 +9,10 @@
     <a href="https://lets-blade.com"><img src="https://timgsa.baidu.com/timg?image&quality=80&size=b10000_10000&sec=1513438288&di=7501d9cbb876dbf8e189d846e72dc1f0&src=http://easyread.ph.126.net/e09BC9VNjw0fmSDrvpjVog==/7916749801802782271.jpg" width="550"/></a>
 </p>                                          
 
+
+## Browser support(mobile.pc)
+> 支持移动端touch事件滚动循环列表
+
 ## Demo
 
 [https://github.com/chenxuan0000/vue-seamless-scroll/index.html](https://chenxuan0000.github.io/vue-seamless-scroll/)
