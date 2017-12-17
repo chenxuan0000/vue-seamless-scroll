@@ -23,8 +23,8 @@ npm install vue-seamless-scroll --save
 
 ## Usage
 ### ES6
-*以下es6用法需要webpack环境编译.
-*> 具体参考[example-src/App.vue](https://github.com/chenxuan0000/vue-seamless-scroll/blob/master/examples-src/App.vue)
+*以下es6用法需要webpack环境编译.*
+> 具体参考[example-src/App.vue](https://github.com/chenxuan0000/vue-seamless-scroll/blob/master/examples-src/App.vue)
 
 ```js
 import Vue from 'vue'
