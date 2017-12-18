@@ -1,7 +1,10 @@
 <template>
     <div @mouseenter="enter" @mouseleave="leave" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
         <div ref="wrapper" :style="pos">
-            <slot></slot>
+            <div ref="slotList">
+                <slot></slot>
+            </div>
+            <div v-html="copyHtml"></div>
         </div>
     </div>
 </template>
@@ -13,6 +16,7 @@
       return {
         yPos: 0,
         delay: 0,
+        copyHtml: '',
         reqFrame: null
       }
     },
@@ -109,11 +113,12 @@
       _move () {
         this.reqFrame = requestAnimationFrame(
           () => {
-            let timer
-            let h = this.$refs.wrapper.offsetHeight / 2
-            let direction = this.options.direction
+            let h = this.$refs.wrapper.offsetHeight / 2  //实际高度
+            let direction = this.options.direction //滚动方向
             if (direction === 1) {
-              if (Math.abs(this.yPos) >= h) this.yPos = 0
+              if (Math.abs(this.yPos) >= h) {
+                this.yPos = 0
+              }
             } else {
               if (this.yPos >= 0) this.yPos = h * -1
             }
@@ -122,8 +127,9 @@
             } else {
               this.yPos += this.options.step
             }
-            if (!!this.options.singleHeight) {
-              if (Math.abs(this.yPos) % this.options.singleHeight === 0) {
+            if (!!this.options.singleHeight) { //是否启动了单行暂停配置
+              if (Math.abs(this.yPos) % this.options.singleHeight === 0) { // 符合条件暂停waitTime
+                let timer
                 if (timer) clearTimeout(timer)
                 timer = setTimeout(() => {
                   this._move()
@@ -138,13 +144,21 @@
         )
       },
       _initMove () {
+        this.copyHtml = '' //清空copy
         if (this.moveSwitch) {
           cancelAnimationFrame(this.reqFrame)
           this.yPos = 0
         } else {
-          this.$emit('copy-data')
+          let timer
+          if (timer) clearTimeout(timer)
+          timer = setTimeout(() => { //20ms作用保证能取到最新的html
+            this.copyHtml = this.$refs.slotList.innerHTML
+          }, 20)
           if (this.options.direction !== 1) {
-            setTimeout(() => {
+            //非向上滚动位置初始化
+            let timer
+            if (timer) clearTimeout(timer)
+            timer = setTimeout(() => {
               this.yPos = this.$refs.wrapper.offsetHeight / 2 * -1
             }, 20)
           }
@@ -157,8 +171,9 @@
     },
     watch: {
       data (newData, oldData) {
+        //监听data是否有变更
         if (!this.options.openWatch) return
-        if (!arrayEqual(newData, oldData.concat(oldData))) {
+        if (!arrayEqual(newData, oldData)) {
           cancelAnimationFrame(this.reqFrame)
           this._initMove()
         }

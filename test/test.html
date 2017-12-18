@@ -31,9 +31,7 @@
     </head>
     <body>
         <div id="app">
-            <vue-seamless-scroll :data="listData" :class-option="classOption"
-                                 @copy-data="listData = listData.concat(listData)"
-                                 class="warp">
+            <vue-seamless-scroll :data="listData" :class-option="classOption" class="warp">
                 <ul class="item">
                     <li v-for="item in listData"><span class="title" v-text="item.title"></span><span class="date"
                                                                                                       v-text="item.date"></span>

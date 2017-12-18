@@ -20,8 +20,7 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limitMoveNum: 5<br/>
                 }
             </div>
-            <my-class :data="listData" :class-option="classOption" @copy-data="listData = listData.concat(listData)"
-                      class="warp">
+            <my-class :data="listData" :class-option="classOption" class="warp">
                 <ul class="item">
                     <li v-for="item in listData"><span class="title" v-text="item.title"></span><span class="date"
                                                                                                       v-text="item.date"></span>
@@ -37,9 +36,7 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limitMoveNum: 7<br/>
                 }
             </div>
-            <my-class :data="listData1" :class-option="classOption1"
-                      @copy-data="listData1 = listData1.concat(listData1)"
-                      class="warp">
+            <my-class :data="listData1" :class-option="classOption1" class="warp">
                 <ul class="item">
                     <li v-for="item in listData1"><span class="title" v-text="item.title"></span><span
                             class="date" v-text="item.date"></span></li>
@@ -55,9 +52,7 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;openWatch: false<br/>
                 }
             </div>
-            <my-class :data="listData2" :class-option="classOption2"
-                      @copy-data="listData2 = listData2.concat(listData2)"
-                      class="warp">
+            <my-class :data="listData2" :class-option="classOption2" class="warp">
                 <ul class="item">
                     <li v-for="item in listData2"><span class="title" v-text="item.title"></span><span
                             class="date" v-text="item.date"></span></li>
@@ -73,9 +68,7 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hoverStop: false,<br/>
                 }
             </div>
-            <my-class :data="listData3" :class-option="classOption3"
-                      @copy-data="listData3 = listData3.concat(listData3)"
-                      class="warp">
+            <my-class :data="listData3" :class-option="classOption3" class="warp">
                 <ul class="item">
                     <li v-for="item in listData3"><span class="title" v-text="item.title"></span><span
                             class="date" v-text="item.date"></span></li>
@@ -92,9 +85,7 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;waitTime: 1000<br/>
                 }
             </div>
-            <my-class :data="listData4" :class-option="classOption4"
-                      @copy-data="listData4 = listData4.concat(listData4)"
-                      class="warp">
+            <my-class :data="listData4" :class-option="classOption4" class="warp">
                 <ul class="item">
                     <li v-for="item in listData4"><span class="title" v-text="item.title"></span><span class="date"
                                                                                                        v-text="item.date"></span>

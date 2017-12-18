@@ -312,6 +312,7 @@ exports.default = {
     return {
       yPos: 0,
       delay: 0,
+      copyHtml: '',
       reqFrame: null
     };
   },
@@ -412,11 +413,12 @@ exports.default = {
       var _this3 = this;
 
       this.reqFrame = requestAnimationFrame(function () {
-        var timer = void 0;
         var h = _this3.$refs.wrapper.offsetHeight / 2;
         var direction = _this3.options.direction;
         if (direction === 1) {
-          if (Math.abs(_this3.yPos) >= h) _this3.yPos = 0;
+          if (Math.abs(_this3.yPos) >= h) {
+            _this3.yPos = 0;
+          }
         } else {
           if (_this3.yPos >= 0) _this3.yPos = h * -1;
         }
@@ -427,6 +429,7 @@ exports.default = {
         }
         if (!!_this3.options.singleHeight) {
           if (Math.abs(_this3.yPos) % _this3.options.singleHeight === 0) {
+            var timer = void 0;
             if (timer) clearTimeout(timer);
             timer = setTimeout(function () {
               _this3._move();
@@ -442,13 +445,20 @@ exports.default = {
     _initMove: function _initMove() {
       var _this4 = this;
 
+      this.copyHtml = '';
       if (this.moveSwitch) {
         cancelAnimationFrame(this.reqFrame);
         this.yPos = 0;
       } else {
-        this.$emit('copy-data');
+        var timer = void 0;
+        if (timer) clearTimeout(timer);
+        timer = setTimeout(function () {
+          _this4.copyHtml = _this4.$refs.slotList.innerHTML;
+        }, 20);
         if (this.options.direction !== 1) {
-          setTimeout(function () {
+          var _timer = void 0;
+          if (_timer) clearTimeout(_timer);
+          _timer = setTimeout(function () {
             _this4.yPos = _this4.$refs.wrapper.offsetHeight / 2 * -1;
           }, 20);
         }
@@ -463,7 +473,7 @@ exports.default = {
   watch: {
     data: function data(newData, oldData) {
       if (!this.options.openWatch) return;
-      if (!arrayEqual(newData, oldData.concat(oldData))) {
+      if (!arrayEqual(newData, oldData)) {
         cancelAnimationFrame(this.reqFrame);
         this._initMove();
       }
@@ -978,7 +988,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
   }, [_c('div', {
     ref: "wrapper",
     style: (_vm.pos)
-  }, [_vm._t("default")], 2)])
+  }, [_c('div', {
+    ref: "slotList"
+  }, [_vm._t("default")], 2), _vm._v(" "), _c('div', {
+    domProps: {
+      "innerHTML": _vm._s(_vm.copyHtml)
+    }
+  })])])
 },staticRenderFns: []}
 module.exports.render._withStripped = true
 if (false) {
