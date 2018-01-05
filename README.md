@@ -8,7 +8,7 @@
 
 
 ## Browser support
-> mobile && pc
+> mobile && web
 
 ## Demo
 [https://github.com/chenxuan0000/vue-seamless-scroll/index.html](https://chenxuan0000.github.io/vue-seamless-scroll/)
@@ -23,7 +23,7 @@ npm install vue-seamless-scroll --save
 
 ## Usage
 ### ES6
-> Specific reference[example-src/App.vue](https://github.com/chenxuan0000/vue-seamless-scroll/blob/master/examples-src/App.vue)
+> Specific reference [example-src/App.vue](https://github.com/chenxuan0000/vue-seamless-scroll/blob/master/examples-src/App.vue)
 
 ```js
 import Vue from 'vue'
@@ -39,7 +39,7 @@ new Vue({
 ### normal use (script tag)
 
 Example:
-> Specific reference[test/test.html](https://github.com/chenxuan0000/vue-seamless-scroll/blob/master/test/test.html)
+> Specific reference [test/test.html](https://github.com/chenxuan0000/vue-seamless-scroll/blob/master/test/test.html)
 ```html
 <html>
 <head>
