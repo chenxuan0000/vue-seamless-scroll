@@ -1,8 +1,5 @@
 # vue-seamless-scroll 
 > A simple, Seamless scrolling for Vue.js
-
-[![GitHub forks](https://img.shields.io/github/forks/chenxuan0000/vue-seamless-scroll.svg?style=social&label=Fork)](https://www.npmjs.com/package/vue-seamless-scroll)[![GitHub stars](https://img.shields.io/github/stars/chenxuan0000/vue-seamless-scroll.svg?style=social&label=Stars)](https://www.npmjs.com/package/vue-seamless-scroll)
-[![npm](https://img.shields.io/npm/dw/chenxuan0000/vue-seamless-scroll.svg)]()
 [![Build Status](https://img.shields.io/appveyor/ci/gruntjs/grunt/master.svg) ![LICENSE MIT](https://img.shields.io/npm/l/express.svg)](https://www.npmjs.com/package/vue-seamless-scroll) ![](https://img.shields.io/npm/v/vue-seamless-scroll.svg)
                                          
 <p align="center">
@@ -10,11 +7,10 @@
 </p>                                          
 
 
-## Browser support(mobile.pc)
-> 支持移动端touch事件滚动循环列表
+## Browser support
+> mobile && pc
 
 ## Demo
-
 [https://github.com/chenxuan0000/vue-seamless-scroll/index.html](https://chenxuan0000.github.io/vue-seamless-scroll/)
 
 ## Installation
@@ -27,8 +23,7 @@ npm install vue-seamless-scroll --save
 
 ## Usage
 ### ES6
-*以下es6用法需要webpack环境编译.*
-> 具体参考[example-src/App.vue](https://github.com/chenxuan0000/vue-seamless-scroll/blob/master/examples-src/App.vue)
+> Specific reference[example-src/App.vue](https://github.com/chenxuan0000/vue-seamless-scroll/blob/master/examples-src/App.vue)
 
 ```js
 import Vue from 'vue'
@@ -41,10 +36,10 @@ new Vue({
 })
 ```
 
-### 普通模式 (script tag)
+### normal use (script tag)
 
 Example:
-> 具体参考[test/test.html](https://github.com/chenxuan0000/vue-seamless-scroll/blob/master/test/test.html)
+> Specific reference[test/test.html](https://github.com/chenxuan0000/vue-seamless-scroll/blob/master/test/test.html)
 ```html
 <html>
 <head>
@@ -69,13 +64,13 @@ Example:
 ```js
       defaultOption () {
         return {
-          step: 1, //步长 越大滚动速度越快
-          limitMoveNum: 5, //启动无缝滚动最小数据量 this.dataList.length
-          hoverStop: true, //是否启用鼠标hover控制
-          direction: 1, //1 往上 0 往下
-          openWatch: true, //开启data实时监听
-          singleHeight: 0, //单条数据高度有值hoverStop关闭
-          waitTime: 1000 //单步停止等待时间
+          step: 1, //the faster the rolling speed is faster
+          limitMoveNum: 5, //start seamless scrolling minimum data  //this.dataList.length
+          hoverStop: true, //mouse hover control is enabled
+          direction: 1, //1 up 0 down
+          openWatch: true, //open data realTime monitoring
+          singleHeight: 0, //one single stop height(default zero is seamless)
+          waitTime: 1000 //one single data stop wait time
         }
       }
 ```
