@@ -11,6 +11,18 @@
 <script>
   require('comutils/animationFrame')
   const arrayEqual = require('comutils/arrayEqual')
+  // requestAnimationFrame的兼容处理
+  window.requestAnimationFrame =
+    window.requestAnimationFrame ||
+    window.webkitRequestAnimationFrame ||
+    window.msRequestAnimationFrame ||
+    window.mozRequestAnimationFrame ||
+    window.oRequestAnimationFrame
+  if (!window.requestAnimationFrame) {
+    window.requestAnimationFrame = function(fn) {
+      setTimeout(fn, 17)
+    }
+  }
   export default {
     data () {
       return {
