@@ -1,5 +1,6 @@
 # vue-seamless-scroll 
 > A simple, Seamless scrolling for Vue.js
+
 [![Build Status](https://img.shields.io/appveyor/ci/gruntjs/grunt/master.svg) ![LICENSE MIT](https://img.shields.io/npm/l/express.svg)](https://www.npmjs.com/package/vue-seamless-scroll) ![](https://img.shields.io/npm/v/vue-seamless-scroll.svg)
                                                                       
 <p align="center">
@@ -7,7 +8,7 @@
 </p>                                            
 <p align="center">
    🌾 <a href="https://github.com/chenxuan0000/vue-seamless-scroll/index.html" target="_blank">online demo</a> |
-   📘 <a href="../README.md">中文文档</a>
+   📘 <a href="./document/README.md">中文文档</a>
 </p>
                                         
 
