@@ -305,7 +305,7 @@ var _assign2 = _interopRequireDefault(_assign);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-__webpack_require__(41);
+__webpack_require__(41)();
 var arrayEqual = __webpack_require__(42);
 exports.default = {
   data: function data() {
@@ -403,44 +403,44 @@ exports.default = {
     },
     enter: function enter() {
       if (!this.options.openWatch || !!this.options.singleHeight || !this.options.hoverStop || this.moveSwitch) return;
-      cancelAnimationFrame(this.reqFrame);
+      cancelAnimationFrame(this.reqFrame || '');
     },
     leave: function leave() {
       if (!this.options.openWatch || !!this.options.singleHeight || !this.options.hoverStop || this.moveSwitch) return;
       this._move();
     },
     _move: function _move() {
-      var _this3 = this;
-
       this.reqFrame = requestAnimationFrame(function () {
-        var h = _this3.$refs.wrapper.offsetHeight / 2;
-        var direction = _this3.options.direction;
+        var _this3 = this;
+
+        var h = this.$refs.wrapper.offsetHeight / 2;
+        var direction = this.options.direction;
         if (direction === 1) {
-          if (Math.abs(_this3.yPos) >= h) {
-            _this3.yPos = 0;
+          if (Math.abs(this.yPos) >= h) {
+            this.yPos = 0;
           }
         } else {
-          if (_this3.yPos >= 0) _this3.yPos = h * -1;
+          if (this.yPos >= 0) this.yPos = h * -1;
         }
         if (direction === 1) {
-          _this3.yPos -= _this3.options.step;
+          this.yPos -= this.options.step;
         } else {
-          _this3.yPos += _this3.options.step;
+          this.yPos += this.options.step;
         }
-        if (!!_this3.options.singleHeight) {
-          if (Math.abs(_this3.yPos) % _this3.options.singleHeight === 0) {
+        if (!!this.options.singleHeight) {
+          if (Math.abs(this.yPos) % this.options.singleHeight === 0) {
             var timer = void 0;
             if (timer) clearTimeout(timer);
             timer = setTimeout(function () {
               _this3._move();
-            }, _this3.options.waitTime);
+            }, this.options.waitTime);
           } else {
-            _this3._move();
+            this._move();
           }
         } else {
-          _this3._move();
+          this._move();
         }
-      });
+      }.bind(this));
     },
     _initMove: function _initMove() {
       var _this4 = this;
@@ -938,14 +938,14 @@ module.exports = function (it) {
  * @desc AnimationFrame简单兼容hack
  */
 var animationFrame = function animationFrame() {
-  window.requestAnimFrame = function () {
-    return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || function (callback) {
-      window.setTimeout(callback, 1000 / 60);
+  window.cancelAnimationFrame = function () {
+    return window.cancelAnimationFrame || window.webkitCancelAnimationFrame || window.mozCancelAnimationFrame || window.oCancelAnimationFrame || window.msCancelAnimationFrame || function (id) {
+      return window.clearTimeout(id);
     };
   }();
-  window.cancelAnimationFrame = function () {
-    return window.cancelAnimationFrame || window.webkitCancelAnimationFrame || window.mozCancelAnimationFrame || function (id) {
-      clearTimeout(id);
+  window.requestAnimationFrame = function () {
+    return window.requestAnimationFrame || window.webkitRequestAnimationFrame || window.mozRequestAnimationFrame || window.oRequestAnimationFrame || window.msRequestAnimationFrame || function (callback) {
+      return window.setTimeout(callback, 1000 / 60);
     };
   }();
 };

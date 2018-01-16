@@ -9,7 +9,7 @@
     </div>
 </template>
 <script>
-  require('comutils/animationFrame')
+  require('comutils/animationFrame')()
   const arrayEqual = require('comutils/arrayEqual')
   export default {
     data () {
@@ -104,7 +104,7 @@
       },
       enter () {
         if (!this.options.openWatch || !!this.options.singleHeight || !this.options.hoverStop || this.moveSwitch) return
-        cancelAnimationFrame(this.reqFrame)
+        cancelAnimationFrame(this.reqFrame || '')
       },
       leave () {
         if (!this.options.openWatch || !!this.options.singleHeight || !this.options.hoverStop || this.moveSwitch) return
@@ -112,7 +112,7 @@
       },
       _move () {
         this.reqFrame = requestAnimationFrame(
-          () => {
+          function () {
             let h = this.$refs.wrapper.offsetHeight / 2  //实际高度
             let direction = this.options.direction //滚动方向
             if (direction === 1) {
@@ -140,7 +140,7 @@
             } else {
               this._move()
             }
-          }
+          }.bind(this)
         )
       },
       _initMove () {
