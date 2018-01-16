@@ -79,5 +79,8 @@ Example:
       }
 ```
 
+## 注意
+我将会在近期创建一个js无缝滚动插件项目。
+
 ## License
 vue-simple-spinner is open source and released under the [MIT License](LICENSE).

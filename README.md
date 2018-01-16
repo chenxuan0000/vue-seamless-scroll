@@ -79,5 +79,8 @@ Example:
       }
 ```
 
+## Care
+I will create a js seamless scrolling plug-in project in the near future.
+
 ## License
 vue-simple-spinner is open source and released under the [MIT License](LICENSE).
