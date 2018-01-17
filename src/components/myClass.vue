@@ -1,10 +1,10 @@
 <template>
     <div @mouseenter="enter" @mouseleave="leave" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
-        <div ref="wrapper" :style="pos">
-            <div ref="slotList">
+        <div ref="wrap" :style="pos">
+            <div ref="slotList" :style="float">
                 <slot></slot>
             </div>
-            <div v-html="copyHtml"></div>
+            <div v-html="copyHtml" :style="float"></div>
         </div>
     </div>
 </template>
@@ -32,17 +32,24 @@
       }
     },
     computed: {
+      float () {
+        return this.options.direction > 1 ? {float: 'left'} : {}
+      },
       pos () {
-        return {transform: `translate(${this.xPos}px,${this.yPos}px)`, transition: `all ease-in ${this.delay}ms`}
+        return {
+          transform: `translate(${this.xPos}px,${this.yPos}px)`,
+          transition: `all ease-in ${this.delay}ms`
+        }
       },
       defaultOption () {
         return {
           step: 1, //步长
           limitMoveNum: 5, //启动无缝滚动最小数据数
           hoverStop: true, //是否启用鼠标hover控制
-          direction: 1, // 0 往下 1 往上
+          direction: 1, // 0 往下 1 往上 2向左 3向右
           openWatch: true, //开启data实时监听
           singleHeight: 0, //单条数据高度有值hoverStop关闭
+          singleWidth: 0, //单条数据宽度有值hoverStop关闭
           waitTime: 1000 //单步停止等待时间
         }
       },
@@ -63,7 +70,8 @@
           y: touch.pageY
         } //取第一个touch的坐标值
         this.startPosY = this.yPos //记录touchStart时候的posY
-        if (!!this.options.singleHeight) {
+        this.startPosX = this.xPos //记录touchStart时候的posX
+        if (!!this.options.singleHeight && !!this.options.singleWidth) {
           if (timer) clearTimeout(timer)
           timer = setTimeout(() => {
             cancelAnimationFrame(this.reqFrame)
@@ -80,10 +88,12 @@
           x: touch.pageX - this.startPos.x,
           y: touch.pageY - this.startPos.y
         }
-        let dir = Math.abs(this.endPos.x) < Math.abs(this.endPos.y) ? 1 : 0 //direction，1表示纵向滑动，0为横向滑动
-        if (dir === 1) {
-          event.preventDefault(); //阻止触摸事件的默认行为，即阻止滚屏
+        event.preventDefault(); //阻止触摸事件的默认行为，即阻止滚屏
+        let dir = Math.abs(this.endPos.x) < Math.abs(this.endPos.y) ? 1 : 0 //dir，1表示纵向滑动，0为横向滑动
+        if (dir === 1 && this.options.direction < 2) {  // 表示纵向滑动 && 运动方向为上下
           this.yPos = this.startPosY + this.endPos.y
+        } else if (dir === 0 && this.options.direction > 1) { // 为横向滑动 && 运动方向为左右
+          this.xPos = this.startPosX + this.endPos.x
         }
       },
       touchEnd () {
@@ -93,9 +103,14 @@
         this.delay = 50
         if (direction === 1) {
           if (this.yPos > 0) this.yPos = 0
-        } else {
-          let h = this.$refs.wrapper.offsetHeight / 2 * -1
+        } else if (direction === 0) {
+          let h = this.$refs.wrap.offsetHeight / 2 * -1
           if (this.yPos < h) this.yPos = h
+        } else if (direction === 2) {
+          if (this.xPos > 0) this.xPos = 0
+        } else if (direction === 3) {
+          let w = this.$refs.slotList.offsetWidth * -1
+          if (this.xPos < w) this.yPos = w
         }
         if (timer) clearTimeout(timer)
         timer = setTimeout(() => {
@@ -104,29 +119,44 @@
         }, this.delay)
       },
       enter () {
-        if (!this.options.openWatch || !!this.options.singleHeight || !this.options.hoverStop || this.moveSwitch) return
+        if (!this.options.openWatch || !!this.options.singleHeight || !!this.options.singleWidth || !this.options.hoverStop || this.moveSwitch) return
         cancelAnimationFrame(this.reqFrame || '')
       },
       leave () {
-        if (!this.options.openWatch || !!this.options.singleHeight || !this.options.hoverStop || this.moveSwitch) return
+        if (!this.options.openWatch || !!this.options.singleHeight || !!this.options.singleWidth || !this.options.hoverStop || this.moveSwitch) return
         this._move()
       },
       _move () {
         this.reqFrame = requestAnimationFrame(
           function () {
-            let h = this.$refs.wrapper.offsetHeight / 2  //实际高度
+            let h = this.$refs.wrap.offsetHeight / 2  //实际高度
+            let w = this.$refs.slotList.offsetWidth //宽度
             let direction = this.options.direction //滚动方向
             if (direction === 1) {
-              if (Math.abs(this.yPos) >= h) {
-                this.yPos = 0
-              }
+              if (Math.abs(this.yPos) >= h) this.yPos = 0
               this.yPos -= this.options.step
-            } else {
+            } else if (direction === 0) {
               if (this.yPos >= 0) this.yPos = h * -1
               this.yPos += this.options.step
+            } else if (direction === 2) {
+              if (Math.abs(this.xPos) >= w) this.xPos = 0
+              this.xPos -= this.options.step
+            } else if (direction === 3) {
+              if (this.xPos >= 0) this.xPos = w * -1
+              this.xPos += this.options.step
             }
             if (!!this.options.singleHeight) { //是否启动了单行暂停配置
               if (Math.abs(this.yPos) % this.options.singleHeight === 0) { // 符合条件暂停waitTime
+                let timer
+                if (timer) clearTimeout(timer)
+                timer = setTimeout(() => {
+                  this._move()
+                }, this.options.waitTime)
+              } else {
+                this._move()
+              }
+            } else if (!!this.options.singleWidth) {
+              if (Math.abs(this.xPos) % this.options.singleWidth === 0) { // 符合条件暂停waitTime
                 let timer
                 if (timer) clearTimeout(timer)
                 timer = setTimeout(() => {
@@ -145,19 +175,25 @@
         this.copyHtml = '' //清空copy
         if (this.moveSwitch) {
           cancelAnimationFrame(this.reqFrame)
-          this.yPos = 0
+          this.yPos = this.xPos = 0
         } else {
           let timer
           if (timer) clearTimeout(timer)
           timer = setTimeout(() => { //20ms作用保证能取到最新的html
             this.copyHtml = this.$refs.slotList.innerHTML
           }, 20)
-          if (this.options.direction !== 1) {
-            //非向上滚动位置初始化
+          if (this.options.direction === 1) {
+            //非向上滚动位置初始化位置
             let timer
             if (timer) clearTimeout(timer)
             timer = setTimeout(() => {
-              this.yPos = this.$refs.wrapper.offsetHeight / 2 * -1
+              this.yPos = this.$refs.wrap.offsetHeight / 2 * -1
+            }, 20)
+          } else if (this.options.direction === 3) {
+            let timer
+            if (timer) clearTimeout(timer)
+            timer = setTimeout(() => {
+              this.xPos = this.$refs.slotList.offsetWidth * -1
             }, 20)
           }
           this._move()
@@ -166,6 +202,10 @@
     },
     mounted () {
       this._initMove()
+      // 设置warp width
+      if (this.options.direction > 1) {
+        this.$refs.wrap.style.width = this.$refs.slotList.offsetWidth * 2 + 'px'
+      }
     },
     watch: {
       data (newData, oldData) {

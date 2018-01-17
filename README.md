@@ -71,16 +71,16 @@ Example:
           step: 1, //the faster the rolling speed is faster
           limitMoveNum: 5, //start seamless scrolling minimum data  //this.dataList.length
           hoverStop: true, //mouse hover control is enabled
-          direction: 1, //1 up 0 down
+          direction: 1, // 0 down || 1 up || 2 left || 3 right
           openWatch: true, //open data realTime monitoring
-          singleHeight: 0, //one single stop height(default zero is seamless)
+          singleHeight: 0, //one single stop height(default zero is seamless) => direction 0/1
+          singleWidth: 0, //one single stop width(default zero is seamless) => direction 2/3
           waitTime: 1000 //one single data stop wait time
         }
       }
 ```
 
-## Care
-I will add left and right seamless scroll in the near future.
+## Cares
 I will create a js seamless scrolling plug-in project in the near future.
 
 ## License

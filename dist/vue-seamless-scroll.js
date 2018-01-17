@@ -329,8 +329,14 @@ exports.default = {
     }
   },
   computed: {
+    float: function float() {
+      return this.options.direction > 1 ? { float: 'left' } : {};
+    },
     pos: function pos() {
-      return { transform: 'translate(' + this.xPos + 'px,' + this.yPos + 'px)', transition: 'all ease-in ' + this.delay + 'ms' };
+      return {
+        transform: 'translate(' + this.xPos + 'px,' + this.yPos + 'px)',
+        transition: 'all ease-in ' + this.delay + 'ms'
+      };
     },
     defaultOption: function defaultOption() {
       return {
@@ -340,6 +346,7 @@ exports.default = {
         direction: 1,
         openWatch: true,
         singleHeight: 0,
+        singleWidth: 0,
         waitTime: 1000 };
     },
     options: function options() {
@@ -361,7 +368,8 @@ exports.default = {
         y: touch.pageY
       };
       this.startPosY = this.yPos;
-      if (!!this.options.singleHeight) {
+      this.startPosX = this.xPos;
+      if (!!this.options.singleHeight && !!this.options.singleWidth) {
         if (timer) clearTimeout(timer);
         timer = setTimeout(function () {
           cancelAnimationFrame(_this.reqFrame);
@@ -377,10 +385,12 @@ exports.default = {
         x: touch.pageX - this.startPos.x,
         y: touch.pageY - this.startPos.y
       };
+      event.preventDefault();
       var dir = Math.abs(this.endPos.x) < Math.abs(this.endPos.y) ? 1 : 0;
-      if (dir === 1) {
-        event.preventDefault();
+      if (dir === 1 && this.options.direction < 2) {
         this.yPos = this.startPosY + this.endPos.y;
+      } else if (dir === 0 && this.options.direction > 1) {
+        this.xPos = this.startPosX + this.endPos.x;
       }
     },
     touchEnd: function touchEnd() {
@@ -392,9 +402,14 @@ exports.default = {
       this.delay = 50;
       if (direction === 1) {
         if (this.yPos > 0) this.yPos = 0;
-      } else {
-        var h = this.$refs.wrapper.offsetHeight / 2 * -1;
+      } else if (direction === 0) {
+        var h = this.$refs.wrap.offsetHeight / 2 * -1;
         if (this.yPos < h) this.yPos = h;
+      } else if (direction === 2) {
+        if (this.xPos > 0) this.xPos = 0;
+      } else if (direction === 3) {
+        var w = this.$refs.slotList.offsetWidth * -1;
+        if (this.xPos < w) this.yPos = w;
       }
       if (timer) clearTimeout(timer);
       timer = setTimeout(function () {
@@ -403,33 +418,48 @@ exports.default = {
       }, this.delay);
     },
     enter: function enter() {
-      if (!this.options.openWatch || !!this.options.singleHeight || !this.options.hoverStop || this.moveSwitch) return;
+      if (!this.options.openWatch || !!this.options.singleHeight || !!this.options.singleWidth || !this.options.hoverStop || this.moveSwitch) return;
       cancelAnimationFrame(this.reqFrame || '');
     },
     leave: function leave() {
-      if (!this.options.openWatch || !!this.options.singleHeight || !this.options.hoverStop || this.moveSwitch) return;
+      if (!this.options.openWatch || !!this.options.singleHeight || !!this.options.singleWidth || !this.options.hoverStop || this.moveSwitch) return;
       this._move();
     },
     _move: function _move() {
       this.reqFrame = requestAnimationFrame(function () {
         var _this3 = this;
 
-        var h = this.$refs.wrapper.offsetHeight / 2;
+        var h = this.$refs.wrap.offsetHeight / 2;
+        var w = this.$refs.slotList.offsetWidth;
         var direction = this.options.direction;
         if (direction === 1) {
-          if (Math.abs(this.yPos) >= h) {
-            this.yPos = 0;
-          }
+          if (Math.abs(this.yPos) >= h) this.yPos = 0;
           this.yPos -= this.options.step;
-        } else {
+        } else if (direction === 0) {
           if (this.yPos >= 0) this.yPos = h * -1;
           this.yPos += this.options.step;
+        } else if (direction === 2) {
+          if (Math.abs(this.xPos) >= w) this.xPos = 0;
+          this.xPos -= this.options.step;
+        } else if (direction === 3) {
+          if (this.xPos >= 0) this.xPos = w * -1;
+          this.xPos += this.options.step;
         }
         if (!!this.options.singleHeight) {
           if (Math.abs(this.yPos) % this.options.singleHeight === 0) {
             var timer = void 0;
             if (timer) clearTimeout(timer);
             timer = setTimeout(function () {
+              _this3._move();
+            }, this.options.waitTime);
+          } else {
+            this._move();
+          }
+        } else if (!!this.options.singleWidth) {
+          if (Math.abs(this.xPos) % this.options.singleWidth === 0) {
+            var _timer = void 0;
+            if (_timer) clearTimeout(_timer);
+            _timer = setTimeout(function () {
               _this3._move();
             }, this.options.waitTime);
           } else {
@@ -446,18 +476,24 @@ exports.default = {
       this.copyHtml = '';
       if (this.moveSwitch) {
         cancelAnimationFrame(this.reqFrame);
-        this.yPos = 0;
+        this.yPos = this.xPos = 0;
       } else {
         var timer = void 0;
         if (timer) clearTimeout(timer);
         timer = setTimeout(function () {
           _this4.copyHtml = _this4.$refs.slotList.innerHTML;
         }, 20);
-        if (this.options.direction !== 1) {
-          var _timer = void 0;
-          if (_timer) clearTimeout(_timer);
-          _timer = setTimeout(function () {
-            _this4.yPos = _this4.$refs.wrapper.offsetHeight / 2 * -1;
+        if (this.options.direction === 1) {
+          var _timer2 = void 0;
+          if (_timer2) clearTimeout(_timer2);
+          _timer2 = setTimeout(function () {
+            _this4.yPos = _this4.$refs.wrap.offsetHeight / 2 * -1;
+          }, 20);
+        } else if (this.options.direction === 3) {
+          var _timer3 = void 0;
+          if (_timer3) clearTimeout(_timer3);
+          _timer3 = setTimeout(function () {
+            _this4.xPos = _this4.$refs.slotList.offsetWidth * -1;
           }, 20);
         }
         this._move();
@@ -466,6 +502,10 @@ exports.default = {
   },
   mounted: function mounted() {
     this._initMove();
+
+    if (this.options.direction > 1) {
+      this.$refs.wrap.style.width = this.$refs.slotList.offsetWidth * 2 + 'px';
+    }
   },
 
   watch: {
@@ -984,11 +1024,13 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "touchend": _vm.touchEnd
     }
   }, [_c('div', {
-    ref: "wrapper",
+    ref: "wrap",
     style: (_vm.pos)
   }, [_c('div', {
-    ref: "slotList"
+    ref: "slotList",
+    style: (_vm.float)
   }, [_vm._t("default")], 2), _vm._v(" "), _c('div', {
+    style: (_vm.float),
     domProps: {
       "innerHTML": _vm._s(_vm.copyHtml)
     }

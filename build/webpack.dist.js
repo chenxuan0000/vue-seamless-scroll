@@ -40,5 +40,4 @@ if (options.isProduction) {
     })
   ])
 }
-
 module.exports = config
