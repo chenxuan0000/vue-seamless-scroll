@@ -80,6 +80,7 @@ Example:
 ```
 
 ## Care
+I will add left and right seamless scroll in the near future.
 I will create a js seamless scrolling plug-in project in the near future.
 
 ## License

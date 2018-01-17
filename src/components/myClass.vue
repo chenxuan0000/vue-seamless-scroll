@@ -14,6 +14,7 @@
   export default {
     data () {
       return {
+        xPos: 0,
         yPos: 0,
         delay: 0,
         copyHtml: '',
@@ -32,14 +33,14 @@
     },
     computed: {
       pos () {
-        return {transform: `translate(0,${this.yPos}px)`, transition: `all ease-in ${this.delay}ms`}
+        return {transform: `translate(${this.xPos}px,${this.yPos}px)`, transition: `all ease-in ${this.delay}ms`}
       },
       defaultOption () {
         return {
           step: 1, //步长
           limitMoveNum: 5, //启动无缝滚动最小数据数
           hoverStop: true, //是否启用鼠标hover控制
-          direction: 1, //1 往上 0 往下
+          direction: 1, // 0 往下 1 往上
           openWatch: true, //开启data实时监听
           singleHeight: 0, //单条数据高度有值hoverStop关闭
           waitTime: 1000 //单步停止等待时间
@@ -79,8 +80,8 @@
           x: touch.pageX - this.startPos.x,
           y: touch.pageY - this.startPos.y
         }
-        let direction = Math.abs(this.endPos.x) < Math.abs(this.endPos.y) ? 1 : 0 //direction，1表示纵向滑动，0为横向滑动
-        if (direction === 1) {
+        let dir = Math.abs(this.endPos.x) < Math.abs(this.endPos.y) ? 1 : 0 //direction，1表示纵向滑动，0为横向滑动
+        if (dir === 1) {
           event.preventDefault(); //阻止触摸事件的默认行为，即阻止滚屏
           this.yPos = this.startPosY + this.endPos.y
         }
@@ -119,12 +120,9 @@
               if (Math.abs(this.yPos) >= h) {
                 this.yPos = 0
               }
-            } else {
-              if (this.yPos >= 0) this.yPos = h * -1
-            }
-            if (direction === 1) {
               this.yPos -= this.options.step
             } else {
+              if (this.yPos >= 0) this.yPos = h * -1
               this.yPos += this.options.step
             }
             if (!!this.options.singleHeight) { //是否启动了单行暂停配置

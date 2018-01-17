@@ -310,6 +310,7 @@ var arrayEqual = __webpack_require__(42);
 exports.default = {
   data: function data() {
     return {
+      xPos: 0,
       yPos: 0,
       delay: 0,
       copyHtml: '',
@@ -329,7 +330,7 @@ exports.default = {
   },
   computed: {
     pos: function pos() {
-      return { transform: 'translate(0,' + this.yPos + 'px)', transition: 'all ease-in ' + this.delay + 'ms' };
+      return { transform: 'translate(' + this.xPos + 'px,' + this.yPos + 'px)', transition: 'all ease-in ' + this.delay + 'ms' };
     },
     defaultOption: function defaultOption() {
       return {
@@ -376,8 +377,8 @@ exports.default = {
         x: touch.pageX - this.startPos.x,
         y: touch.pageY - this.startPos.y
       };
-      var direction = Math.abs(this.endPos.x) < Math.abs(this.endPos.y) ? 1 : 0;
-      if (direction === 1) {
+      var dir = Math.abs(this.endPos.x) < Math.abs(this.endPos.y) ? 1 : 0;
+      if (dir === 1) {
         event.preventDefault();
         this.yPos = this.startPosY + this.endPos.y;
       }
@@ -419,12 +420,9 @@ exports.default = {
           if (Math.abs(this.yPos) >= h) {
             this.yPos = 0;
           }
-        } else {
-          if (this.yPos >= 0) this.yPos = h * -1;
-        }
-        if (direction === 1) {
           this.yPos -= this.options.step;
         } else {
+          if (this.yPos >= 0) this.yPos = h * -1;
           this.yPos += this.options.step;
         }
         if (!!this.options.singleHeight) {
