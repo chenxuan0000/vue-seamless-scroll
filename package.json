@@ -1,6 +1,6 @@
 {
   "name": "vue-seamless-scroll",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "A simple, Seamless scrolling for Vue.js",
   "main": "dist/vue-seamless-scroll.min.js",
   "scripts": {
@@ -24,7 +24,7 @@
     "scroll"
   ],
   "dependencies": {
-    "comutils": "^1.1.8"
+    "comutils": "^1.1.9"
   },
   "devDependencies": {
     "babel-core": "^6.0.0",

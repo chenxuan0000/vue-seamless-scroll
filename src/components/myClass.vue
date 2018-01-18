@@ -58,9 +58,15 @@
       },
       moveSwitch () {
         return this.data.length < this.options.limitMoveNum
+      },
+      hoverStop () {
+        return !this.options.openWatch || !!this.options.singleHeight || !!this.options.singleWidth || !this.options.hoverStop || this.moveSwitch
       }
     },
     methods: {
+      _cancle () {
+        cancelAnimationFrame(this.reqFrame || '')
+      },
       touchStart (e) {
         if (!this.options.openWatch) return
         let timer
@@ -74,10 +80,10 @@
         if (!!this.options.singleHeight && !!this.options.singleWidth) {
           if (timer) clearTimeout(timer)
           timer = setTimeout(() => {
-            cancelAnimationFrame(this.reqFrame)
+            this._cancle()
           }, this.options.waitTime + 20)
         } else {
-          cancelAnimationFrame(this.reqFrame)
+          this._cancle()
         }
       },
       touchMove (e) {
@@ -119,29 +125,30 @@
         }, this.delay)
       },
       enter () {
-        if (!this.options.openWatch || !!this.options.singleHeight || !!this.options.singleWidth || !this.options.hoverStop || this.moveSwitch) return
-        cancelAnimationFrame(this.reqFrame || '')
+        if (this.hoverStop) return
+        this._cancle()
       },
       leave () {
-        if (!this.options.openWatch || !!this.options.singleHeight || !!this.options.singleWidth || !this.options.hoverStop || this.moveSwitch) return
+        if (this.hoverStop) return
         this._move()
       },
       _move () {
+        this._cancle() //进入move立即先清除动画 防止频繁touchMove导致多动画同时进行
         this.reqFrame = requestAnimationFrame(
           function () {
             let h = this.$refs.wrap.offsetHeight / 2  //实际高度
             let w = this.$refs.slotList.offsetWidth //宽度
             let direction = this.options.direction //滚动方向
-            if (direction === 1) {
+            if (direction === 1) { // 上
               if (Math.abs(this.yPos) >= h) this.yPos = 0
               this.yPos -= this.options.step
-            } else if (direction === 0) {
+            } else if (direction === 0) { // 下
               if (this.yPos >= 0) this.yPos = h * -1
               this.yPos += this.options.step
-            } else if (direction === 2) {
+            } else if (direction === 2) { // 左
               if (Math.abs(this.xPos) >= w) this.xPos = 0
               this.xPos -= this.options.step
-            } else if (direction === 3) {
+            } else if (direction === 3) { // 右
               if (this.xPos >= 0) this.xPos = w * -1
               this.xPos += this.options.step
             }
@@ -174,12 +181,12 @@
       _initMove () {
         this.copyHtml = '' //清空copy
         if (this.moveSwitch) {
-          cancelAnimationFrame(this.reqFrame)
+          this._cancle()
           this.yPos = this.xPos = 0
         } else {
           let timer
           if (timer) clearTimeout(timer)
-          timer = setTimeout(() => { //20ms作用保证能取到最新的html
+          timer = setTimeout(() => { //20ms延迟 作用保证能取到最新的html
             this.copyHtml = this.$refs.slotList.innerHTML
           }, 20)
           if (this.options.direction === 1) {
@@ -212,7 +219,7 @@
         //监听data是否有变更
         if (!this.options.openWatch) return
         if (!arrayEqual(newData, oldData)) {
-          cancelAnimationFrame(this.reqFrame)
+          this._cancle()
           this._initMove()
         }
       }

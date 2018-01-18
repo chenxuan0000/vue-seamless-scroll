@@ -80,6 +80,13 @@ Example:
       }
 ```
 
+## demo gif
+<p align="center">
+    <img src="//upload-images.jianshu.io/upload_images/3402722-d1f572ed4f7d3afe.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" width="783"/>
+</p> 
+<p align="center">
+    <img src="./test/demo1.gif" width="783"/>
+</p> 
 ## Cares
 I will create a js seamless scrolling plug-in project in the near future.
 

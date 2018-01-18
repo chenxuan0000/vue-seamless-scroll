@@ -354,9 +354,15 @@ exports.default = {
     },
     moveSwitch: function moveSwitch() {
       return this.data.length < this.options.limitMoveNum;
+    },
+    hoverStop: function hoverStop() {
+      return !this.options.openWatch || !!this.options.singleHeight || !!this.options.singleWidth || !this.options.hoverStop || this.moveSwitch;
     }
   },
   methods: {
+    _cancle: function _cancle() {
+      cancelAnimationFrame(this.reqFrame || '');
+    },
     touchStart: function touchStart(e) {
       var _this = this;
 
@@ -372,10 +378,10 @@ exports.default = {
       if (!!this.options.singleHeight && !!this.options.singleWidth) {
         if (timer) clearTimeout(timer);
         timer = setTimeout(function () {
-          cancelAnimationFrame(_this.reqFrame);
+          _this._cancle();
         }, this.options.waitTime + 20);
       } else {
-        cancelAnimationFrame(this.reqFrame);
+        this._cancle();
       }
     },
     touchMove: function touchMove(e) {
@@ -418,14 +424,15 @@ exports.default = {
       }, this.delay);
     },
     enter: function enter() {
-      if (!this.options.openWatch || !!this.options.singleHeight || !!this.options.singleWidth || !this.options.hoverStop || this.moveSwitch) return;
-      cancelAnimationFrame(this.reqFrame || '');
+      if (this.hoverStop) return;
+      this._cancle();
     },
     leave: function leave() {
-      if (!this.options.openWatch || !!this.options.singleHeight || !!this.options.singleWidth || !this.options.hoverStop || this.moveSwitch) return;
+      if (this.hoverStop) return;
       this._move();
     },
     _move: function _move() {
+      this._cancle();
       this.reqFrame = requestAnimationFrame(function () {
         var _this3 = this;
 
@@ -475,7 +482,7 @@ exports.default = {
 
       this.copyHtml = '';
       if (this.moveSwitch) {
-        cancelAnimationFrame(this.reqFrame);
+        this._cancle();
         this.yPos = this.xPos = 0;
       } else {
         var timer = void 0;
@@ -512,7 +519,7 @@ exports.default = {
     data: function data(newData, oldData) {
       if (!this.options.openWatch) return;
       if (!arrayEqual(newData, oldData)) {
-        cancelAnimationFrame(this.reqFrame);
+        this._cancle();
         this._initMove();
       }
     }
