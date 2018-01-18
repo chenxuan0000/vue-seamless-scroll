@@ -81,12 +81,34 @@ Example:
 ```
 
 ## demo gif
-<p align="center">
-    <img src="//upload-images.jianshu.io/upload_images/3402722-d1f572ed4f7d3afe.gif?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" width="783"/>
-</p> 
+- This component is based on vue's data-driven implementation,so you must Pass in a data for later callback processing. 
+
+> demo1
 <p align="center">
     <img src="./test/demo1.gif" width="783"/>
 </p> 
+
+> demo2
+<p align="center">
+    <img src="./test/demo2.gif" width="783"/>
+</p> 
+
+> demo3
+<p align="center">
+    <img src="./test/demo3.gif" width="783"/>
+</p> 
+
+> demo4
+- be careful that left and right scrolling you must define the actual width styles of the solt(example ul) container
+```css
+  .ul-item {
+    width: 670px;
+  }
+```
+<p align="center">
+    <img src="./test/demo4.gif" width="783"/>
+</p> 
+
 ## Cares
 I will create a js seamless scrolling plug-in project in the near future.
 

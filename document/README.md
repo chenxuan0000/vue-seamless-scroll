@@ -79,6 +79,34 @@ Example:
         }
       }
 ```
+## demo gif
+- 这个组件是基于vue数据驱动的原理来实现的，所以你需要为了后面的回调处理向组件传个data。
+
+> demo1
+<p align="center">
+    <img src="../test/demo1.gif" width="783"/>
+</p> 
+
+> demo2
+<p align="center">
+    <img src="../test/demo2.gif" width="783"/>
+</p> 
+
+> demo3
+<p align="center">
+    <img src="../test/demo3.gif" width="783"/>
+</p> 
+
+> demo4
+- 请注意左右滚动你必须定义好solt容器的实际宽度(例如下面的css)样式。
+```css
+  .ul-item {
+    width: 670px;
+  }
+```
+<p align="center">
+    <img src="../test/demo4.gif" width="783"/>
+</p> 
 
 ## 注意
 我将会在近期创建一个js无缝滚动插件项目。
