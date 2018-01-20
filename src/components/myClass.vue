@@ -24,11 +24,15 @@
     props: {
       data: {
         type: Array,
-        default: []
+        default: () => {
+          return []
+        }
       },
       classOption: {
         type: Object,
-        default: {}
+        default: () => {
+          return {}
+        }
       }
     },
     computed: {

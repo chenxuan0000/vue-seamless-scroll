@@ -11,7 +11,7 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limitMoveNum: 5<br/>
                 }
             </div>
-            <my-class :data="listData" :class-option="classOption" class="warp">
+            <my-class :data="listData" class="warp">
                 <ul class="item">
                     <li v-for="item in listData"><span class="title" v-text="item.title"></span><span class="date"
                                                                                                       v-text="item.date"></span>

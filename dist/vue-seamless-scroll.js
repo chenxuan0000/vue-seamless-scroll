@@ -327,11 +327,15 @@ exports.default = {
   props: {
     data: {
       type: Array,
-      default: []
+      default: function _default() {
+        return [];
+      }
     },
     classOption: {
       type: Object,
-      default: {}
+      default: function _default() {
+        return {};
+      }
     }
   },
   computed: {
