@@ -7,10 +7,9 @@
     <img src="http://p2.qqyou.com/biaoqing/UploadPic/2013-2/1/2013020120565544702.gif" width="480"/>
 </p>                                            
 <p align="center">
-   🌾 <a href="https://chenxuan0000.github.io/vue-seamless-scroll/" target="_blank">在线demo</a> |
+   🌾 <a href="https://chenxuan0000.github.io/component-document/index_prod.html" target="_blank">在线demo</a> |
    📘 <a href="../README.md">English Document</a>
 </p>
-
 ## 浏览器兼容性
 | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/edge.png" alt="IE" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>IE | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/firefox.png" alt="Firefox" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/chrome.png" alt="Chrome" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/safari.png" alt="Safari" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/safari-ios.png" alt="iOS Safari" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>iOS | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/chrome-android.png" alt="Chrome for Android" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Android |
 |:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|
@@ -75,34 +74,6 @@ Example:
         }
       }
 ```
-## demo gif
-- 这个组件是基于vue数据驱动的原理来实现的，所以你需要为了后面的回调处理向组件传个data。
-
-> demo1
-<p align="center">
-    <img src="../test/demo1.gif" width="783"/>
-</p> 
-
-> demo2
-<p align="center">
-    <img src="../test/demo2.gif" width="783"/>
-</p> 
-
-> demo3
-<p align="center">
-    <img src="../test/demo3.gif" width="783"/>
-</p> 
-
-> demo4
-- 请注意左右滚动你必须定义好solt容器的实际宽度(例如下面的css)样式。
-```css
-  .ul-item {
-    width: 670px;
-  }
-```
-<p align="center">
-    <img src="../test/demo4.gif" width="783"/>
-</p> 
 
 ## 注意
 我将会在近期创建一个js无缝滚动插件项目。

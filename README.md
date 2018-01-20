@@ -7,8 +7,8 @@
     <img src="http://p2.qqyou.com/biaoqing/UploadPic/2013-2/1/2013020120565544702.gif" width="480"/>
 </p>                                             
 <p align="center">
-   🌾 <a href="https://chenxuan0000.github.io/vue-seamless-scroll/" target="_blank">online demo</a> |
-   📘 <a href="./document/README.md">中文文档</a>
+   🌾 <a href="https://chenxuan0000.github.io/component-document/index_prod.html" target="_blank">online demo</a> |
+   📘 <a href="./document/README.md">中文文档</a> 
 </p>
                                         
 
@@ -75,35 +75,6 @@ Example:
         }
       }
 ```
-
-## demo gif
-- This component is based on vue's data-driven implementation,so you must Pass in a data for later callback processing. 
-
-> demo1
-<p align="center">
-    <img src="./test/demo1.gif" width="783"/>
-</p> 
-
-> demo2
-<p align="center">
-    <img src="./test/demo2.gif" width="783"/>
-</p> 
-
-> demo3
-<p align="center">
-    <img src="./test/demo3.gif" width="783"/>
-</p> 
-
-> demo4
-- be careful that left and right scrolling you must define the actual width styles of the solt(example ul) container
-```css
-  .ul-item {
-    width: 670px;
-  }
-```
-<p align="center">
-    <img src="./test/demo4.gif" width="783"/>
-</p> 
 
 ## Cares
 I will create a js seamless scrolling plug-in project in the near future.
