@@ -182,7 +182,6 @@ module.exports = function (it) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.vueMyCLass = undefined;
 
 var _myClass = __webpack_require__(10);
 
@@ -190,12 +189,19 @@ var _myClass2 = _interopRequireDefault(_myClass);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var myScroll = void 0;
+
 if (typeof window !== 'undefined' && window.Vue) {
   Vue.component('vue-seamless-scroll', _myClass2.default);
+} else {
+  myScroll = {
+    install: function install(Vue) {
+      Vue.component('vue-seamless-scroll', _myClass2.default);
+    }
+  };
 }
 
-exports.vueMyCLass = _myClass2.default;
-exports.default = _myClass2.default;
+exports.default = myScroll;
 
 /***/ }),
 /* 10 */

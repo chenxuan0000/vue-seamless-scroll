@@ -30,14 +30,10 @@ npm install vue-seamless-scroll --save
 > 详情的demo页面 [example-src/App.vue](https://github.com/chenxuan0000/vue-seamless-scroll/blob/master/examples-src/App.vue)
 
 ```js
+// **main.js**
 import Vue from 'vue'
-import vueSeamlessScroll from 'vue-seamless-scroll'
-
-new Vue({
-  components: {
-    vueSeamlessScroll
-  }
-})
+import scroll from 'vue-seamless-scroll'
+Vue.use(scroll)
 ```
 
 ### 普通的使用方法 (script标签引入)
