@@ -450,6 +450,7 @@ exports.default = {
       this.reqFrame = requestAnimationFrame(function () {
         var _this3 = this;
 
+        if (!this.$refs.wrap) return;
         var h = this.$refs.wrap.offsetHeight / 2;
         var w = this.$refs.slotList.offsetWidth;
         var direction = this.options.direction;
@@ -537,6 +538,9 @@ exports.default = {
         this._initMove();
       }
     }
+  },
+  beforeDestroy: function beforeDestroy() {
+    this._cancle();
   }
 };
 

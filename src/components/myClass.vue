@@ -140,6 +140,7 @@
         this._cancle() //进入move立即先清除动画 防止频繁touchMove导致多动画同时进行
         this.reqFrame = requestAnimationFrame(
           function () {
+            if(!this.$refs.wrap) return //fixed 路由之间切换报this.$refs.wrap.offsetHeigh undefined bug
             let h = this.$refs.wrap.offsetHeight / 2  //实际高度
             let w = this.$refs.slotList.offsetWidth //宽度
             let direction = this.options.direction //滚动方向
@@ -227,6 +228,9 @@
           this._initMove()
         }
       }
+    },
+    beforeDestroy () {
+      this._cancle()
     }
   }
 </script>
