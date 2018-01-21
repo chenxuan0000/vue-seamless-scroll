@@ -78,6 +78,9 @@ Example:
       }
 ```
 
+## Changelog
+See the GitHub [release history](https://github.com/chenxuan0000/vue-seamless-scroll/releases).
+
 ## Cares
 I will create a js seamless scrolling plug-in project in the near future.
 

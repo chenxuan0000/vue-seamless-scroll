@@ -77,6 +77,8 @@ Example:
         }
       }
 ```
+## 历史版本
+See the GitHub [历史版本](https://github.com/chenxuan0000/vue-seamless-scroll/releases).
 
 ## 注意
 我将会在近期创建一个js无缝滚动插件项目。
