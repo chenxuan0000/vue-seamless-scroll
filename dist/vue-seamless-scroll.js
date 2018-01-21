@@ -191,12 +191,16 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 var myScroll = void 0;
 
+var defaultComponentName = 'vue-seamless-scroll';
+
 if (typeof window !== 'undefined' && window.Vue) {
   Vue.component('vue-seamless-scroll', _myClass2.default);
 } else {
   myScroll = {
     install: function install(Vue) {
-      Vue.component('vue-seamless-scroll', _myClass2.default);
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+      Vue.component(options.componentName || defaultComponentName, _myClass2.default);
     }
   };
 }
