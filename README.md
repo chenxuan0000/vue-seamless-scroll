@@ -8,7 +8,7 @@
 </p>                                             
 <p align="center">
    🐾<a href="https://chenxuan0000.github.io/component-document/index_prod.html#/component/seamless-default">online demo</a> |
-   🌾 <a href="https://chenxuan0000.github.io/vue-seamless-scroll/">sample demo</a> |
+   🌾 <a href="https://chenxuan0000.github.io/vue-seamless-scroll/index.html">sample demo</a> |
    📘 <a href="./document/README.md">中文文档</a> 
 </p>
                                         
@@ -94,5 +94,8 @@ See the GitHub [release history](https://github.com/chenxuan0000/vue-seamless-sc
 ## Cares
 I will create a js seamless scrolling plug-in project in the near future.
 
+## 注意
+If you want js to scroll seamlessly (without dependencies) you can switch to here.[seamscroll](https://github.com/chenxuan0000/seamless-scroll)。
+
 ## License
-vue-simple-spinner is open source and released under the [MIT License](LICENSE).
+vue-seamless-scroll is open source and released under the [MIT License](LICENSE).

@@ -8,7 +8,7 @@
 </p>                                            
 <p align="center">
    🐾<a href="https://chenxuan0000.github.io/component-document/index_prod.html#/component/seamless-default">在线文档demo</a> |
-   🌾 <a href="https://chenxuan0000.github.io/vue-seamless-scroll/" target="_blank">小demo</a> |
+   🌾 <a href="https://chenxuan0000.github.io/vue-seamless-scroll/index.html" target="_blank">小demo</a> |
    📘 <a href="../README.md">English Document</a>
 </p>
 
@@ -91,7 +91,7 @@ Example:
 See the GitHub [历史版本](https://github.com/chenxuan0000/vue-seamless-scroll/releases).
 
 ## 注意
-我将会在近期创建一个js无缝滚动插件项目。
+如果你想要js无缝滚动(无依赖)你可以切换到这里[seamscroll](https://github.com/chenxuan0000/seamless-scroll)。
 
 ## License
-vue-simple-spinner is open source and released under the [MIT License](LICENSE).
+vue-seamless-scroll is open source and released under the [MIT License](LICENSE).
