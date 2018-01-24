@@ -92,9 +92,6 @@ Example:
 See the GitHub [release history](https://github.com/chenxuan0000/vue-seamless-scroll/releases).
 
 ## Cares
-I will create a js seamless scrolling plug-in project in the near future.
-
-## 注意
 If you want js to scroll seamlessly (without dependencies) you can switch to here.[seamscroll](https://github.com/chenxuan0000/seamless-scroll)。
 
 ## License
