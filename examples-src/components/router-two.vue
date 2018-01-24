@@ -4,40 +4,40 @@
             <div style="text-align:center;">
                 <router-link to="/routerOne" tag="a">前往routerOne路由</router-link>
             </div>
-            <div class="flex wd800">
-                <div class="options" style="color:#357edd;">
-                    <p><b>demo4</b> 向下滚动,禁止了hover悬停</p>
-                    var option = {<br/>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limitMoveNum: 5,<br/>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;direction: 0,<br/>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hoverStop: false,<br/>
-                    }
-                </div>
-                <my-class :data="listData3" :class-option="classOption3" class="warp">
-                    <ul class="item">
-                        <li v-for="item in listData3"><span class="title" v-text="item.title"></span><span
-                                class="date" v-text="item.date"></span></li>
-                    </ul>
-                </my-class>
-            </div>
-            <div class="flex wd800">
-                <div class="options" style="color:#357edd;">
-                    <p><b>demo5</b> 向上无缝滚动,单条停止一段时间</p>
-                    var option = {<br/>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;step: 0.5,<br/>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limitMoveNum: 5<br/>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;singleHeight: 30,<br/>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;waitTime: 1000<br/>
-                    }
-                </div>
-                <my-class :data="listData4" :class-option="classOption4" class="warp">
-                    <ul class="item">
-                        <li v-for="item in listData4"><span class="title" v-text="item.title"></span><span class="date"
-                                                                                                           v-text="item.date"></span>
-                        </li>
-                    </ul>
-                </my-class>
-            </div>
+            <!--<div class="flex wd800">-->
+                <!--<div class="options" style="color:#357edd;">-->
+                    <!--<p><b>demo4</b> 向下滚动,禁止了hover悬停</p>-->
+                    <!--var option = {<br/>-->
+                    <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limitMoveNum: 5,<br/>-->
+                    <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;direction: 0,<br/>-->
+                    <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;hoverStop: false,<br/>-->
+                    <!--}-->
+                <!--</div>-->
+                <!--<my-class :data="listData3" :class-option="classOption3" class="warp">-->
+                    <!--<ul class="item">-->
+                        <!--<li v-for="item in listData3"><span class="title" v-text="item.title"></span><span-->
+                                <!--class="date" v-text="item.date"></span></li>-->
+                    <!--</ul>-->
+                <!--</my-class>-->
+            <!--</div>-->
+            <!--<div class="flex wd800">-->
+                <!--<div class="options" style="color:#357edd;">-->
+                    <!--<p><b>demo5</b> 向上无缝滚动,单条停止一段时间</p>-->
+                    <!--var option = {<br/>-->
+                    <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;step: 0.5,<br/>-->
+                    <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limitMoveNum: 5<br/>-->
+                    <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;singleHeight: 30,<br/>-->
+                    <!--&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;waitTime: 1000<br/>-->
+                    <!--}-->
+                <!--</div>-->
+                <!--<my-class :data="listData4" :class-option="classOption4" class="warp">-->
+                    <!--<ul class="item">-->
+                        <!--<li v-for="item in listData4"><span class="title" v-text="item.title"></span><span class="date"-->
+                                                                                                           <!--v-text="item.date"></span>-->
+                        <!--</li>-->
+                    <!--</ul>-->
+                <!--</my-class>-->
+            <!--</div>-->
         </div>
     </transition>
 </template>

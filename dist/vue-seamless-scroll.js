@@ -344,12 +344,13 @@ exports.default = {
   },
   computed: {
     float: function float() {
-      return this.options.direction > 1 ? { float: 'left' } : {};
+      return this.options.direction > 1 ? { float: 'left', overflow: 'hidden' } : { overflow: 'hidden' };
     },
     pos: function pos() {
       return {
         transform: 'translate(' + this.xPos + 'px,' + this.yPos + 'px)',
-        transition: 'all ease-in ' + this.delay + 'ms'
+        transition: 'all ease-in ' + this.delay + 'ms',
+        overflow: 'hidden'
       };
     },
     defaultOption: function defaultOption() {
@@ -505,19 +506,6 @@ exports.default = {
         timer = setTimeout(function () {
           _this4.copyHtml = _this4.$refs.slotList.innerHTML;
         }, 20);
-        if (this.options.direction === 1) {
-          var _timer2 = void 0;
-          if (_timer2) clearTimeout(_timer2);
-          _timer2 = setTimeout(function () {
-            _this4.yPos = _this4.$refs.wrap.offsetHeight / 2 * -1;
-          }, 20);
-        } else if (this.options.direction === 3) {
-          var _timer3 = void 0;
-          if (_timer3) clearTimeout(_timer3);
-          _timer3 = setTimeout(function () {
-            _this4.xPos = _this4.$refs.slotList.offsetWidth * -1;
-          }, 20);
-        }
         this._move();
       }
     }

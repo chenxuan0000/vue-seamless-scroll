@@ -37,12 +37,13 @@
     },
     computed: {
       float () {
-        return this.options.direction > 1 ? {float: 'left'} : {}
+        return this.options.direction > 1 ? {float: 'left',overflow:'hidden'} : {overflow:'hidden'}
       },
       pos () {
         return {
           transform: `translate(${this.xPos}px,${this.yPos}px)`,
-          transition: `all ease-in ${this.delay}ms`
+          transition: `all ease-in ${this.delay}ms`,
+          overflow:'hidden'
         }
       },
       defaultOption () {
@@ -194,20 +195,6 @@
           timer = setTimeout(() => { //20ms延迟 作用保证能取到最新的html
             this.copyHtml = this.$refs.slotList.innerHTML
           }, 20)
-          if (this.options.direction === 1) {
-            //非向上滚动位置初始化位置
-            let timer
-            if (timer) clearTimeout(timer)
-            timer = setTimeout(() => {
-              this.yPos = this.$refs.wrap.offsetHeight / 2 * -1
-            }, 20)
-          } else if (this.options.direction === 3) {
-            let timer
-            if (timer) clearTimeout(timer)
-            timer = setTimeout(() => {
-              this.xPos = this.$refs.slotList.offsetWidth * -1
-            }, 20)
-          }
           this._move()
         }
       }
