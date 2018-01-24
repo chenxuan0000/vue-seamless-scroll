@@ -158,9 +158,9 @@
               if (this.xPos >= 0) this.xPos = w * -1
               this.xPos += this.options.step
             }
+            let timer
             if (!!this.options.singleHeight) { //是否启动了单行暂停配置
               if (Math.abs(this.yPos) % this.options.singleHeight === 0) { // 符合条件暂停waitTime
-                let timer
                 if (timer) clearTimeout(timer)
                 timer = setTimeout(() => {
                   this._move()
@@ -170,7 +170,6 @@
               }
             } else if (!!this.options.singleWidth) {
               if (Math.abs(this.xPos) % this.options.singleWidth === 0) { // 符合条件暂停waitTime
-                let timer
                 if (timer) clearTimeout(timer)
                 timer = setTimeout(() => {
                   this._move()

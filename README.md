@@ -34,8 +34,18 @@ npm install vue-seamless-scroll --save
 // **main.js**
 import Vue from 'vue'
 import scroll from 'vue-seamless-scroll'
-// you can set componentName default componentName is vue-seamless-scroll
+Vue.use(scroll)
+
+<template>
+  <vue-seamless-scroll></vue-seamless-scroll>
+</template>
+
+//or you can set componentName default componentName is vue-seamless-scroll
 Vue.use(scroll,{componentName: 'scroll-seamless'})
+
+<template>
+  <scroll-seamless></scroll-seamless>
+</template>
 ```
 
 ### normal use (script tag)

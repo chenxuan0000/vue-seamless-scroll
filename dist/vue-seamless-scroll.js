@@ -468,9 +468,9 @@ exports.default = {
           if (this.xPos >= 0) this.xPos = w * -1;
           this.xPos += this.options.step;
         }
+        var timer = void 0;
         if (!!this.options.singleHeight) {
           if (Math.abs(this.yPos) % this.options.singleHeight === 0) {
-            var timer = void 0;
             if (timer) clearTimeout(timer);
             timer = setTimeout(function () {
               _this3._move();
@@ -480,9 +480,8 @@ exports.default = {
           }
         } else if (!!this.options.singleWidth) {
           if (Math.abs(this.xPos) % this.options.singleWidth === 0) {
-            var _timer = void 0;
-            if (_timer) clearTimeout(_timer);
-            _timer = setTimeout(function () {
+            if (timer) clearTimeout(timer);
+            timer = setTimeout(function () {
               _this3._move();
             }, this.options.waitTime);
           } else {

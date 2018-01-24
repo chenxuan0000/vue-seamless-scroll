@@ -34,8 +34,18 @@ npm install vue-seamless-scroll --save
 // **main.js**
 import Vue from 'vue'
 import scroll from 'vue-seamless-scroll'
-// 你可以自己设置全局注册的组件名 默认注册的组件名是 vue-seamless-scroll
+Vue.use(scroll)
+
+<template>
+  <vue-seamless-scroll></vue-seamless-scroll>
+</template>
+
+// 或者你可以自己设置全局注册的组件名 默认注册的组件名是 vue-seamless-scroll
 Vue.use(scroll,{componentName: 'scroll-seamless'})
+
+<template>
+  <scroll-seamless></scroll-seamless>
+</template>
 ```
 
 ### 普通的使用方法 (script标签引入)
