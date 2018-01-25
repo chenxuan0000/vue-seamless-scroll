@@ -93,5 +93,9 @@ See the GitHub [历史版本](https://github.com/chenxuan0000/vue-seamless-scrol
 ## 注意
 如果你想要js无缝滚动(无依赖)你可以切换到这里[seamscroll](https://github.com/chenxuan0000/seamless-scroll)。
 
+
+## 贡献
+欢迎给出一些意见和优化，期待你的 `Pull Request`。
+
 ## License
 vue-seamless-scroll is open source and released under the [MIT License](LICENSE).

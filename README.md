@@ -94,5 +94,8 @@ See the GitHub [release history](https://github.com/chenxuan0000/vue-seamless-sc
 ## Cares
 If you want js to scroll seamlessly (without dependencies) you can switch to here.[seamscroll](https://github.com/chenxuan0000/seamless-scroll)。
 
+## Contribution
+Welcome to give some Suggestions and optimizations, and look forward to your `Pull Request`.
+
 ## License
 vue-seamless-scroll is open source and released under the [MIT License](LICENSE).
