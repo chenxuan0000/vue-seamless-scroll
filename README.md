@@ -26,6 +26,9 @@
 npm install vue-seamless-scroll --save
 ```
 
+### CDN
+`https://cdn.jsdelivr.net/npm/vue-seamless-scroll@1.0.17/dist/vue-seamless-scroll.min.js`
+
 ## Usage
 ### ES6
 
