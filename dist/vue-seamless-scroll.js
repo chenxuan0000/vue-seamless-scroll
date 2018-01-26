@@ -324,8 +324,8 @@ exports.default = {
       yPos: 0,
       delay: 0,
       copyHtml: '',
-      reqFrame: null
-    };
+      reqFrame: null,
+      isHover: false };
   },
 
   props: {
@@ -371,7 +371,7 @@ exports.default = {
       return this.data.length < this.options.limitMoveNum;
     },
     hoverStop: function hoverStop() {
-      return !this.options.openWatch || !!this.options.singleHeight || !!this.options.singleWidth || !this.options.hoverStop || this.moveSwitch;
+      return !this.options.openWatch || !this.options.hoverStop || this.moveSwitch;
     }
   },
   methods: {
@@ -440,13 +440,16 @@ exports.default = {
     },
     enter: function enter() {
       if (this.hoverStop) return;
+      this.isHover = true;
       this._cancle();
     },
     leave: function leave() {
       if (this.hoverStop) return;
+      this.isHover = false;
       this._move();
     },
     _move: function _move() {
+      if (this.isHover) return;
       this._cancle();
       this.reqFrame = requestAnimationFrame(function () {
         var _this3 = this;

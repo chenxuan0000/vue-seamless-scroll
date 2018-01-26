@@ -18,7 +18,8 @@
         yPos: 0,
         delay: 0,
         copyHtml: '',
-        reqFrame: null
+        reqFrame: null,
+        isHover: false // mouseenter mouseleave 控制this._move()的开关
       }
     },
     props: {
@@ -37,13 +38,13 @@
     },
     computed: {
       float () {
-        return this.options.direction > 1 ? {float: 'left',overflow:'hidden'} : {overflow:'hidden'}
+        return this.options.direction > 1 ? {float: 'left', overflow: 'hidden'} : {overflow: 'hidden'}
       },
       pos () {
         return {
           transform: `translate(${this.xPos}px,${this.yPos}px)`,
           transition: `all ease-in ${this.delay}ms`,
-          overflow:'hidden'
+          overflow: 'hidden'
         }
       },
       defaultOption () {
@@ -65,7 +66,8 @@
         return this.data.length < this.options.limitMoveNum
       },
       hoverStop () {
-        return !this.options.openWatch || !!this.options.singleHeight || !!this.options.singleWidth || !this.options.hoverStop || this.moveSwitch
+        // 第一个判断是为了防止明明关闭了openWatch 但是data变化后数据量达到scroll的条件 触发mouseenter导致再次滚动问题
+        return !this.options.openWatch || !this.options.hoverStop || this.moveSwitch
       }
     },
     methods: {
@@ -131,17 +133,20 @@
       },
       enter () {
         if (this.hoverStop) return
+        this.isHover = true //关闭_move
         this._cancle()
       },
       leave () {
         if (this.hoverStop) return
+        this.isHover = false //开启_move
         this._move()
       },
       _move () {
+        if (this.isHover) return
         this._cancle() //进入move立即先清除动画 防止频繁touchMove导致多动画同时进行
         this.reqFrame = requestAnimationFrame(
           function () {
-            if(!this.$refs.wrap) return //fixed 路由之间切换报this.$refs.wrap.offsetHeigh undefined bug
+            if (!this.$refs.wrap) return //fixed 路由之间切换报this.$refs.wrap.offsetHeigh undefined bug
             let h = this.$refs.wrap.offsetHeight / 2  //实际高度
             let w = this.$refs.slotList.offsetWidth //宽度
             let direction = this.options.direction //滚动方向
