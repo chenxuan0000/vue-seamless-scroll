@@ -430,7 +430,7 @@ exports.default = {
         if (this.xPos > 0) this.xPos = 0;
       } else if (direction === 3) {
         var w = this.$refs.slotList.offsetWidth * -1;
-        if (this.xPos < w) this.yPos = w;
+        if (this.xPos < w) this.xPos = w;
       }
       if (timer) clearTimeout(timer);
       timer = setTimeout(function () {
