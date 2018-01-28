@@ -27,13 +27,14 @@ npm install vue-seamless-scroll --save
 ```
 
 ### CDN
-`https://cdn.jsdelivr.net/npm/vue-seamless-scroll@1.0.17/dist/vue-seamless-scroll.min.js`
+`https://cdn.jsdelivr.net/npm/vue-seamless-scroll@1.1.1/dist/vue-seamless-scroll.min.js`
 
 ## 使用
 ### ES6
 
 ```js
 // **main.js**
+// 1.全局 install
 import Vue from 'vue'
 import scroll from 'vue-seamless-scroll'
 Vue.use(scroll)
@@ -41,6 +42,16 @@ Vue.use(scroll)
 // 或者你可以自己设置全局注册的组件名 默认注册的组件名是 vue-seamless-scroll
 Vue.use(scroll,{componentName: 'scroll-seamless'})
 
+// 2.单个.vue文件局部注册
+<script>
+  import vueSeamless from 'vue-seamless-scroll'
+   export default {
+      components: {
+        vueSeamless
+      }
+   }
+</script>
+// demo
 <template>
     <vue-seamless-scroll :data="listData" class="seamless-warp">
         <ul class="item">

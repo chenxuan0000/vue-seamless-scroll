@@ -90,23 +90,17 @@ var _myClass2 = _interopRequireDefault(_myClass);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var myScroll = void 0;
+_myClass2.default.install = function (Vue) {
+  var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
 
-var defaultComponentName = 'vue-seamless-scroll';
+  Vue.component(options.componentName || _myClass2.default.name, _myClass2.default);
+};
 
 if (typeof window !== 'undefined' && window.Vue) {
-  Vue.component('vue-seamless-scroll', _myClass2.default);
-} else {
-  myScroll = {
-    install: function install(Vue) {
-      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
-
-      Vue.component(options.componentName || defaultComponentName, _myClass2.default);
-    }
-  };
+  Vue.component(_myClass2.default.name, _myClass2.default);
 }
 
-exports.default = myScroll;
+exports.default = _myClass2.default;
 
 /***/ }),
 /* 1 */
@@ -215,6 +209,7 @@ __webpack_require__(4)();
 var arrayEqual = __webpack_require__(5);
 var copyObj = __webpack_require__(6);
 exports.default = {
+  name: 'vue-seamless-scroll',
   data: function data() {
     return {
       xPos: 0,

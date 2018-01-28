@@ -27,13 +27,14 @@ npm install vue-seamless-scroll --save
 ```
 
 ### CDN
-`https://cdn.jsdelivr.net/npm/vue-seamless-scroll@1.0.17/dist/vue-seamless-scroll.min.js`
+`https://cdn.jsdelivr.net/npm/vue-seamless-scroll@1.1.1/dist/vue-seamless-scroll.min.js`
 
 ## Usage
 ### ES6
 
 ```js
 // **main.js**
+// 1.global install
 import Vue from 'vue'
 import scroll from 'vue-seamless-scroll'
 Vue.use(scroll)
@@ -41,6 +42,16 @@ Vue.use(scroll)
 //or you can set componentName default componentName is vue-seamless-scroll
 Vue.use(scroll,{componentName: 'scroll-seamless'})
 
+// 2.single .vue import
+<script>
+  import vueSeamless from 'vue-seamless-scroll'
+   export default {
+      components: {
+        vueSeamless
+      }
+   }
+</script>
+// demo
 <template>
     <vue-seamless-scroll :data="listData" class="seamless-warp">
         <ul class="item">
