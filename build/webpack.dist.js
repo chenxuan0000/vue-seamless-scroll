@@ -19,23 +19,21 @@ const config = merge(base, {
 // debug and production
 config.plugins = config.plugins.concat([
   new webpack.DefinePlugin({
+    'process.env': {
+      NODE_ENV: '"production"'
+    },
     VERSION: JSON.stringify(options.version)
   })
 ])
 
 if (options.isProduction) {
-  // production only
   config.plugins = config.plugins.concat([
-    // Set the production environment
-    new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('production')
-    }),
-
-    // Minify with dead-code elimination
     new webpack.optimize.UglifyJsPlugin({
       sourceMap: false,
       compress: {
-        warnings: false
+        warnings: false,
+        drop_debugger: true,
+        drop_console: true
       }
     })
   ])

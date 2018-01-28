@@ -2,8 +2,5 @@
   "presets": [
     ["env"]
   ],
-  "plugins": [
-    "transform-runtime"
-  ],
   "comments": false
 }

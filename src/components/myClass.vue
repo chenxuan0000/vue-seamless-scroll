@@ -11,6 +11,7 @@
 <script>
   require('comutils/animationFrame')()
   const arrayEqual = require('comutils/arrayEqual')
+  const copyObj = require('comutils/copyObj')
   export default {
     data () {
       return {
@@ -60,7 +61,7 @@
         }
       },
       options () {
-        return Object.assign({}, this.defaultOption, this.classOption)
+        return copyObj({}, this.defaultOption, this.classOption)
       },
       moveSwitch () {
         return this.data.length < this.options.limitMoveNum

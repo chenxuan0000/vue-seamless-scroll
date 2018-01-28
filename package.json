@@ -1,6 +1,6 @@
 {
   "name": "vue-seamless-scroll",
-  "version": "1.0.17",
+  "version": "1.0.18",
   "description": "A simple, Seamless scrolling for Vue.js",
   "main": "dist/vue-seamless-scroll.min.js",
   "scripts": {
@@ -29,7 +29,6 @@
   "devDependencies": {
     "babel-core": "^6.0.0",
     "babel-loader": "^7.1.2",
-    "babel-plugin-transform-runtime": "^6.22.0",
     "babel-preset-env": "^1.6.1",
     "cross-env": "^3.0.0",
     "css-loader": "^0.25.0",
