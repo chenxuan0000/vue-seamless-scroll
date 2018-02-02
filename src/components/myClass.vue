@@ -55,7 +55,7 @@
           limitMoveNum: 5, //启动无缝滚动最小数据数
           hoverStop: true, //是否启用鼠标hover控制
           direction: 1, // 0 往下 1 往上 2向左 3向右
-          openWatch: true, //开启data实时监听
+          openTouch: true, //开启移动端touch
           singleHeight: 0, //单条数据高度有值hoverStop关闭
           singleWidth: 0, //单条数据宽度有值hoverStop关闭
           waitTime: 1000 //单步停止等待时间
@@ -68,8 +68,7 @@
         return this.data.length < this.options.limitMoveNum
       },
       hoverStop () {
-        // 第一个判断是为了防止明明关闭了openWatch 但是data变化后数据量达到scroll的条件 触发mouseenter导致再次滚动问题
-        return !this.options.openWatch || !this.options.hoverStop || this.moveSwitch
+        return !this.options.hoverStop || this.moveSwitch
       }
     },
     methods: {
@@ -77,7 +76,7 @@
         cancelAnimationFrame(this.reqFrame || '')
       },
       touchStart (e) {
-        if (!this.options.openWatch) return
+        if (!this.options.openTouch) return
         let timer
         let touch = e.targetTouches[0] //touches数组对象获得屏幕上所有的touch，取第一个touch
         this.startPos = {
@@ -97,7 +96,7 @@
       },
       touchMove (e) {
         //当屏幕有多个touch或者页面被缩放过，就不执行move操作
-        if (!this.options.openWatch || e.targetTouches.length > 1 || e.scale && e.scale !== 1) return
+        if (!this.options.openTouch || e.targetTouches.length > 1 || e.scale && e.scale !== 1) return
         let touch = e.targetTouches[0]
         this.endPos = {
           x: touch.pageX - this.startPos.x,
@@ -112,7 +111,7 @@
         }
       },
       touchEnd () {
-        if (!this.options.openWatch) return
+        if (!this.options.openTouch) return
         let timer
         let direction = this.options.direction
         this.delay = 50
@@ -215,7 +214,6 @@
     watch: {
       data (newData, oldData) {
         //监听data是否有变更
-        if (!this.options.openWatch) return
         if (!arrayEqual(newData, oldData)) {
           this._cancle()
           this._initMove()

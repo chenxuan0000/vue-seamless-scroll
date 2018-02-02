@@ -27,7 +27,7 @@ npm install vue-seamless-scroll --save
 ```
 
 ### CDN
-`https://cdn.jsdelivr.net/npm/vue-seamless-scroll@1.1.1/dist/vue-seamless-scroll.min.js`
+`https://cdn.jsdelivr.net/npm/vue-seamless-scroll@1.1.2/dist/vue-seamless-scroll.min.js`
 
 ## Usage
 ### ES6
@@ -138,7 +138,7 @@ Example:
           limitMoveNum: 5, //start seamless scrolling minimum data  //this.dataList.length
           hoverStop: true, //mouse hover control is enabled
           direction: 1, // 0 down || 1 up || 2 left || 3 right
-          openWatch: true, //open data realTime monitoring
+          openTouch: true, //open touch 
           singleHeight: 0, //one single stop height(default zero is seamless) => direction 0/1
           singleWidth: 0, //one single stop width(default zero is seamless) => direction 2/3
           waitTime: 1000 //one single data stop wait time

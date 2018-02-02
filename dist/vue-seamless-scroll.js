@@ -251,7 +251,7 @@ exports.default = {
         limitMoveNum: 5,
         hoverStop: true,
         direction: 1,
-        openWatch: true,
+        openTouch: true,
         singleHeight: 0,
         singleWidth: 0,
         waitTime: 1000 };
@@ -263,7 +263,7 @@ exports.default = {
       return this.data.length < this.options.limitMoveNum;
     },
     hoverStop: function hoverStop() {
-      return !this.options.openWatch || !this.options.hoverStop || this.moveSwitch;
+      return !this.options.hoverStop || this.moveSwitch;
     }
   },
   methods: {
@@ -273,7 +273,7 @@ exports.default = {
     touchStart: function touchStart(e) {
       var _this = this;
 
-      if (!this.options.openWatch) return;
+      if (!this.options.openTouch) return;
       var timer = void 0;
       var touch = e.targetTouches[0];
       this.startPos = {
@@ -292,7 +292,7 @@ exports.default = {
       }
     },
     touchMove: function touchMove(e) {
-      if (!this.options.openWatch || e.targetTouches.length > 1 || e.scale && e.scale !== 1) return;
+      if (!this.options.openTouch || e.targetTouches.length > 1 || e.scale && e.scale !== 1) return;
       var touch = e.targetTouches[0];
       this.endPos = {
         x: touch.pageX - this.startPos.x,
@@ -309,7 +309,7 @@ exports.default = {
     touchEnd: function touchEnd() {
       var _this2 = this;
 
-      if (!this.options.openWatch) return;
+      if (!this.options.openTouch) return;
       var timer = void 0;
       var direction = this.options.direction;
       this.delay = 50;
@@ -414,7 +414,6 @@ exports.default = {
 
   watch: {
     data: function data(newData, oldData) {
-      if (!this.options.openWatch) return;
       if (!arrayEqual(newData, oldData)) {
         this._cancle();
         this._initMove();

@@ -27,7 +27,7 @@ npm install vue-seamless-scroll --save
 ```
 
 ### CDN
-`https://cdn.jsdelivr.net/npm/vue-seamless-scroll@1.1.1/dist/vue-seamless-scroll.min.js`
+`https://cdn.jsdelivr.net/npm/vue-seamless-scroll@1.1.2/dist/vue-seamless-scroll.min.js`
 
 ## 使用
 ### ES6
@@ -138,7 +138,7 @@ Example:
           limitMoveNum: 5, //开始无缝滚动的数据量  //this.dataList.length
           hoverStop: true, //是否开启鼠标悬停stop
           direction: 1, // 0向下 1向上 2向左 3向右
-          openWatch: true, //开启数据实时监控刷新dom
+          openTouch: true, //开启移动端touch
           singleHeight: 0, //单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
           singleWidth: 0, //单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
           waitTime: 1000 //单步运动停止的时间(默认值1000ms)

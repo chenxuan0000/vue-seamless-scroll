@@ -11,7 +11,7 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limitMoveNum: 5<br/>
                 }
             </div>
-            <my-class :data="listData" class="warp">
+            <my-class :data="listData" class="warp":class-option="classOption">
                 <ul class="item">
                     <li v-for="item in listData"><span class="title" v-text="item.title"></span><span class="date"
                                                                                                       v-text="item.date"></span>
@@ -155,12 +155,14 @@
         height: 150px;
         overflow: hidden;
     }
+
     .test {
-        height:126px;
+        height: 126px;
         width: 600px;
         overflow: hidden;
         font-size: 14px;
     }
+
     .test .item {
         display: flex;
         margin-top: 10px;
@@ -251,7 +253,8 @@
       classOption () {
         return {
           step: 0.5,
-          limitMoveNum: 5
+          limitMoveNum: 5,
+          openTouch: false
         }
       },
       classOption1 () {
@@ -261,8 +264,7 @@
       },
       classOption2 () {
         return {
-          limitMoveNum: 7,
-          openWatch: false
+          limitMoveNum: 7
         }
       },
       classOption3 () {
@@ -292,7 +294,7 @@
     created () {
       setTimeout(() => {
         this.listData5 = [1, 2, 3, 4, 5]
-      },3000)
+      }, 3000)
       setTimeout(() => {
         this.listData1 = this.listData2 = [{
           'title': '无缝滚动第一行无缝滚动第一行',
