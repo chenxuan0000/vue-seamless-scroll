@@ -24,7 +24,7 @@
                 <div class="options" style="color:#357edd;">
                     <p><b>demo5</b> 向上无缝滚动,单条停止一段时间</p>
                     var option = {<br/>
-                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;step: 0.5,<br/>
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;step: 1,<br/>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limitMoveNum: 5<br/>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;singleHeight: 30,<br/>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;waitTime: 1000<br/>
@@ -114,7 +114,7 @@
       },
       classOption4 () {
         return {
-          step: 0.5,
+          step: 1,
           limitMoveNum: 5,
           singleHeight: 30,
           waitTime: 1000

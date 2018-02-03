@@ -217,6 +217,7 @@ exports.default = {
       delay: 0,
       copyHtml: '',
       reqFrame: null,
+      singleWaitTime: null,
       isHover: false };
   },
 
@@ -333,6 +334,7 @@ exports.default = {
     enter: function enter() {
       if (this.hoverStop) return;
       this.isHover = true;
+      if (this.singleWaitTime) clearTimeout(this.singleWaitTime);
       this._cancle();
     },
     leave: function leave() {
@@ -363,11 +365,10 @@ exports.default = {
           if (this.xPos >= 0) this.xPos = w * -1;
           this.xPos += this.options.step;
         }
-        var timer = void 0;
+        if (this.singleWaitTime) clearTimeout(this.singleWaitTime);
         if (!!this.options.singleHeight) {
           if (Math.abs(this.yPos) % this.options.singleHeight === 0) {
-            if (timer) clearTimeout(timer);
-            timer = setTimeout(function () {
+            this.singleWaitTime = setTimeout(function () {
               _this3._move();
             }, this.options.waitTime);
           } else {
@@ -375,8 +376,7 @@ exports.default = {
           }
         } else if (!!this.options.singleWidth) {
           if (Math.abs(this.xPos) % this.options.singleWidth === 0) {
-            if (timer) clearTimeout(timer);
-            timer = setTimeout(function () {
+            this.singleWaitTime = setTimeout(function () {
               _this3._move();
             }, this.options.waitTime);
           } else {

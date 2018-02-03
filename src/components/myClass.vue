@@ -20,7 +20,8 @@
         yPos: 0,
         delay: 0,
         copyHtml: '',
-        reqFrame: null,
+        reqFrame: null, // move动画的animationFrame定时器
+        singleWaitTime: null, // single 单步滚动的定时器
         isHover: false // mouseenter mouseleave 控制this._move()的开关
       }
     },
@@ -135,6 +136,8 @@
       enter () {
         if (this.hoverStop) return
         this.isHover = true //关闭_move
+        // 防止蛋疼的人频频hover进出单步滚动 导致定时器乱掉
+        if (this.singleWaitTime) clearTimeout(this.singleWaitTime)
         this._cancle()
       },
       leave () {
@@ -143,6 +146,7 @@
         this._move()
       },
       _move () {
+        // 鼠标移入时拦截_move()
         if (this.isHover) return
         this._cancle() //进入move立即先清除动画 防止频繁touchMove导致多动画同时进行
         this.reqFrame = requestAnimationFrame(
@@ -164,11 +168,10 @@
               if (this.xPos >= 0) this.xPos = w * -1
               this.xPos += this.options.step
             }
-            let timer
+            if (this.singleWaitTime) clearTimeout(this.singleWaitTime)
             if (!!this.options.singleHeight) { //是否启动了单行暂停配置
               if (Math.abs(this.yPos) % this.options.singleHeight === 0) { // 符合条件暂停waitTime
-                if (timer) clearTimeout(timer)
-                timer = setTimeout(() => {
+                this.singleWaitTime = setTimeout(() => {
                   this._move()
                 }, this.options.waitTime)
               } else {
@@ -176,8 +179,7 @@
               }
             } else if (!!this.options.singleWidth) {
               if (Math.abs(this.xPos) % this.options.singleWidth === 0) { // 符合条件暂停waitTime
-                if (timer) clearTimeout(timer)
-                timer = setTimeout(() => {
+                this.singleWaitTime = setTimeout(() => {
                   this._move()
                 }, this.options.waitTime)
               } else {
