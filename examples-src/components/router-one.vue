@@ -1,8 +1,5 @@
 <template>
     <div class="router1">
-        <div style="text-align:center;">
-            <router-link to="/routerTwo" tag="a">前往routerTwo路由</router-link>
-        </div>
         <div class="flex wd800">
             <div class="options" style="color:#357edd;">
                 <p><b>demo1</b> 向上无缝滚动,hover可停止</p>
