@@ -266,7 +266,7 @@ exports.default = {
       };
     },
     float: function float() {
-      return this.options.direction > 1 ? { float: 'left', overflow: 'hidden' } : { overflow: 'hidden' };
+      return this.options.direction > 1 || !this.options.autoPlay ? { float: 'left', overflow: 'hidden' } : { overflow: 'hidden' };
     },
     pos: function pos() {
       return {
@@ -464,7 +464,7 @@ exports.default = {
     this.height = this.$refs.wrap.offsetHeight;
     this.width = this.$refs.wrap.offsetWidth;
 
-    if (this.options.direction > 1) {
+    if (this.options.direction > 1 || !this.options.autoPlay) {
       var rate = void 0;
       if (!this.options.autoPlay) {
         rate = 1;

@@ -276,7 +276,6 @@
       },
       classOption3 () {
         return {
-          direction: 2,
           autoPlay: false
         }
       },

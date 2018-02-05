@@ -77,7 +77,7 @@
         }
       },
       float () {
-        return this.options.direction > 1 ? {float: 'left', overflow: 'hidden'} : {overflow: 'hidden'}
+        return this.options.direction > 1 || !this.options.autoPlay ? {float: 'left', overflow: 'hidden'} : {overflow: 'hidden'}
       },
       pos () {
         return {
@@ -272,7 +272,7 @@
       this.height = this.$refs.wrap.offsetHeight
       this.width = this.$refs.wrap.offsetWidth
       // 设置warp width
-      if (this.options.direction > 1) {
+      if (this.options.direction > 1 || !this.options.autoPlay) {
         let rate
         if (!this.options.autoPlay) {
           rate = 1
