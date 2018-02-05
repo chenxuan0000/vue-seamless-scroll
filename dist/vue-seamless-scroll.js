@@ -216,6 +216,9 @@ exports.default = {
       yPos: 0,
       delay: 0,
       copyHtml: '',
+      height: 0,
+      width: 0,
+      realBoxWidth: 0,
       reqFrame: null,
       singleWaitTime: null,
       isHover: false };
@@ -236,13 +239,39 @@ exports.default = {
     }
   },
   computed: {
+    leftSwitchState: function leftSwitchState() {
+      return this.xPos < 0 ? true : false;
+    },
+    rightSwitchState: function rightSwitchState() {
+      return Math.abs(this.xPos) < this.realBoxWidth - this.width ? true : false;
+    },
+    leftSwitchClass: function leftSwitchClass() {
+      return this.leftSwitchState ? '' : this.options.switchDisabledClass;
+    },
+    rightSwitchClass: function rightSwitchClass() {
+      return this.rightSwitchState ? '' : this.options.switchDisabledClass;
+    },
+    leftSwitch: function leftSwitch() {
+      return {
+        position: 'absolute',
+        margin: this.height / 2 + 'px 0 0 -' + this.options.switchOffset + 'px',
+        transform: 'translate(-100%,-50%)'
+      };
+    },
+    rightSwitch: function rightSwitch() {
+      return {
+        position: 'absolute',
+        margin: this.height / 2 + 'px 0 0 ' + (this.width + this.options.switchOffset) + 'px',
+        transform: 'translateY(-50%)'
+      };
+    },
     float: function float() {
       return this.options.direction > 1 ? { float: 'left', overflow: 'hidden' } : { overflow: 'hidden' };
     },
     pos: function pos() {
       return {
         transform: 'translate(' + this.xPos + 'px,' + this.yPos + 'px)',
-        transition: 'all ease-in ' + this.delay + 'ms',
+        transition: 'all ' + (this.ease || 'ease-in') + ' ' + this.delay + 'ms',
         overflow: 'hidden'
       };
     },
@@ -255,7 +284,13 @@ exports.default = {
         openTouch: true,
         singleHeight: 0,
         singleWidth: 0,
-        waitTime: 1000 };
+        waitTime: 1000,
+        switchOffset: 30,
+        autoPlay: true,
+        switchSingleStep: 134,
+        switchDelay: 400,
+        switchDisabledClass: 'disabled'
+      };
     },
     options: function options() {
       return copyObj({}, this.defaultOption, this.classOption);
@@ -264,10 +299,28 @@ exports.default = {
       return this.data.length < this.options.limitMoveNum;
     },
     hoverStop: function hoverStop() {
-      return !this.options.hoverStop || this.moveSwitch;
+      return !this.options.autoPlay || !this.options.hoverStop || this.moveSwitch;
     }
   },
   methods: {
+    leftSwitchClick: function leftSwitchClick() {
+      if (!this.leftSwitchState) return;
+
+      if (Math.abs(this.xPos) < this.options.switchSingleStep) {
+        this.xPos = 0;
+        return;
+      }
+      this.xPos += this.options.switchSingleStep;
+    },
+    rightSwitchClick: function rightSwitchClick() {
+      if (!this.rightSwitchState) return;
+
+      if (this.realBoxWidth - this.width + this.xPos < this.options.switchSingleStep) {
+        this.xPos = this.width - this.realBoxWidth;
+        return;
+      }
+      this.xPos -= this.options.switchSingleStep;
+    },
     _cancle: function _cancle() {
       cancelAnimationFrame(this.reqFrame || '');
     },
@@ -405,11 +458,25 @@ exports.default = {
     }
   },
   mounted: function mounted() {
-    this._initMove();
+    this.height = this.$refs.realBox.offsetHeight;
+    this.width = this.$refs.realBox.offsetWidth;
 
     if (this.options.direction > 1) {
-      this.$refs.wrap.style.width = this.$refs.slotList.offsetWidth * 2 + 'px';
+      var rate = void 0;
+      if (!this.options.autoPlay) {
+        rate = 1;
+      } else {
+        rate = 2;
+      }
+      this.$refs.wrap.style.width = this.$refs.slotList.offsetWidth * rate + 'px';
+      this.realBoxWidth = this.$refs.slotList.offsetWidth * rate;
     }
+    if (!this.options.autoPlay) {
+      this.ease = 'linear';
+      this.delay = this.options.switchDelay;
+      return;
+    }
+    this._initMove();
   },
 
   watch: {
@@ -544,6 +611,22 @@ module.exports = copyObj;
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
+    ref: "realBox"
+  }, [_c('div', {
+    class: _vm.leftSwitchClass,
+    style: (_vm.leftSwitch),
+    on: {
+      "click": _vm.leftSwitchClick
+    }
+  }, [_vm._t("left-switch")], 2), _vm._v(" "), _c('div', {
+    class: _vm.rightSwitchClass,
+    style: (_vm.rightSwitch),
+    on: {
+      "click": _vm.rightSwitchClick
+    }
+  }, [_vm._t("right-switch")], 2), _vm._v(" "), _c('div', {
+    ref: "wrap",
+    style: (_vm.pos),
     on: {
       "mouseenter": _vm.enter,
       "mouseleave": _vm.leave,
@@ -551,9 +634,6 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "touchmove": _vm.touchMove,
       "touchend": _vm.touchEnd
     }
-  }, [_c('div', {
-    ref: "wrap",
-    style: (_vm.pos)
   }, [_c('div', {
     ref: "slotList",
     style: (_vm.float)

@@ -8,7 +8,7 @@
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limitMoveNum: 5<br/>
                 }
             </div>
-            <my-class :data="listData" class="warp":class-option="classOption">
+            <my-class :data="listData" class="warp" :class-option="classOption">
                 <ul class="item">
                     <li v-for="item in listData"><span class="title" v-text="item.title"></span><span class="date"
                                                                                                       v-text="item.date"></span>
@@ -56,9 +56,11 @@
                 }
             </div>
             <my-class :data="listData3" :class-option="classOption3" class="warp2">
+                <span class="name" slot="left-switch" style="width: 100px;height: 100px;cursor: pointer;background-color:yellow;">&lt;</span>
                 <ul class="ul-item clearfix">
                     <li class="li-item" v-for="item in listData3">{{item}}</li>
                 </ul>
+                <span class="name" slot="right-switch" style="width: 100px;height: 100px;cursor: pointer;background-color:yellow;">&gt;</span>
             </my-class>
         </div>
         <div class="flex wd800">
@@ -267,7 +269,8 @@
       classOption3 () {
         return {
           limitMoveNum: 2,
-          direction: 2
+          direction: 2,
+          autoPlay: false
         }
       },
       classOption4 () {

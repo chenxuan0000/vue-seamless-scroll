@@ -141,7 +141,12 @@ Example:
           openTouch: true, //open touch 
           singleHeight: 0, //one single stop height(default zero is seamless) => direction 0/1
           singleWidth: 0, //one single stop width(default zero is seamless) => direction 2/3
-          waitTime: 1000 //one single data stop wait time
+          waitTime: 1000, //one single data stop wait time
+          switchOffset: 30, // 左右 切换按钮 距离左右边距
+          autoPlay: true, // 是否自动播放 使用switch切换时候需要置为false
+          switchSingleStep: 134, //单步切换step
+          switchDelay: 400, // 单步切换的时间
+          switchDisabledClass: 'disabled'  // 不可以点击状态的switch父元素的类名
         }
       }
 ```

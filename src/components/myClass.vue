@@ -1,6 +1,13 @@
 <template>
-    <div @mouseenter="enter" @mouseleave="leave" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
-        <div ref="wrap" :style="pos">
+    <div ref="realBox">
+        <div :style="leftSwitch" :class="leftSwitchClass" @click="leftSwitchClick">
+            <slot name="left-switch"></slot>
+        </div>
+        <div :style="rightSwitch" :class="rightSwitchClass" @click="rightSwitchClick">
+            <slot name="right-switch"></slot>
+        </div>
+        <div ref="wrap" :style="pos" @mouseenter="enter" @mouseleave="leave" @touchstart="touchStart"
+             @touchmove="touchMove" @touchend="touchEnd">
             <div ref="slotList" :style="float">
                 <slot></slot>
             </div>
@@ -20,6 +27,9 @@
         yPos: 0,
         delay: 0,
         copyHtml: '',
+        height: 0,
+        width: 0,
+        realBoxWidth: 0,
         reqFrame: null, // move动画的animationFrame定时器
         singleWaitTime: null, // single 单步滚动的定时器
         isHover: false // mouseenter mouseleave 控制this._move()的开关
@@ -40,13 +50,39 @@
       }
     },
     computed: {
+      leftSwitchState () {
+        return this.xPos < 0 ? true : false
+      },
+      rightSwitchState () {
+        return Math.abs(this.xPos) < (this.realBoxWidth - this.width) ? true : false
+      },
+      leftSwitchClass () {
+        return this.leftSwitchState ? '' : this.options.switchDisabledClass
+      },
+      rightSwitchClass () {
+        return this.rightSwitchState ? '' : this.options.switchDisabledClass
+      },
+      leftSwitch () {
+        return {
+          position: 'absolute',
+          margin: `${this.height / 2}px 0 0 -${this.options.switchOffset}px`,
+          transform: 'translate(-100%,-50%)'
+        }
+      },
+      rightSwitch () {
+        return {
+          position: 'absolute',
+          margin: `${this.height / 2}px 0 0 ${this.width + this.options.switchOffset}px`,
+          transform: 'translateY(-50%)'
+        }
+      },
       float () {
         return this.options.direction > 1 ? {float: 'left', overflow: 'hidden'} : {overflow: 'hidden'}
       },
       pos () {
         return {
           transform: `translate(${this.xPos}px,${this.yPos}px)`,
-          transition: `all ease-in ${this.delay}ms`,
+          transition: `all ${this.ease || 'ease-in'} ${this.delay}ms`,
           overflow: 'hidden'
         }
       },
@@ -59,7 +95,12 @@
           openTouch: true, //开启移动端touch
           singleHeight: 0, //单条数据高度有值hoverStop关闭
           singleWidth: 0, //单条数据宽度有值hoverStop关闭
-          waitTime: 1000 //单步停止等待时间
+          waitTime: 1000, //单步停止等待时间
+          switchOffset: 30,
+          autoPlay: true,
+          switchSingleStep: 134,
+          switchDelay: 400,
+          switchDisabledClass: 'disabled'
         }
       },
       options () {
@@ -69,10 +110,28 @@
         return this.data.length < this.options.limitMoveNum
       },
       hoverStop () {
-        return !this.options.hoverStop || this.moveSwitch
+        return !this.options.autoPlay || !this.options.hoverStop || this.moveSwitch
       }
     },
     methods: {
+      leftSwitchClick () {
+        if (!this.leftSwitchState) return
+        // 小于单步距离
+        if (Math.abs(this.xPos) < this.options.switchSingleStep) {
+          this.xPos = 0
+          return
+        }
+        this.xPos += this.options.switchSingleStep
+      },
+      rightSwitchClick () {
+        if (!this.rightSwitchState) return
+        // 小于单步距离
+        if ((this.realBoxWidth - this.width + this.xPos) < this.options.switchSingleStep) {
+          this.xPos = this.width - this.realBoxWidth
+          return
+        }
+        this.xPos -= this.options.switchSingleStep
+      },
       _cancle () {
         cancelAnimationFrame(this.reqFrame || '')
       },
@@ -207,11 +266,25 @@
       }
     },
     mounted () {
-      this._initMove()
+      this.height = this.$refs.realBox.offsetHeight
+      this.width = this.$refs.realBox.offsetWidth
       // 设置warp width
       if (this.options.direction > 1) {
-        this.$refs.wrap.style.width = this.$refs.slotList.offsetWidth * 2 + 'px'
+        let rate
+        if (!this.options.autoPlay) {
+          rate = 1
+        } else {
+          rate = 2
+        }
+        this.$refs.wrap.style.width = this.$refs.slotList.offsetWidth * rate + 'px'
+        this.realBoxWidth = this.$refs.slotList.offsetWidth * rate
       }
+      if (!this.options.autoPlay) {
+        this.ease = 'linear'
+        this.delay = this.options.switchDelay
+        return
+      }
+      this._initMove()
     },
     watch: {
       data (newData, oldData) {

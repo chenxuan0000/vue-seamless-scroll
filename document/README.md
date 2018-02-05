@@ -141,8 +141,12 @@ Example:
           openTouch: true, //开启移动端touch
           singleHeight: 0, //单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
           singleWidth: 0, //单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
-          waitTime: 1000 //单步运动停止的时间(默认值1000ms)
-        }
+          waitTime: 1000, //单步运动停止的时间(默认值1000ms)
+          switchOffset: 30, // 左右 切换按钮 距离左右边距
+          autoPlay: true, // 是否自动播放 使用switch切换时候需要置为false
+          switchSingleStep: 134, //单步切换step
+          switchDelay: 400, // 单步切换的时间
+          switchDisabledClass: 'disabled'  // 不可以点击状态的switch父元素的类名
       }
 ```
 ## 历史版本
