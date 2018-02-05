@@ -51,7 +51,6 @@
             <div class="options" style="color:#357edd;">
                 <p><b>demo4</b>手动切换的demo</p>
                 var option = {<br/>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;direction: 2,<br/>
                 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;autoPlay: false<br/>
                 }
             </div>
