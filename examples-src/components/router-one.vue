@@ -49,18 +49,20 @@
         </div>
         <div class="flex wd800">
             <div class="options" style="color:#357edd;">
-                <p><b>demo4</b>向左的无缝滚动</p>
+                <p><b>demo4</b>手动切换的demo</p>
                 var option = {<br/>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limitMoveNum: 2<br/>
-                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;direction: 2<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;direction: 2,<br/>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;autoPlay: false<br/>
                 }
             </div>
-            <my-class :data="listData3" :class-option="classOption3" class="warp2">
-                <span class="name" slot="left-switch" style="width: 100px;height: 100px;cursor: pointer;background-color:yellow;">&lt;</span>
+            <my-class :class-option="classOption3" class="warp2 demo4">
+                <span class="name" slot="left-switch"
+                      style="display: block;width: 30px;height: 40px;cursor: pointer;background-color:yellow;text-align: center;line-height:40px;">&lt;</span>
                 <ul class="ul-item clearfix">
                     <li class="li-item" v-for="item in listData3">{{item}}</li>
                 </ul>
-                <span class="name" slot="right-switch" style="width: 100px;height: 100px;cursor: pointer;background-color:yellow;">&gt;</span>
+                <span class="name" slot="right-switch"
+                      style="display: block;width: 30px;height: 40px;cursor: pointer;background-color:yellow;text-align: center;line-height:40px;">&gt;</span>
             </my-class>
         </div>
         <div class="flex wd800">
@@ -131,6 +133,12 @@
     </div>
 </template>
 <style lang="scss" scoped>
+    .demo4 {
+        width: 402px!important;
+        .ul-item {
+            width: 804px;
+        }
+    }
     .ul-item {
         list-style: none;
         margin: 0;
@@ -176,7 +184,7 @@
   export default {
     data () {
       return {
-        listData3: [1, 2, 3, 4, 5],
+        listData3: [1, 2, 3, 4, 5, 6],
         listData4: [1, 2, 3, 4, 5],
         listData5: [1, 2],
         listData: [{
@@ -268,7 +276,6 @@
       },
       classOption3 () {
         return {
-          limitMoveNum: 2,
           direction: 2,
           autoPlay: false
         }

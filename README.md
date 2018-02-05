@@ -12,11 +12,30 @@
    📘 <a href="./document/README.md">中文文档</a> 
 </p>
                                         
+## Content
+
+- [**`Browser support`**](#browser-support)
+- [**`Features`**](#features)
+- [**`Installation`**](#installation)
+- [**`Usage`**](#usage)
+    - [**`ES6`**](#eS6)
+    - [**`Normal use`**](#normal-use)
+- [**`Configure`**](#configure)  
+- [**`Individual special configuration items`**](#individual-special-configuration-items) 
+- [**`Changelog`**](#changelog)
+- [**`Cares`**](#cares)
+- [**`Contribution`**](#contribution)
 
 ## Browser support
 | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/edge.png" alt="IE" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>IE | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/firefox.png" alt="Firefox" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/chrome.png" alt="Chrome" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/safari.png" alt="Safari" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/safari-ios.png" alt="iOS Safari" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>iOS | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/chrome-android.png" alt="Chrome for Android" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Android |
 |:---------:|:---------:|:---------:|:---------:|:---------:|:---------:|
 | IE9+ | &check;| &check; | &check; | &check; | &check; | &check;
+
+## Features
+* [x] base on requestAnimationFrame
+* [x] the configuration meets a variety of requirements.
+* [x] current support for seamless scrolling, single-step scrolling, and manual switching support for horizontal direction.
+* [x] ongoing maintenance
 
 ## Installation
 
@@ -106,7 +125,7 @@ Vue.use(scroll,{componentName: 'scroll-seamless'})
 
 ```
 
-### normal use (script tag)
+### Normal use
 
 Example:
 > Specific reference [test/test.html](https://github.com/chenxuan0000/vue-seamless-scroll/blob/master/test/test.html)
@@ -142,14 +161,23 @@ Example:
           singleHeight: 0, //one single stop height(default zero is seamless) => direction 0/1
           singleWidth: 0, //one single stop width(default zero is seamless) => direction 2/3
           waitTime: 1000, //one single data stop wait time
-          switchOffset: 30, // 左右 切换按钮 距离左右边距
-          autoPlay: true, // 是否自动播放 使用switch切换时候需要置为false
-          switchSingleStep: 134, //单步切换step
-          switchDelay: 400, // 单步切换的时间
-          switchDisabledClass: 'disabled'  // 不可以点击状态的switch父元素的类名
+          switchOffset: 30, // the left and right buttons distance from the left and right sides (px)
+          autoPlay: true, // whether or not to automatically play the switch needs to be set to false
+          switchSingleStep: 134, //the size of a single step switch (px)
+          switchDelay: 400, // the time of a single step switch (ms)
+          switchDisabledClass: 'disabled'  // the className of the switch parent element that cannot be clicked.
         }
       }
 ```
+
+## Individual special configuration items
+
+> 1.The outermost container needs to be set manually`width height overflow:hidden`
+> 2.The left and right seamless rolling needs to be set for the main content area (that is, the default slot slots)`css width`(otherwise, the actual width cannot be calculated correctly)
+> 3.The step value is not recommended to be too small, otherwise there will be carton effect.
+> 4.You need to set when you need to manually switch left and right to scroll`autoPlay:false`,(The loop is not currently supported.)
+> 5.Provides `slot left-switch || right-switch` you can freely define the button styles you want. The outer div is positioned in the middle,the distance from both sides can be adjusted by the switchOffset parameter.
+> 6.When the button reaches the boundary position, it automatically adds a definition to the state button that cannot be clicked.`switchDisabledClass: 'disabled'`,you can configure it as needed.
 
 ## Changelog
 See the GitHub [release history](https://github.com/chenxuan0000/vue-seamless-scroll/releases).

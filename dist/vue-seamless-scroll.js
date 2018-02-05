@@ -240,10 +240,10 @@ exports.default = {
   },
   computed: {
     leftSwitchState: function leftSwitchState() {
-      return this.xPos < 0 ? true : false;
+      return this.xPos < 0;
     },
     rightSwitchState: function rightSwitchState() {
-      return Math.abs(this.xPos) < this.realBoxWidth - this.width ? true : false;
+      return Math.abs(this.xPos) < this.realBoxWidth - this.width;
     },
     leftSwitchClass: function leftSwitchClass() {
       return this.leftSwitchState ? '' : this.options.switchDisabledClass;
@@ -300,6 +300,9 @@ exports.default = {
     },
     hoverStop: function hoverStop() {
       return !this.options.autoPlay || !this.options.hoverStop || this.moveSwitch;
+    },
+    canTouch: function canTouch() {
+      return !this.options.openTouch || !this.options.autoPlay;
     }
   },
   methods: {
@@ -327,7 +330,7 @@ exports.default = {
     touchStart: function touchStart(e) {
       var _this = this;
 
-      if (!this.options.openTouch) return;
+      if (this.canTouch) return;
       var timer = void 0;
       var touch = e.targetTouches[0];
       this.startPos = {
@@ -346,7 +349,7 @@ exports.default = {
       }
     },
     touchMove: function touchMove(e) {
-      if (!this.options.openTouch || e.targetTouches.length > 1 || e.scale && e.scale !== 1) return;
+      if (this.canTouch || e.targetTouches.length > 1 || e.scale && e.scale !== 1) return;
       var touch = e.targetTouches[0];
       this.endPos = {
         x: touch.pageX - this.startPos.x,
@@ -363,14 +366,14 @@ exports.default = {
     touchEnd: function touchEnd() {
       var _this2 = this;
 
-      if (!this.options.openTouch) return;
+      if (this.canTouch) return;
       var timer = void 0;
       var direction = this.options.direction;
       this.delay = 50;
       if (direction === 1) {
         if (this.yPos > 0) this.yPos = 0;
       } else if (direction === 0) {
-        var h = this.$refs.wrap.offsetHeight / 2 * -1;
+        var h = this.$refs.realBox.offsetHeight / 2 * -1;
         if (this.yPos < h) this.yPos = h;
       } else if (direction === 2) {
         if (this.xPos > 0) this.xPos = 0;
@@ -401,8 +404,8 @@ exports.default = {
       this.reqFrame = requestAnimationFrame(function () {
         var _this3 = this;
 
-        if (!this.$refs.wrap) return;
-        var h = this.$refs.wrap.offsetHeight / 2;
+        if (!this.$refs.realBox) return;
+        var h = this.$refs.realBox.offsetHeight / 2;
         var w = this.$refs.slotList.offsetWidth;
         var direction = this.options.direction;
         if (direction === 1) {
@@ -458,8 +461,8 @@ exports.default = {
     }
   },
   mounted: function mounted() {
-    this.height = this.$refs.realBox.offsetHeight;
-    this.width = this.$refs.realBox.offsetWidth;
+    this.height = this.$refs.wrap.offsetHeight;
+    this.width = this.$refs.wrap.offsetWidth;
 
     if (this.options.direction > 1) {
       var rate = void 0;
@@ -468,7 +471,7 @@ exports.default = {
       } else {
         rate = 2;
       }
-      this.$refs.wrap.style.width = this.$refs.slotList.offsetWidth * rate + 'px';
+      this.$refs.realBox.style.width = this.$refs.slotList.offsetWidth * rate + 'px';
       this.realBoxWidth = this.$refs.slotList.offsetWidth * rate;
     }
     if (!this.options.autoPlay) {
@@ -611,7 +614,7 @@ module.exports = copyObj;
 
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
-    ref: "realBox"
+    ref: "wrap"
   }, [_c('div', {
     class: _vm.leftSwitchClass,
     style: (_vm.leftSwitch),
@@ -625,7 +628,7 @@ module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c
       "click": _vm.rightSwitchClick
     }
   }, [_vm._t("right-switch")], 2), _vm._v(" "), _c('div', {
-    ref: "wrap",
+    ref: "realBox",
     style: (_vm.pos),
     on: {
       "mouseenter": _vm.enter,

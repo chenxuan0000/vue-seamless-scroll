@@ -1,12 +1,12 @@
 <template>
-    <div ref="realBox">
+    <div ref="wrap">
         <div :style="leftSwitch" :class="leftSwitchClass" @click="leftSwitchClick">
             <slot name="left-switch"></slot>
         </div>
         <div :style="rightSwitch" :class="rightSwitchClass" @click="rightSwitchClick">
             <slot name="right-switch"></slot>
         </div>
-        <div ref="wrap" :style="pos" @mouseenter="enter" @mouseleave="leave" @touchstart="touchStart"
+        <div ref="realBox" :style="pos" @mouseenter="enter" @mouseleave="leave" @touchstart="touchStart"
              @touchmove="touchMove" @touchend="touchEnd">
             <div ref="slotList" :style="float">
                 <slot></slot>
@@ -28,8 +28,8 @@
         delay: 0,
         copyHtml: '',
         height: 0,
-        width: 0,
-        realBoxWidth: 0,
+        width: 0, // 外容器宽度
+        realBoxWidth: 0, // 内容实际宽度
         reqFrame: null, // move动画的animationFrame定时器
         singleWaitTime: null, // single 单步滚动的定时器
         isHover: false // mouseenter mouseleave 控制this._move()的开关
@@ -51,10 +51,10 @@
     },
     computed: {
       leftSwitchState () {
-        return this.xPos < 0 ? true : false
+        return this.xPos < 0
       },
       rightSwitchState () {
-        return Math.abs(this.xPos) < (this.realBoxWidth - this.width) ? true : false
+        return Math.abs(this.xPos) < (this.realBoxWidth - this.width)
       },
       leftSwitchClass () {
         return this.leftSwitchState ? '' : this.options.switchDisabledClass
@@ -111,6 +111,9 @@
       },
       hoverStop () {
         return !this.options.autoPlay || !this.options.hoverStop || this.moveSwitch
+      },
+      canTouch () {
+        return !this.options.openTouch || !this.options.autoPlay
       }
     },
     methods: {
@@ -136,7 +139,7 @@
         cancelAnimationFrame(this.reqFrame || '')
       },
       touchStart (e) {
-        if (!this.options.openTouch) return
+        if (this.canTouch) return
         let timer
         let touch = e.targetTouches[0] //touches数组对象获得屏幕上所有的touch，取第一个touch
         this.startPos = {
@@ -156,7 +159,7 @@
       },
       touchMove (e) {
         //当屏幕有多个touch或者页面被缩放过，就不执行move操作
-        if (!this.options.openTouch || e.targetTouches.length > 1 || e.scale && e.scale !== 1) return
+        if (this.canTouch || e.targetTouches.length > 1 || e.scale && e.scale !== 1) return
         let touch = e.targetTouches[0]
         this.endPos = {
           x: touch.pageX - this.startPos.x,
@@ -171,14 +174,14 @@
         }
       },
       touchEnd () {
-        if (!this.options.openTouch) return
+        if (this.canTouch) return
         let timer
         let direction = this.options.direction
         this.delay = 50
         if (direction === 1) {
           if (this.yPos > 0) this.yPos = 0
         } else if (direction === 0) {
-          let h = this.$refs.wrap.offsetHeight / 2 * -1
+          let h = this.$refs.realBox.offsetHeight / 2 * -1
           if (this.yPos < h) this.yPos = h
         } else if (direction === 2) {
           if (this.xPos > 0) this.xPos = 0
@@ -210,8 +213,8 @@
         this._cancle() //进入move立即先清除动画 防止频繁touchMove导致多动画同时进行
         this.reqFrame = requestAnimationFrame(
           function () {
-            if (!this.$refs.wrap) return //fixed 路由之间切换报this.$refs.wrap.offsetHeigh undefined bug
-            let h = this.$refs.wrap.offsetHeight / 2  //实际高度
+            if (!this.$refs.realBox) return //fixed 路由之间切换报this.$refs.realBox.offsetHeigh undefined bug
+            let h = this.$refs.realBox.offsetHeight / 2  //实际高度
             let w = this.$refs.slotList.offsetWidth //宽度
             let direction = this.options.direction //滚动方向
             if (direction === 1) { // 上
@@ -266,8 +269,8 @@
       }
     },
     mounted () {
-      this.height = this.$refs.realBox.offsetHeight
-      this.width = this.$refs.realBox.offsetWidth
+      this.height = this.$refs.wrap.offsetHeight
+      this.width = this.$refs.wrap.offsetWidth
       // 设置warp width
       if (this.options.direction > 1) {
         let rate
@@ -276,7 +279,7 @@
         } else {
           rate = 2
         }
-        this.$refs.wrap.style.width = this.$refs.slotList.offsetWidth * rate + 'px'
+        this.$refs.realBox.style.width = this.$refs.slotList.offsetWidth * rate + 'px'
         this.realBoxWidth = this.$refs.slotList.offsetWidth * rate
       }
       if (!this.options.autoPlay) {
