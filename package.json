@@ -30,6 +30,7 @@
     "babel-core": "^6.0.0",
     "babel-loader": "^7.1.2",
     "babel-preset-env": "^1.6.1",
+    "babel-polyfill": "^6.26.0",
     "cross-env": "^3.0.0",
     "css-loader": "^0.25.0",
     "deep-assign": "^2.0.0",

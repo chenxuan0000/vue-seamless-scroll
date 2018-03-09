@@ -1,19 +1,18 @@
 <template>
-    <div ref="wrap">
-        <div :style="leftSwitch" :class="leftSwitchClass" @click="leftSwitchClick">
-            <slot name="left-switch"></slot>
-        </div>
-        <div :style="rightSwitch" :class="rightSwitchClass" @click="rightSwitchClick">
-            <slot name="right-switch"></slot>
-        </div>
-        <div ref="realBox" :style="pos" @mouseenter="enter" @mouseleave="leave" @touchstart="touchStart"
-             @touchmove="touchMove" @touchend="touchEnd">
-            <div ref="slotList" :style="float">
-                <slot></slot>
-            </div>
-            <div v-html="copyHtml" :style="float"></div>
-        </div>
+  <div ref="wrap">
+    <div :style="leftSwitch" :class="leftSwitchClass" @click="leftSwitchClick">
+      <slot name="left-switch"></slot>
     </div>
+    <div :style="rightSwitch" :class="rightSwitchClass" @click="rightSwitchClick">
+      <slot name="right-switch"></slot>
+    </div>
+    <div ref="realBox" :style="pos" @mouseenter="enter" @mouseleave="leave" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
+      <div ref="slotList" :style="float">
+        <slot></slot>
+      </div>
+      <div v-html="copyHtml" :style="float"></div>
+    </div>
+  </div>
 </template>
 <script>
   require('comutils/animationFrame')()
@@ -77,7 +76,7 @@
         }
       },
       float () {
-        return this.options.direction > 1 || !this.options.autoPlay ? {float: 'left', overflow: 'hidden'} : {overflow: 'hidden'}
+        return this.options.direction > 1 || !this.options.autoPlay ? { float: 'left', overflow: 'hidden' } : { overflow: 'hidden' }
       },
       pos () {
         return {
@@ -266,9 +265,15 @@
           }, 20)
           this._move()
         }
+      },
+      _dataWarm (data) {
+        if (data.length > 2) {
+          console.warn(`数据达到了${data.length}条有点多哦~,可能会造成部分老旧浏览器卡顿。`);
+        }
       }
     },
     mounted () {
+      this._dataWarm(this.data)
       this.height = this.$refs.wrap.offsetHeight
       this.width = this.$refs.wrap.offsetWidth
       // 设置warp width
@@ -291,6 +296,7 @@
     },
     watch: {
       data (newData, oldData) {
+        this._dataWarm(newData)
         //监听data是否有变更
         if (!arrayEqual(newData, oldData)) {
           this._cancle()

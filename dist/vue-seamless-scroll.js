@@ -458,9 +458,15 @@ exports.default = {
         }, 20);
         this._move();
       }
+    },
+    _dataWarm: function _dataWarm(data) {
+      if (data.length > 2) {
+        console.warn('\u6570\u636E\u8FBE\u5230\u4E86' + data.length + '\u6761\u6709\u70B9\u591A\u54E6~,\u53EF\u80FD\u4F1A\u9020\u6210\u90E8\u5206\u8001\u65E7\u6D4F\u89C8\u5668\u5361\u987F\u3002');
+      }
     }
   },
   mounted: function mounted() {
+    this._dataWarm(this.data);
     this.height = this.$refs.wrap.offsetHeight;
     this.width = this.$refs.wrap.offsetWidth;
 
@@ -484,6 +490,8 @@ exports.default = {
 
   watch: {
     data: function data(newData, oldData) {
+      this._dataWarm(newData);
+
       if (!arrayEqual(newData, oldData)) {
         this._cancle();
         this._initMove();
@@ -547,6 +555,11 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
  * @desc 深浅合并拷贝
  */
 function copyObj() {
+  if (!Array.isArray) {
+    Array.isArray = function (arg) {
+      return Object.prototype.toString.call(arg) === '[object Array]';
+    };
+  }
   var name = void 0,
       options = void 0,
       src = void 0,
