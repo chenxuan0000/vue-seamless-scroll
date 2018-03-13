@@ -446,6 +446,7 @@ exports.default = {
     _initMove: function _initMove() {
       var _this4 = this;
 
+      this._dataWarm(this.data);
       this.copyHtml = '';
       if (this.moveSwitch) {
         this._cancle();
@@ -460,13 +461,12 @@ exports.default = {
       }
     },
     _dataWarm: function _dataWarm(data) {
-      if (data.length > 2) {
+      if (data.length > 100) {
         console.warn('\u6570\u636E\u8FBE\u5230\u4E86' + data.length + '\u6761\u6709\u70B9\u591A\u54E6~,\u53EF\u80FD\u4F1A\u9020\u6210\u90E8\u5206\u8001\u65E7\u6D4F\u89C8\u5668\u5361\u987F\u3002');
       }
     }
   },
   mounted: function mounted() {
-    this._dataWarm(this.data);
     this.height = this.$refs.wrap.offsetHeight;
     this.width = this.$refs.wrap.offsetWidth;
 

@@ -253,6 +253,7 @@
         )
       },
       _initMove () {
+        this._dataWarm(this.data)
         this.copyHtml = '' //清空copy
         if (this.moveSwitch) {
           this._cancle()
@@ -267,13 +268,12 @@
         }
       },
       _dataWarm (data) {
-        if (data.length > 2) {
+        if (data.length > 100) {
           console.warn(`数据达到了${data.length}条有点多哦~,可能会造成部分老旧浏览器卡顿。`);
         }
       }
     },
     mounted () {
-      this._dataWarm(this.data)
       this.height = this.$refs.wrap.offsetHeight
       this.width = this.$refs.wrap.offsetWidth
       // 设置warp width
