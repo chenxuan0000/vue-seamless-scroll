@@ -7,7 +7,7 @@
     <img src="http://p2.qqyou.com/biaoqing/UploadPic/2013-2/1/2013020120565544702.gif" width="480"/>
 </p>                                             
 <p align="center">
-   🐾<a href="https://chenxuan0000.github.io/component-document/index_prod.html#/component/seamless-default">online demo</a> |
+   🐾<a href="http://chenxuan1993.gitee.io/component-document/index_prod#/component/seamless-default">online demo</a> |
    🌾 <a href="https://chenxuan0000.github.io/vue-seamless-scroll/index.html">sample demo</a> |
    📘 <a href="./document/README.md">中文文档</a> 
 </p>
