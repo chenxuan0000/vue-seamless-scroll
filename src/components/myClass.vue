@@ -253,19 +253,38 @@
         )
       },
       _initMove () {
-        this._dataWarm(this.data)
-        this.copyHtml = '' //清空copy
-        if (this.moveSwitch) {
-          this._cancle()
-          this.yPos = this.xPos = 0
-        } else {
-          let timer
-          if (timer) clearTimeout(timer)
-          timer = setTimeout(() => { //20ms延迟 作用保证能取到最新的html
+        this.$nextTick(() => {
+          this.height = this.$refs.wrap.offsetHeight
+          this.width = this.$refs.wrap.offsetWidth
+          // 水平滚动设置warp width
+          if (this.options.direction > 1 || !this.options.autoPlay) {
+            let rate
+            if (!this.options.autoPlay) {
+              rate = 1
+            } else {
+              rate = 2
+            }
+            this.$refs.realBox.style.width = this.$refs.slotList.offsetWidth * rate + 'px'
+            this.realBoxWidth = this.$refs.slotList.offsetWidth * rate
+          }
+          if (!this.options.autoPlay) {
+            this.ease = 'linear'
+            this.delay = this.options.switchDelay
+            return
+          }
+          this._dataWarm(this.data)
+          this.copyHtml = '' //清空copy
+          // 是否可以滚动判断
+          if (this.moveSwitch) {
+            this._cancle()
+            this.yPos = this.xPos = 0
+          } else {
+            let timer
+            if (timer) clearTimeout(timer)
             this.copyHtml = this.$refs.slotList.innerHTML
-          }, 20)
-          this._move()
-        }
+            this._move()
+          }
+        })
       },
       _dataWarm (data) {
         if (data.length > 100) {
@@ -274,24 +293,6 @@
       }
     },
     mounted () {
-      this.height = this.$refs.wrap.offsetHeight
-      this.width = this.$refs.wrap.offsetWidth
-      // 设置warp width
-      if (this.options.direction > 1 || !this.options.autoPlay) {
-        let rate
-        if (!this.options.autoPlay) {
-          rate = 1
-        } else {
-          rate = 2
-        }
-        this.$refs.realBox.style.width = this.$refs.slotList.offsetWidth * rate + 'px'
-        this.realBoxWidth = this.$refs.slotList.offsetWidth * rate
-      }
-      if (!this.options.autoPlay) {
-        this.ease = 'linear'
-        this.delay = this.options.switchDelay
-        return
-      }
       this._initMove()
     },
     watch: {

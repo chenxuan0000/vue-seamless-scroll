@@ -116,13 +116,13 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "G:\\github\\vue-seamless-scroll\\src\\components\\myClass.vue"
+Component.options.__file = "/Users/chenxuan/Documents/github/vue-seamless-scroll/src/components/myClass.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] myClass.vue: functional components are not supported with templates, they should use render functions.")}
 
 /* hot reload */
 if (false) {(function () {
-  var hotAPI = require("vue-loader/node_modules/vue-hot-reload-api")
+  var hotAPI = require("vue-hot-reload-api")
   hotAPI.install(require("vue"), false)
   if (!hotAPI.compatible) return
   module.hot.accept()
@@ -446,19 +446,37 @@ exports.default = {
     _initMove: function _initMove() {
       var _this4 = this;
 
-      this._dataWarm(this.data);
-      this.copyHtml = '';
-      if (this.moveSwitch) {
-        this._cancle();
-        this.yPos = this.xPos = 0;
-      } else {
-        var timer = void 0;
-        if (timer) clearTimeout(timer);
-        timer = setTimeout(function () {
+      this.$nextTick(function () {
+        _this4.height = _this4.$refs.wrap.offsetHeight;
+        _this4.width = _this4.$refs.wrap.offsetWidth;
+
+        if (_this4.options.direction > 1 || !_this4.options.autoPlay) {
+          var rate = void 0;
+          if (!_this4.options.autoPlay) {
+            rate = 1;
+          } else {
+            rate = 2;
+          }
+          _this4.$refs.realBox.style.width = _this4.$refs.slotList.offsetWidth * rate + 'px';
+          _this4.realBoxWidth = _this4.$refs.slotList.offsetWidth * rate;
+        }
+        if (!_this4.options.autoPlay) {
+          _this4.ease = 'linear';
+          _this4.delay = _this4.options.switchDelay;
+          return;
+        }
+        _this4._dataWarm(_this4.data);
+        _this4.copyHtml = '';
+        if (_this4.moveSwitch) {
+          _this4._cancle();
+          _this4.yPos = _this4.xPos = 0;
+        } else {
+          var timer = void 0;
+          if (timer) clearTimeout(timer);
           _this4.copyHtml = _this4.$refs.slotList.innerHTML;
-        }, 20);
-        this._move();
-      }
+          _this4._move();
+        }
+      });
     },
     _dataWarm: function _dataWarm(data) {
       if (data.length > 100) {
@@ -467,24 +485,6 @@ exports.default = {
     }
   },
   mounted: function mounted() {
-    this.height = this.$refs.wrap.offsetHeight;
-    this.width = this.$refs.wrap.offsetWidth;
-
-    if (this.options.direction > 1 || !this.options.autoPlay) {
-      var rate = void 0;
-      if (!this.options.autoPlay) {
-        rate = 1;
-      } else {
-        rate = 2;
-      }
-      this.$refs.realBox.style.width = this.$refs.slotList.offsetWidth * rate + 'px';
-      this.realBoxWidth = this.$refs.slotList.offsetWidth * rate;
-    }
-    if (!this.options.autoPlay) {
-      this.ease = 'linear';
-      this.delay = this.options.switchDelay;
-      return;
-    }
     this._initMove();
   },
 
@@ -664,7 +664,7 @@ module.exports.render._withStripped = true
 if (false) {
   module.hot.accept()
   if (module.hot.data) {
-     require("vue-loader/node_modules/vue-hot-reload-api").rerender("data-v-299cf3bf", module.exports)
+     require("vue-hot-reload-api").rerender("data-v-299cf3bf", module.exports)
   }
 }
 
