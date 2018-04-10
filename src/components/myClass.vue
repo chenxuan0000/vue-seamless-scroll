@@ -1,9 +1,9 @@
 <template>
   <div ref="wrap">
-    <div :style="leftSwitch" :class="leftSwitchClass" @click="leftSwitchClick">
+    <div :style="leftSwitch" v-if="isHorizontal" :class="leftSwitchClass" @click="leftSwitchClick">
       <slot name="left-switch"></slot>
     </div>
-    <div :style="rightSwitch" :class="rightSwitchClass" @click="rightSwitchClick">
+    <div :style="rightSwitch" v-if="isHorizontal" :class="rightSwitchClass" @click="rightSwitchClick">
       <slot name="right-switch"></slot>
     </div>
     <div ref="realBox" :style="pos" @mouseenter="enter" @mouseleave="leave" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
@@ -76,7 +76,7 @@
         }
       },
       float () {
-        return this.options.direction > 1 || !this.options.autoPlay ? { float: 'left', overflow: 'hidden' } : { overflow: 'hidden' }
+        return this.isHorizontal ? { float: 'left', overflow: 'hidden' } : { overflow: 'hidden' }
       },
       pos () {
         return {
@@ -111,8 +111,11 @@
       hoverStop () {
         return !this.options.autoPlay || !this.options.hoverStop || this.moveSwitch
       },
-      canTouch () {
+      canNotTouch () {
         return !this.options.openTouch || !this.options.autoPlay
+      },
+      isHorizontal () {
+        return this.options.direction > 1 || !this.options.autoPlay
       }
     },
     methods: {
@@ -138,7 +141,7 @@
         cancelAnimationFrame(this.reqFrame || '')
       },
       touchStart (e) {
-        if (this.canTouch) return
+        if (this.canNotTouch) return
         let timer
         let touch = e.targetTouches[0] //touches数组对象获得屏幕上所有的touch，取第一个touch
         this.startPos = {
@@ -158,7 +161,7 @@
       },
       touchMove (e) {
         //当屏幕有多个touch或者页面被缩放过，就不执行move操作
-        if (this.canTouch || e.targetTouches.length > 1 || e.scale && e.scale !== 1) return
+        if (this.canNotTouch || e.targetTouches.length > 1 || e.scale && e.scale !== 1) return
         let touch = e.targetTouches[0]
         this.endPos = {
           x: touch.pageX - this.startPos.x,
@@ -173,7 +176,7 @@
         }
       },
       touchEnd () {
-        if (this.canTouch) return
+        if (this.canNotTouch) return
         let timer
         let direction = this.options.direction
         this.delay = 50
@@ -257,7 +260,7 @@
           this.height = this.$refs.wrap.offsetHeight
           this.width = this.$refs.wrap.offsetWidth
           // 水平滚动设置warp width
-          if (this.options.direction > 1 || !this.options.autoPlay) {
+          if (this.isHorizontal) {
             let rate
             if (!this.options.autoPlay) {
               rate = 1

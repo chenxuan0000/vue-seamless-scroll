@@ -97,25 +97,22 @@ Example:
 </html>
 ```
 
-## 配置项默认值
-```js
-      defaultOption () {
-        return {
-          step: 1, //数值越大速度滚动越快
-          limitMoveNum: 5, //开始无缝滚动的数据量  //this.dataList.length
-          hoverStop: true, //是否开启鼠标悬停stop
-          direction: 1, // 0向下 1向上 2向左 3向右
-          openTouch: true, //开启移动端touch
-          singleHeight: 0, //单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1
-          singleWidth: 0, //单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3
-          waitTime: 1000, //单步运动停止的时间(默认值1000ms)
-          switchOffset: 30, // 左右 切换按钮 距离左右边距(px)
-          autoPlay: true, // *是否自动播放 使用switch切换时候需要置为false*
-          switchSingleStep: 134, //单步切换step(px)
-          switchDelay: 400, // 单步切换的时间(ms)
-          switchDisabledClass: 'disabled'  // 不可以点击状态的switch父元素的类名
-      }
-```
+## 配置项
+|key|description|default|val|
+|:---|---|---|---|
+|`step`|数值越大速度滚动越快|`1`|`Number`|
+|`limitMoveNum`|开启无缝滚动的数据量|`1`|`Number`|
+|`hoverStop`|是否启用鼠标hover控制|`true`|`Boolean`|
+|`direction`|方向 0 往下 1 往上 2向左 3向右|`1`|`Number`|
+|`openTouch`|移动端开启touch滑动|`true`|`Boolean`|
+|`singleHeight`|单步运动停止的高度(默认值0是无缝不停止的滚动) direction => 0/1|`0`|`Number`|
+|`singleWidth`|单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3|`0`|`Number`|
+|`waitTime`|单步停止等待时间(默认值1000ms)|`1000`|`Number`|
+|`switchOffset`|左右切换按钮距离左右边界的边距(px)|`30`|`Number`|
+|`autoPlay`|是否自动播放使用switch切换时候需要置为false|`true`|`Boolean`|
+|`switchSingleStep`|手动单步切换step值(px)|`134`|`Number`|
+|`switchDelay`|单步切换的动画时间(ms)|`400`|`Number`|
+|`switchDisabledClass`|不可以点击状态的switch按钮父元素的类名|`disabled`|`String`|
 
 ## 个别特殊配置项说明
 

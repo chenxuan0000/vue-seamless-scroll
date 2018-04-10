@@ -266,7 +266,7 @@ exports.default = {
       };
     },
     float: function float() {
-      return this.options.direction > 1 || !this.options.autoPlay ? { float: 'left', overflow: 'hidden' } : { overflow: 'hidden' };
+      return this.isHorizontal ? { float: 'left', overflow: 'hidden' } : { overflow: 'hidden' };
     },
     pos: function pos() {
       return {
@@ -301,8 +301,11 @@ exports.default = {
     hoverStop: function hoverStop() {
       return !this.options.autoPlay || !this.options.hoverStop || this.moveSwitch;
     },
-    canTouch: function canTouch() {
+    canNotTouch: function canNotTouch() {
       return !this.options.openTouch || !this.options.autoPlay;
+    },
+    isHorizontal: function isHorizontal() {
+      return this.options.direction > 1 || !this.options.autoPlay;
     }
   },
   methods: {
@@ -330,7 +333,7 @@ exports.default = {
     touchStart: function touchStart(e) {
       var _this = this;
 
-      if (this.canTouch) return;
+      if (this.canNotTouch) return;
       var timer = void 0;
       var touch = e.targetTouches[0];
       this.startPos = {
@@ -349,7 +352,7 @@ exports.default = {
       }
     },
     touchMove: function touchMove(e) {
-      if (this.canTouch || e.targetTouches.length > 1 || e.scale && e.scale !== 1) return;
+      if (this.canNotTouch || e.targetTouches.length > 1 || e.scale && e.scale !== 1) return;
       var touch = e.targetTouches[0];
       this.endPos = {
         x: touch.pageX - this.startPos.x,
@@ -366,7 +369,7 @@ exports.default = {
     touchEnd: function touchEnd() {
       var _this2 = this;
 
-      if (this.canTouch) return;
+      if (this.canNotTouch) return;
       var timer = void 0;
       var direction = this.options.direction;
       this.delay = 50;
@@ -450,7 +453,7 @@ exports.default = {
         _this4.height = _this4.$refs.wrap.offsetHeight;
         _this4.width = _this4.$refs.wrap.offsetWidth;
 
-        if (_this4.options.direction > 1 || !_this4.options.autoPlay) {
+        if (_this4.isHorizontal) {
           var rate = void 0;
           if (!_this4.options.autoPlay) {
             rate = 1;
@@ -628,19 +631,19 @@ module.exports = copyObj;
 module.exports={render:function (){var _vm=this;var _h=_vm.$createElement;var _c=_vm._self._c||_h;
   return _c('div', {
     ref: "wrap"
-  }, [_c('div', {
+  }, [(_vm.isHorizontal) ? _c('div', {
     class: _vm.leftSwitchClass,
     style: (_vm.leftSwitch),
     on: {
       "click": _vm.leftSwitchClick
     }
-  }, [_vm._t("left-switch")], 2), _vm._v(" "), _c('div', {
+  }, [_vm._t("left-switch")], 2) : _vm._e(), _vm._v(" "), (_vm.isHorizontal) ? _c('div', {
     class: _vm.rightSwitchClass,
     style: (_vm.rightSwitch),
     on: {
       "click": _vm.rightSwitchClick
     }
-  }, [_vm._t("right-switch")], 2), _vm._v(" "), _c('div', {
+  }, [_vm._t("right-switch")], 2) : _vm._e(), _vm._v(" "), _c('div', {
     ref: "realBox",
     style: (_vm.pos),
     on: {

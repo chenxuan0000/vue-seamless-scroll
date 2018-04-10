@@ -98,25 +98,21 @@ Example:
 ```
 
 ## Configure
-```js
-      defaultOption () {
-        return {
-          step: 1, //the faster the rolling speed is faster
-          limitMoveNum: 5, //start seamless scrolling minimum data  //this.dataList.length
-          hoverStop: true, //mouse hover control is enabled
-          direction: 1, // 0 down || 1 up || 2 left || 3 right
-          openTouch: true, //open touch 
-          singleHeight: 0, //one single stop height(default zero is seamless) => direction 0/1
-          singleWidth: 0, //one single stop width(default zero is seamless) => direction 2/3
-          waitTime: 1000, //one single data stop wait time
-          switchOffset: 30, // the left and right buttons distance from the left and right sides (px)
-          autoPlay: true, // whether or not to automatically play the switch needs to be set to false
-          switchSingleStep: 134, //the size of a single step switch (px)
-          switchDelay: 400, // the time of a single step switch (ms)
-          switchDisabledClass: 'disabled'  // the className of the switch parent element that cannot be clicked.
-        }
-      }
-```
+|key|description|default|val|
+|:---|---|---|---|
+|`step`|the faster the rolling speed is faster|`1`|`Number`|
+|`limitMoveNum`|start seamless scrolling minimum data length|`1`|`Number`|
+|`hoverStop`|mouse hover control is enabled|`true`|`Boolean`|
+|`direction`| 0 down、 1 up 、 2 left 、 3 right|`1`|`Number`|
+|`openTouch`|open mobile touch |`true`|`Boolean`|
+|`singleHeight`|one single stop height(default zero is seamless) => direction 0/1|`0`|`Number`|
+|`singleWidth`|one single stop width(default zero is seamless) => direction 2/3|`0`|`Number`|
+|`waitTime`|one single data stop wait time(ms)|`1000`|`Number`|
+|`switchOffset`|the left and right buttons distance from the left and right sides (px)|`30`|`Number`|
+|`autoPlay`|whether or not to automatically play the switch needs to be set to false|`true`|`Boolean`|
+|`switchSingleStep`|the size of a single step switch (px)|`134`|`Number`|
+|`switchDelay`|the animation time of a single step switch(ms)|`400`|`Number`|
+|`switchDisabledClass`|the className of the switch parent element that cannot be clicked|`disabled`|`String`|
 
 ## Individual special configuration items
 
