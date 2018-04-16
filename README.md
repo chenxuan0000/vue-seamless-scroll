@@ -101,7 +101,7 @@ Example:
 |key|description|default|val|
 |:---|---|---|---|
 |`step`|the faster the rolling speed is faster|`1`|`Number`|
-|`limitMoveNum`|start seamless scrolling minimum data length|`1`|`Number`|
+|`limitMoveNum`|start seamless scrolling minimum data length|`5`|`Number`|
 |`hoverStop`|mouse hover control is enabled|`true`|`Boolean`|
 |`direction`| 0 down、 1 up 、 2 left 、 3 right|`1`|`Number`|
 |`openTouch`|open mobile touch |`true`|`Boolean`|

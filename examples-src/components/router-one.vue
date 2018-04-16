@@ -8,10 +8,10 @@
       </div>
       <my-class :data="listData" class="warp" :class-option="classOption">
         <ul class="item">
-          <li v-for="item in listData">
+          <a target="_blank" href="http://www.baidu.com" v-for="item in listData">
             <span class="title" v-text="item.title"></span>
             <span class="date" v-text="item.date"></span>
-          </li>
+          </a>
         </ul>
       </my-class>
     </div>
@@ -211,6 +211,9 @@
   	div {
   		flex: 1;
   	}
+    a {
+      display: block;
+    }
   }
 </style>
 <script>

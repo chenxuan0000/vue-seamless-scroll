@@ -101,7 +101,7 @@ Example:
 |key|description|default|val|
 |:---|---|---|---|
 |`step`|数值越大速度滚动越快|`1`|`Number`|
-|`limitMoveNum`|开启无缝滚动的数据量|`1`|`Number`|
+|`limitMoveNum`|开启无缝滚动的数据量|`5`|`Number`|
 |`hoverStop`|是否启用鼠标hover控制|`true`|`Boolean`|
 |`direction`|方向 0 往下 1 往上 2向左 3向右|`1`|`Number`|
 |`openTouch`|移动端开启touch滑动|`true`|`Boolean`|

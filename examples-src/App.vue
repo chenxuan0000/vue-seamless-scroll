@@ -102,7 +102,8 @@
   		list-style: none;
   		padding: 0;
   		margin: 0 auto;
-  		li {
+  		li,a {
+				display: block;
   			height: 30px;
   			line-height: 30px;
   			display: flex;
