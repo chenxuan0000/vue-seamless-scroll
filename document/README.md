@@ -113,6 +113,7 @@ Example:
 |`switchSingleStep`|手动单步切换step值(px)|`134`|`Number`|
 |`switchDelay`|单步切换的动画时间(ms)|`400`|`Number`|
 |`switchDisabledClass`|不可以点击状态的switch按钮父元素的类名|`disabled`|`String`|
+|`isSingleRemUnit`|singleHeight and singleWidth是否开启rem度量|`false`|`Boolean`|
 
 ## 个别特殊配置项说明
 

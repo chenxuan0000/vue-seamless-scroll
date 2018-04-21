@@ -99,7 +99,8 @@
           autoPlay: true,
           switchSingleStep: 134,
           switchDelay: 400,
-          switchDisabledClass: 'disabled'
+          switchDisabledClass: 'disabled',
+          isSingleRemUnit: false // singleWidth/singleHeight 是否开启rem度量
         }
       },
       options () {
@@ -116,6 +117,15 @@
       },
       isHorizontal () {
         return this.options.direction > 1 || !this.options.autoPlay
+      },
+      baseFontSize () {
+        return this.options.isSingleRemUnit ? parseInt(window.getComputedStyle(document.documentElement, null).fontSize) : 1
+      },
+      realSingleStopWidth () {
+        return this.options.singleWidth * this.baseFontSize
+      },
+      realSingleStopHeight () {
+        return this.options.singleHeight * this.baseFontSize
       }
     },
     methods: {
@@ -143,7 +153,7 @@
       touchStart (e) {
         if (this.canNotTouch) return
         let timer
-        let touch = e.targetTouches[0] //touches数组对象获得屏幕上所有的touch，取第一个touch
+        const touch = e.targetTouches[0] //touches数组对象获得屏幕上所有的touch，取第一个touch
         this.startPos = {
           x: touch.pageX,
           y: touch.pageY
@@ -162,13 +172,13 @@
       touchMove (e) {
         //当屏幕有多个touch或者页面被缩放过，就不执行move操作
         if (this.canNotTouch || e.targetTouches.length > 1 || e.scale && e.scale !== 1) return
-        let touch = e.targetTouches[0]
+        const touch = e.targetTouches[0]
         this.endPos = {
           x: touch.pageX - this.startPos.x,
           y: touch.pageY - this.startPos.y
         }
         event.preventDefault(); //阻止触摸事件的默认行为，即阻止滚屏
-        let dir = Math.abs(this.endPos.x) < Math.abs(this.endPos.y) ? 1 : 0 //dir，1表示纵向滑动，0为横向滑动
+        const dir = Math.abs(this.endPos.x) < Math.abs(this.endPos.y) ? 1 : 0 //dir，1表示纵向滑动，0为横向滑动
         if (dir === 1 && this.options.direction < 2) {  // 表示纵向滑动 && 运动方向为上下
           this.yPos = this.startPosY + this.endPos.y
         } else if (dir === 0 && this.options.direction > 1) { // 为横向滑动 && 运动方向为左右
@@ -178,7 +188,7 @@
       touchEnd () {
         if (this.canNotTouch) return
         let timer
-        let direction = this.options.direction
+        const direction = this.options.direction
         this.delay = 50
         if (direction === 1) {
           if (this.yPos > 0) this.yPos = 0
@@ -216,9 +226,9 @@
         this.reqFrame = requestAnimationFrame(
           function () {
             if (!this.$refs.realBox) return //fixed 路由之间切换报this.$refs.realBox.offsetHeigh undefined bug
-            let h = this.$refs.realBox.offsetHeight / 2  //实际高度
-            let w = this.$refs.slotList.offsetWidth //宽度
-            let direction = this.options.direction //滚动方向
+            const h = this.$refs.realBox.offsetHeight / 2  //实际高度
+            const w = this.$refs.slotList.offsetWidth //宽度
+            const direction = this.options.direction //滚动方向
             if (direction === 1) { // 上
               if (Math.abs(this.yPos) >= h) this.yPos = 0
               this.yPos -= this.options.step
@@ -233,16 +243,16 @@
               this.xPos += this.options.step
             }
             if (this.singleWaitTime) clearTimeout(this.singleWaitTime)
-            if (!!this.options.singleHeight) { //是否启动了单行暂停配置
-              if (Math.abs(this.yPos) % this.options.singleHeight === 0) { // 符合条件暂停waitTime
+            if (!!this.realSingleStopHeight) { //是否启动了单行暂停配置
+              if (Math.abs(this.yPos) % this.realSingleStopHeight === 0) { // 符合条件暂停waitTime
                 this.singleWaitTime = setTimeout(() => {
                   this._move()
                 }, this.options.waitTime)
               } else {
                 this._move()
               }
-            } else if (!!this.options.singleWidth) {
-              if (Math.abs(this.xPos) % this.options.singleWidth === 0) { // 符合条件暂停waitTime
+            } else if (!!this.realSingleStopWidth) {
+              if (Math.abs(this.xPos) % this.realSingleStopWidth === 0) { // 符合条件暂停waitTime
                 this.singleWaitTime = setTimeout(() => {
                   this._move()
                 }, this.options.waitTime)
@@ -267,8 +277,9 @@
             } else {
               rate = 2
             }
-            this.$refs.realBox.style.width = this.$refs.slotList.offsetWidth * rate + 'px'
-            this.realBoxWidth = this.$refs.slotList.offsetWidth * rate
+            const w = this.$refs.slotList.offsetWidth * rate
+            this.$refs.realBox.style.width = w + 'px'
+            this.realBoxWidth = w
           }
           if (!this.options.autoPlay) {
             this.ease = 'linear'

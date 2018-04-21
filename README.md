@@ -113,6 +113,7 @@ Example:
 |`switchSingleStep`|the size of a single step switch (px)|`134`|`Number`|
 |`switchDelay`|the animation time of a single step switch(ms)|`400`|`Number`|
 |`switchDisabledClass`|the className of the switch parent element that cannot be clicked|`disabled`|`String`|
+|`isSingleRemUnit`|singleHeight and singleWidth Whether to enable the rem metric|`false`|`Boolean`|
 
 ## Individual special configuration items
 

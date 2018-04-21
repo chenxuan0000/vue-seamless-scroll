@@ -289,8 +289,8 @@ exports.default = {
         autoPlay: true,
         switchSingleStep: 134,
         switchDelay: 400,
-        switchDisabledClass: 'disabled'
-      };
+        switchDisabledClass: 'disabled',
+        isSingleRemUnit: false };
     },
     options: function options() {
       return copyObj({}, this.defaultOption, this.classOption);
@@ -306,6 +306,15 @@ exports.default = {
     },
     isHorizontal: function isHorizontal() {
       return this.options.direction > 1 || !this.options.autoPlay;
+    },
+    baseFontSize: function baseFontSize() {
+      return this.options.isSingleRemUnit ? parseInt(window.getComputedStyle(document.documentElement, null).fontSize) : 1;
+    },
+    realSingleStopWidth: function realSingleStopWidth() {
+      return this.options.singleWidth * this.baseFontSize;
+    },
+    realSingleStopHeight: function realSingleStopHeight() {
+      return this.options.singleHeight * this.baseFontSize;
     }
   },
   methods: {
@@ -425,16 +434,16 @@ exports.default = {
           this.xPos += this.options.step;
         }
         if (this.singleWaitTime) clearTimeout(this.singleWaitTime);
-        if (!!this.options.singleHeight) {
-          if (Math.abs(this.yPos) % this.options.singleHeight === 0) {
+        if (!!this.realSingleStopHeight) {
+          if (Math.abs(this.yPos) % this.realSingleStopHeight === 0) {
             this.singleWaitTime = setTimeout(function () {
               _this3._move();
             }, this.options.waitTime);
           } else {
             this._move();
           }
-        } else if (!!this.options.singleWidth) {
-          if (Math.abs(this.xPos) % this.options.singleWidth === 0) {
+        } else if (!!this.realSingleStopWidth) {
+          if (Math.abs(this.xPos) % this.realSingleStopWidth === 0) {
             this.singleWaitTime = setTimeout(function () {
               _this3._move();
             }, this.options.waitTime);
@@ -460,8 +469,9 @@ exports.default = {
           } else {
             rate = 2;
           }
-          _this4.$refs.realBox.style.width = _this4.$refs.slotList.offsetWidth * rate + 'px';
-          _this4.realBoxWidth = _this4.$refs.slotList.offsetWidth * rate;
+          var w = _this4.$refs.slotList.offsetWidth * rate;
+          _this4.$refs.realBox.style.width = w + 'px';
+          _this4.realBoxWidth = w;
         }
         if (!_this4.options.autoPlay) {
           _this4.ease = 'linear';
