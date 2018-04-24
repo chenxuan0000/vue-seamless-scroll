@@ -22,6 +22,7 @@
     - [**`普通的使用方法`**](#普通的使用方法)
 - [**`配置项默认值`**](#配置项)   
 - [**`个别特殊配置项说明`**](#个别特殊配置项说明)
+- [**`Issues解决方案`**](#Issues解决方案)
 - [**`历史版本`**](#历史版本)
 - [**`注意`**](#注意)
 - [**`贡献`**](#贡献)
@@ -46,7 +47,7 @@ npm install vue-seamless-scroll --save
 ```
 
 ### CDN
-`https://cdn.jsdelivr.net/npm/vue-seamless-scroll@1.1.10/dist/vue-seamless-scroll.min.js`
+`https://cdn.jsdelivr.net/npm/vue-seamless-scroll@1.1.12/dist/vue-seamless-scroll.min.js`
 
 ## 使用
 ### ES6
@@ -129,6 +130,8 @@ Example:
 
 > 6.当按钮到达边界位置,会自动为无法点击状态按钮加上定义的`switchDisabledClass: 'disabled'`,可以按需配置
 
+## Issues解决方案
+> [**`事件无法被复制的问题`**](./issuses/problem1.md)
 
 ## 历史版本
 See the GitHub [历史版本](https://github.com/chenxuan0000/vue-seamless-scroll/releases).

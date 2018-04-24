@@ -23,6 +23,7 @@
 - [**`Configure`**](#configure)  
 - [**`Individual special configuration items`**](#individual-special-configuration-items) 
 - [**`Changelog`**](#changelog)
+- [**`Issues solution`**](#issues-solution)
 - [**`Cares`**](#cares)
 - [**`Contribution`**](#contribution)
 
@@ -46,7 +47,7 @@ npm install vue-seamless-scroll --save
 ```
 
 ### CDN
-`https://cdn.jsdelivr.net/npm/vue-seamless-scroll@1.1.10/dist/vue-seamless-scroll.min.js`
+`https://cdn.jsdelivr.net/npm/vue-seamless-scroll@1.1.12/dist/vue-seamless-scroll.min.js`
 
 ## Usage
 ### ES6
@@ -128,6 +129,9 @@ Example:
 > 5.Provides `slot left-switch || right-switch` you can freely define the button styles you want. The outer div is positioned in the middle,the distance from both sides can be adjusted by the switchOffset parameter.
 
 > 6.When the button reaches the boundary position, it automatically adds a definition to the state button that cannot be clicked.`switchDisabledClass: 'disabled'`,you can configure it as needed.
+
+## Issues solution
+> [**`Event cannot be duplicated`**](./issuses/problem1-en.md)
 
 ## Changelog
 See the GitHub [release history](https://github.com/chenxuan0000/vue-seamless-scroll/releases).
