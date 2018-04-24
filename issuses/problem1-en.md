@@ -4,4 +4,4 @@
 
 ### Solution
 > 1. A simple direct native js for `addEventListener`, there is a problem with asynchronous data can not be bound. (Not recommended)
-> 2. The event agent binds the corresponding event to the parent element and adds events to the child elements that need to be penalized. (recommend)
+> 2. The event agent binds the parent element to the corresponding event and makes event completions on the required child elements. (recommend)
