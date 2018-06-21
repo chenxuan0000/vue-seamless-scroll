@@ -244,7 +244,7 @@
             }
             if (this.singleWaitTime) clearTimeout(this.singleWaitTime)
             if (!!this.realSingleStopHeight) { //是否启动了单行暂停配置
-              if (Math.abs(this.yPos) % this.realSingleStopHeight === 0) { // 符合条件暂停waitTime
+              if (Math.abs(this.yPos) % this.realSingleStopHeight < 1) { // 符合条件暂停waitTime
                 this.singleWaitTime = setTimeout(() => {
                   this._move()
                 }, this.options.waitTime)
@@ -252,7 +252,7 @@
                 this._move()
               }
             } else if (!!this.realSingleStopWidth) {
-              if (Math.abs(this.xPos) % this.realSingleStopWidth === 0) { // 符合条件暂停waitTime
+              if (Math.abs(this.xPos) % this.realSingleStopWidth < 1) { // 符合条件暂停waitTime
                 this.singleWaitTime = setTimeout(() => {
                   this._move()
                 }, this.options.waitTime)

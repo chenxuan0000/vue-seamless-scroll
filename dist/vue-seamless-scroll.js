@@ -435,7 +435,7 @@ exports.default = {
         }
         if (this.singleWaitTime) clearTimeout(this.singleWaitTime);
         if (!!this.realSingleStopHeight) {
-          if (Math.abs(this.yPos) % this.realSingleStopHeight === 0) {
+          if (Math.abs(this.yPos) % this.realSingleStopHeight < 1) {
             this.singleWaitTime = setTimeout(function () {
               _this3._move();
             }, this.options.waitTime);
@@ -443,7 +443,7 @@ exports.default = {
             this._move();
           }
         } else if (!!this.realSingleStopWidth) {
-          if (Math.abs(this.xPos) % this.realSingleStopWidth === 0) {
+          if (Math.abs(this.xPos) % this.realSingleStopWidth < 1) {
             this.singleWaitTime = setTimeout(function () {
               _this3._move();
             }, this.options.waitTime);
