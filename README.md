@@ -119,7 +119,7 @@ Example:
 
 ## Events
 |name|description|calback params|
-|:---|---|---|---|
+|:---|---|---|
 |`ScrollEnd`|A roll-through callback event|`null`|
 
 ## Individual special configuration items
