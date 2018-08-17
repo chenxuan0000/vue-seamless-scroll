@@ -21,6 +21,7 @@
     - [**`ES6`**](#eS6)
     - [**`Normal use`**](#normal-use)
 - [**`Configure`**](#configure)  
+- [**`Events`**](#events)  
 - [**`Individual special configuration items`**](#individual-special-configuration-items) 
 - [**`Changelog`**](#changelog)
 - [**`Issues solution`**](#issues-solution)
@@ -115,6 +116,11 @@ Example:
 |`switchDelay`|the animation time of a single step switch(ms)|`400`|`Number`|
 |`switchDisabledClass`|the className of the switch parent element that cannot be clicked|`disabled`|`String`|
 |`isSingleRemUnit`|singleHeight and singleWidth Whether to enable the rem metric|`false`|`Boolean`|
+
+## Events
+|name|description|calback params|
+|:---|---|---|---|
+|`ScrollEnd`|A roll-through callback event|`null`|
 
 ## Individual special configuration items
 

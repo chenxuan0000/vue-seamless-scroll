@@ -6,7 +6,7 @@
           <b>demo1</b> 向上无缝滚动,hover可停止</p>
         var option = {<br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;step: 0.5,<br/> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limitMoveNum: 5<br/> }
       </div>
-      <my-class :data="listData" class="warp" :class-option="classOption">
+      <my-class :data="listData" class="warp" :class-option="classOption" @ScrollEnd="end">
         <ul class="item">
           <a target="_blank" href="http://www.baidu.com" v-for="item in listData">
             <span class="title" v-text="item.title"></span>
@@ -335,7 +335,11 @@
     components: {
       myClass
     },
-    methods: {},
+    methods: {
+      end () {
+        console.log('ScrollEnd')
+      }
+    },
     created () {
       setTimeout(() => {
         this.listData5 = [1, 2, 3, 4, 5]

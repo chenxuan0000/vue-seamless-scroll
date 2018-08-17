@@ -20,7 +20,8 @@
 - [**`使用`**](#使用)
     - [**`ES6`**](#ES6)
     - [**`普通的使用方法`**](#普通的使用方法)
-- [**`配置项默认值`**](#配置项)   
+- [**`配置项默认值`**](#配置项)
+- [**`回调事件`**] (#回调事件)
 - [**`个别特殊配置项说明`**](#个别特殊配置项说明)
 - [**`Issues解决方案`**](#issues解决方案)
 - [**`历史版本`**](#历史版本)
@@ -115,6 +116,12 @@ Example:
 |`switchDelay`|单步切换的动画时间(ms)|`400`|`Number`|
 |`switchDisabledClass`|不可以点击状态的switch按钮父元素的类名|`disabled`|`String`|
 |`isSingleRemUnit`|singleHeight and singleWidth是否开启rem度量|`false`|`Boolean`|
+
+
+## 回调事件
+|name|description|calback params|
+|:---|---|---|---|
+|`ScrollEnd`|一次滚动完成的回调事件|`null`|
 
 ## 个别特殊配置项说明
 

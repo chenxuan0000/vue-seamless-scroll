@@ -230,16 +230,28 @@
             const w = this.$refs.slotList.offsetWidth //宽度
             const direction = this.options.direction //滚动方向
             if (direction === 1) { // 上
-              if (Math.abs(this.yPos) >= h) this.yPos = 0
+              if (Math.abs(this.yPos) >= h) {
+                this.$emit('ScrollEnd')
+                this.yPos = 0
+              }
               this.yPos -= this.options.step
             } else if (direction === 0) { // 下
-              if (this.yPos >= 0) this.yPos = h * -1
+              if (this.yPos >= 0) {
+                this.$emit('ScrollEnd')
+                this.yPos = h * -1
+              }
               this.yPos += this.options.step
             } else if (direction === 2) { // 左
-              if (Math.abs(this.xPos) >= w) this.xPos = 0
+              if (Math.abs(this.xPos) >= w) {
+                this.$emit('ScrollEnd')
+                this.xPos = 0
+              }
               this.xPos -= this.options.step
             } else if (direction === 3) { // 右
-              if (this.xPos >= 0) this.xPos = w * -1
+              if (this.xPos >= 0) {
+                this.$emit('ScrollEnd')
+                this.xPos = w * -1
+              }
               this.xPos += this.options.step
             }
             if (this.singleWaitTime) clearTimeout(this.singleWaitTime)

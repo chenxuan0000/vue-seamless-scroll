@@ -116,7 +116,7 @@ var Component = __webpack_require__(2)(
   /* cssModules */
   null
 )
-Component.options.__file = "/Users/chenxuan/Documents/github/vue-seamless-scroll/src/components/myClass.vue"
+Component.options.__file = "/Users/xmly/Documents/vue-seamless-scroll/src/components/myClass.vue"
 if (Component.esModule && Object.keys(Component.esModule).some(function (key) {return key !== "default" && key !== "__esModule"})) {console.error("named exports are not supported in *.vue files.")}
 if (Component.options.functional) {console.error("[vue-loader] myClass.vue: functional components are not supported with templates, they should use render functions.")}
 
@@ -421,16 +421,28 @@ exports.default = {
         var w = this.$refs.slotList.offsetWidth;
         var direction = this.options.direction;
         if (direction === 1) {
-          if (Math.abs(this.yPos) >= h) this.yPos = 0;
+          if (Math.abs(this.yPos) >= h) {
+            this.$emit('ScrollEnd');
+            this.yPos = 0;
+          }
           this.yPos -= this.options.step;
         } else if (direction === 0) {
-          if (this.yPos >= 0) this.yPos = h * -1;
+          if (this.yPos >= 0) {
+            this.$emit('ScrollEnd');
+            this.yPos = h * -1;
+          }
           this.yPos += this.options.step;
         } else if (direction === 2) {
-          if (Math.abs(this.xPos) >= w) this.xPos = 0;
+          if (Math.abs(this.xPos) >= w) {
+            this.$emit('ScrollEnd');
+            this.xPos = 0;
+          }
           this.xPos -= this.options.step;
         } else if (direction === 3) {
-          if (this.xPos >= 0) this.xPos = w * -1;
+          if (this.xPos >= 0) {
+            this.$emit('ScrollEnd');
+            this.xPos = w * -1;
+          }
           this.xPos += this.options.step;
         }
         if (this.singleWaitTime) clearTimeout(this.singleWaitTime);
