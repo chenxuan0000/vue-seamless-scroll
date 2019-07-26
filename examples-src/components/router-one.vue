@@ -300,7 +300,8 @@
         return {
           step: 0.5,
           limitMoveNum: 5,
-          openTouch: false
+          openTouch: false,
+          singleHeight: 30
         }
       },
       classOption1 () {
@@ -315,7 +316,7 @@
       },
       classOption3 () {
         return {
-          autoPlay: false
+          // autoPlay: false
         }
       },
       classOption4 () {

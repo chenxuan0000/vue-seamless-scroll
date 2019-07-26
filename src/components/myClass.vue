@@ -3,10 +3,23 @@
     <div :style="leftSwitch" v-if="isHorizontal" :class="leftSwitchClass" @click="leftSwitchClick">
       <slot name="left-switch"></slot>
     </div>
-    <div :style="rightSwitch" v-if="isHorizontal" :class="rightSwitchClass" @click="rightSwitchClick">
+    <div
+      :style="rightSwitch"
+      v-if="isHorizontal"
+      :class="rightSwitchClass"
+      @click="rightSwitchClick"
+    >
       <slot name="right-switch"></slot>
     </div>
-    <div ref="realBox" :style="pos" @mouseenter="enter" @mouseleave="leave" @touchstart="touchStart" @touchmove="touchMove" @touchend="touchEnd">
+    <div
+      ref="realBox"
+      :style="pos"
+      @mouseenter="enter"
+      @mouseleave="leave"
+      @touchstart="touchStart"
+      @touchmove="touchMove"
+      @touchend="touchEnd"
+    >
       <div ref="slotList" :style="float">
         <slot></slot>
       </div>
@@ -97,6 +110,7 @@
           waitTime: 1000, //单步停止等待时间
           switchOffset: 30,
           autoPlay: true,
+          navigation: false,
           switchSingleStep: 134,
           switchDelay: 400,
           switchDisabledClass: 'disabled',
@@ -106,11 +120,11 @@
       options () {
         return copyObj({}, this.defaultOption, this.classOption)
       },
-      moveSwitch () {
-        return this.data.length < this.options.limitMoveNum
+      scrollSwitch () {
+        return this.data.length >= this.options.limitMoveNum
       },
-      hoverStop () {
-        return !this.options.autoPlay || !this.options.hoverStop || this.moveSwitch
+      hoverStopSwitch () {
+        return this.options.hoverStop && this.options.autoPlay && this.scrollSwitch
       },
       canNotTouch () {
         return !this.options.openTouch || !this.options.autoPlay
@@ -208,16 +222,18 @@
         }, this.delay)
       },
       enter () {
-        if (this.hoverStop) return
-        this.isHover = true //关闭_move
-        // 防止蛋疼的人频频hover进出单步滚动 导致定时器乱掉
-        if (this.singleWaitTime) clearTimeout(this.singleWaitTime)
-        this._cancle()
+        if (this.hoverStopSwitch) {
+          this.isHover = true //关闭_move
+          // 防止频频hover进出单步滚动,导致定时器乱掉
+          if (this.singleWaitTime) clearTimeout(this.singleWaitTime)
+          this._cancle()
+        }
       },
       leave () {
-        if (this.hoverStop) return
-        this.isHover = false //开启_move
-        this._move()
+        if (this.hoverStopSwitch) {
+          this.isHover = false //开启_move
+          this._move()
+        }
       },
       _move () {
         // 鼠标移入时拦截_move()
@@ -301,14 +317,14 @@
           this._dataWarm(this.data)
           this.copyHtml = '' //清空copy
           // 是否可以滚动判断
-          if (this.moveSwitch) {
-            this._cancle()
-            this.yPos = this.xPos = 0
-          } else {
+          if (this.scrollSwitch) {
             let timer
             if (timer) clearTimeout(timer)
             this.copyHtml = this.$refs.slotList.innerHTML
             this._move()
+          } else {
+            this._cancle()
+            this.yPos = this.xPos = 0
           }
         })
       },

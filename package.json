@@ -1,50 +1,62 @@
 {
-  "name": "vue-seamless-scroll",
-  "version": "1.1.16",
-  "description": "A simple, Seamless scrolling for Vue.js",
-  "main": "dist/vue-seamless-scroll.min.js",
-  "scripts": {
-    "dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.dev.js --open --inline --hot",
-    "build:debug": "cross-env NODE_ENV=debug webpack --config build/webpack.dist.js",
-    "build:prod": "cross-env NODE_ENV=production webpack --config build/webpack.dist.js",
-    "build:examples": "webpack --config build/webpack.examples.js",
-    "build:all": "npm run build:debug && npm run build:prod && npm run build:examples"
-  },
-  "author": "chenxuan",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/chenxuan0000/vue-seamless-scroll"
-  },
-  "keywords": [
-    "vue",
-    "vuejs",
-    "ui",
-    "components",
-    "Seamless",
-    "scroll"
-  ],
-  "dependencies": {
-    "comutils": "^1.1.9"
-  },
-  "devDependencies": {
-    "babel-core": "^6.0.0",
-    "babel-loader": "^7.1.2",
-    "babel-preset-env": "^1.6.1",
-    "babel-polyfill": "^6.26.0",
-    "cross-env": "^3.0.0",
-    "css-loader": "^0.25.0",
-    "deep-assign": "^2.0.0",
-    "extract-text-webpack-plugin": "^3.0.0",
-    "node-sass": "^4.5.2",
-    "sass-loader": "^6.0.6",
-    "vue": "^2.5.13",
-    "vue-loader": "^11.3.3",
-    "vue-router": "^3.0.1",
-    "vue-style-loader": "^3.0.0",
-    "vue-template-compiler": "^2.5.13",
-    "webpack": "^3.5.6",
-    "webpack-bundle-analyzer": "^2.2.1",
-    "webpack-dev-server": "^2.9.7"
-  },
-  "license": "ISC"
+	"name": "vue-seamless-scroll",
+	"version": "1.1.16",
+	"description": "A simple, Seamless scrolling for Vue.js",
+	"main": "dist/vue-seamless-scroll.min.js",
+	"scripts": {
+		"dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.dev.js --open --inline --hot",
+		"build:debug": "cross-env NODE_ENV=debug webpack --config build/webpack.dist.js",
+		"build:prod": "cross-env NODE_ENV=production webpack --config build/webpack.dist.js",
+		"build:examples": "webpack --config build/webpack.examples.js",
+		"build:all": "npm run build:debug && npm run build:prod && npm run build:examples",
+		"test": "cross-env BABEL_ENV=test karma start --single-run"
+	},
+	"author": "chenxuan",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/chenxuan0000/vue-seamless-scroll"
+	},
+	"keywords": [
+		"vue",
+		"vuejs",
+		"ui",
+		"components",
+		"Seamless",
+		"scroll"
+	],
+	"dependencies": {
+		"comutils": "^1.1.9"
+	},
+	"devDependencies": {
+		"@vue/test-utils": "^1.0.0-beta.19",
+		"babel-core": "^6.26.0",
+		"babel-loader": "^7.1.2",
+		"babel-plugin-istanbul": "^4.1.5",
+		"babel-preset-env": "^1.6.0",
+		"babel-preset-stage-3": "^6.24.1",
+		"chai": "^4.1.2",
+		"cross-env": "^5.1.3",
+		"css-loader": "^0.28.7",
+		"deep-assign": "^3.0.0",
+		"file-loader": "^1.1.4",
+		"karma": "^2.0.0",
+		"karma-chai": "^0.1.0",
+		"karma-chrome-launcher": "^2.2.0",
+		"karma-coverage": "^1.1.1",
+		"karma-mocha": "^1.3.0",
+		"karma-sourcemap-loader": "^0.3.7",
+		"karma-spec-reporter": "0.0.32",
+		"karma-webpack": "^2.0.9",
+		"mocha": "^5.0.0",
+		"node-sass": "^4.12.0",
+		"sass-loader": "^7.1.0",
+		"vue": "^2.6.10",
+		"vue-router": "^3.0.1",
+		"vue-style-loader": "^3.0.0",
+		"vue-loader": "^13.0.5",
+		"vue-template-compiler": "^2.6.10",
+		"webpack": "^3.6.0",
+		"webpack-dev-server": "^2.9.1"
+	},
+	"license": "ISC"
 }
