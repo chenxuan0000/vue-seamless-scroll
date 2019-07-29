@@ -14,6 +14,7 @@
 
 ## 内容
 
+- [**`更新日志`**](#更新日志)
 - [**`浏览器兼容性`**](#浏览器兼容性)
 - [**`功能特性`**](#功能特性)
 - [**`安装`**](#安装)
@@ -27,6 +28,18 @@
 - [**`历史版本`**](#历史版本)
 - [**`注意`**](#注意)
 - [**`贡献`**](#贡献)
+
+## 更新日志
+
+### 1.1.17
+
+ bug修复
+  - step属性设置为1以下的小数点，向上滚动有卡顿的晃动。
+  - offsetWidth四舍五入，导致计算出误差，水平方向的滚动两行不一行上，会出现空白。
+  - 如果设置了单步滚动,step需是单步大小的约数,否则无法保证单步滚动结束的位置是否准确。
+
+配置更新
+ - 新增navigation配置，左右方向的滚动是否显示控制器按钮，值为true的时候autoPlay自动变为false。
 
 ## 浏览器兼容性
 | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/edge.png" alt="IE" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>IE | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/firefox.png" alt="Firefox" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/chrome.png" alt="Chrome" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/safari.png" alt="Safari" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/safari-ios.png" alt="iOS Safari" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>iOS | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/chrome-android.png" alt="Chrome for Android" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Android |

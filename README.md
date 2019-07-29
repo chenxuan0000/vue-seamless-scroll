@@ -14,6 +14,7 @@
                                         
 ## Content
 
+- [**`Update log`**](#update-log)
 - [**`Browser support`**](#browser-support)
 - [**`Features`**](#features)
 - [**`Installation`**](#installation)
@@ -27,6 +28,17 @@
 - [**`Issues solution`**](#issues-solution)
 - [**`Cares`**](#cares)
 - [**`Contribution`**](#contribution)
+
+## Update log
+
+### 1.1.17
+ Bug fix
+  - The step attribute is set to a decimal point below 1 and scrolls up with a sway.
+  - The offsetWidth is rounded off, causing the error to be calculated. The horizontal scrolling is not on one line, and a blank will appear.
+  - If single-step scrolling is set, the step needs to be a single-numbered divisor, otherwise the position of the single-step scrolling end cannot be guaranteed.
+
+ Configuration update
+  - Added navigation configuration, whether the left and right scrolling shows the controller button. When the value is true, autoPlay automatically becomes false.
 
 ## Browser support
 | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/edge.png" alt="IE" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>IE | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/firefox.png" alt="Firefox" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Firefox | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/chrome.png" alt="Chrome" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Chrome | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/safari.png" alt="Safari" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Safari | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/safari-ios.png" alt="iOS Safari" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>iOS | [<img src="https://raw.githubusercontent.com/godban/browsers-support-badges/master/src/images/chrome-android.png" alt="Chrome for Android" width="16px" height="16px" />](http://godban.github.io/browsers-support-badges/)</br>Android |
