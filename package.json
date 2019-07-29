@@ -1,6 +1,6 @@
 {
 	"name": "vue-seamless-scroll",
-	"version": "1.1.16",
+	"version": "1.1.17",
 	"description": "A simple, Seamless scrolling for Vue.js",
 	"main": "dist/vue-seamless-scroll.min.js",
 	"scripts": {
@@ -9,7 +9,7 @@
 		"build:prod": "cross-env NODE_ENV=production webpack --config build/webpack.dist.js",
 		"build:examples": "webpack --config build/webpack.examples.js",
 		"build:all": "npm run build:debug && npm run build:prod && npm run build:examples",
-		"test": "cross-env BABEL_ENV=test karma start --single-run"
+		"unit:test": "cross-env BABEL_ENV=test karma start --single-run"
 	},
 	"author": "chenxuan",
 	"repository": {

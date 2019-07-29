@@ -1,14 +1,9 @@
 <template>
   <div ref="wrap">
-    <div :style="leftSwitch" v-if="isHorizontal" :class="leftSwitchClass" @click="leftSwitchClick">
+    <div :style="leftSwitch" v-if="navigation" :class="leftSwitchClass" @click="leftSwitchClick">
       <slot name="left-switch"></slot>
     </div>
-    <div
-      :style="rightSwitch"
-      v-if="isHorizontal"
-      :class="rightSwitchClass"
-      @click="rightSwitchClick"
-    >
+    <div :style="rightSwitch" v-if="navigation" :class="rightSwitchClass" @click="rightSwitchClick">
       <slot name="right-switch"></slot>
     </div>
     <div
@@ -120,17 +115,24 @@
       options () {
         return copyObj({}, this.defaultOption, this.classOption)
       },
+      navigation () {
+        return this.options.navigation
+      },
+      autoPlay () {
+        if (this.navigation) return false
+        return this.options.autoPlay
+      },
       scrollSwitch () {
         return this.data.length >= this.options.limitMoveNum
       },
       hoverStopSwitch () {
-        return this.options.hoverStop && this.options.autoPlay && this.scrollSwitch
+        return this.options.hoverStop && this.autoPlay && this.scrollSwitch
       },
-      canNotTouch () {
-        return !this.options.openTouch || !this.options.autoPlay
+      canTouchScroll () {
+        return this.options.openTouch
       },
       isHorizontal () {
-        return this.options.direction > 1 || !this.options.autoPlay
+        return this.options.direction > 1
       },
       baseFontSize () {
         return this.options.isSingleRemUnit ? parseInt(window.getComputedStyle(document.documentElement, null).fontSize) : 1
@@ -140,6 +142,19 @@
       },
       realSingleStopHeight () {
         return this.options.singleHeight * this.baseFontSize
+      },
+      step () {
+        let singleStep
+        let step = this.options.step
+        if (this.isHorizontal) {
+          singleStep = this.realSingleStopWidth
+        } else {
+          singleStep = this.realSingleStopHeight
+        }
+        if (singleStep > 0 && singleStep % step > 0) {
+          console.error('如果设置了单步滚动,step需是单步大小的约数,否则无法保证单步滚动结束的位置是否准确。~~~~~')
+        }
+        return step
       }
     },
     methods: {
@@ -165,54 +180,56 @@
         cancelAnimationFrame(this.reqFrame || '')
       },
       touchStart (e) {
-        if (this.canNotTouch) return
+        if (!this.canTouchScroll) return
         let timer
         const touch = e.targetTouches[0] //touches数组对象获得屏幕上所有的touch，取第一个touch
+        const { waitTime, singleHeight, singleWidth } = this.options
         this.startPos = {
           x: touch.pageX,
           y: touch.pageY
         } //取第一个touch的坐标值
         this.startPosY = this.yPos //记录touchStart时候的posY
         this.startPosX = this.xPos //记录touchStart时候的posX
-        if (!!this.options.singleHeight && !!this.options.singleWidth) {
+        if (!!singleHeight && !!singleWidth) {
           if (timer) clearTimeout(timer)
           timer = setTimeout(() => {
             this._cancle()
-          }, this.options.waitTime + 20)
+          }, waitTime + 20)
         } else {
           this._cancle()
         }
       },
       touchMove (e) {
         //当屏幕有多个touch或者页面被缩放过，就不执行move操作
-        if (this.canNotTouch || e.targetTouches.length > 1 || e.scale && e.scale !== 1) return
+        if (!this.canTouchScroll || e.targetTouches.length > 1 || e.scale && e.scale !== 1) return
         const touch = e.targetTouches[0]
+        const { direction } = this.options
         this.endPos = {
           x: touch.pageX - this.startPos.x,
           y: touch.pageY - this.startPos.y
         }
         event.preventDefault(); //阻止触摸事件的默认行为，即阻止滚屏
         const dir = Math.abs(this.endPos.x) < Math.abs(this.endPos.y) ? 1 : 0 //dir，1表示纵向滑动，0为横向滑动
-        if (dir === 1 && this.options.direction < 2) {  // 表示纵向滑动 && 运动方向为上下
+        if (dir === 1 && direction < 2) {  // 表示纵向滑动 && 运动方向为上下
           this.yPos = this.startPosY + this.endPos.y
-        } else if (dir === 0 && this.options.direction > 1) { // 为横向滑动 && 运动方向为左右
+        } else if (dir === 0 && direction > 1) { // 为横向滑动 && 运动方向为左右
           this.xPos = this.startPosX + this.endPos.x
         }
       },
       touchEnd () {
-        if (this.canNotTouch) return
+        if (!this.canTouchScroll) return
         let timer
         const direction = this.options.direction
         this.delay = 50
         if (direction === 1) {
           if (this.yPos > 0) this.yPos = 0
         } else if (direction === 0) {
-          let h = this.$refs.realBox.offsetHeight / 2 * -1
+          let h = this.realBoxHeight / 2 * -1
           if (this.yPos < h) this.yPos = h
         } else if (direction === 2) {
           if (this.xPos > 0) this.xPos = 0
         } else if (direction === 3) {
-          let w = this.$refs.slotList.offsetWidth * -1
+          let w = this.realBoxWidth * -1
           if (this.xPos < w) this.xPos = w
         }
         if (timer) clearTimeout(timer)
@@ -241,49 +258,49 @@
         this._cancle() //进入move立即先清除动画 防止频繁touchMove导致多动画同时进行
         this.reqFrame = requestAnimationFrame(
           function () {
-            if (!this.$refs.realBox) return //fixed 路由之间切换报this.$refs.realBox.offsetHeigh undefined bug
-            const h = this.$refs.realBox.offsetHeight / 2  //实际高度
-            const w = this.$refs.slotList.offsetWidth //宽度
-            const direction = this.options.direction //滚动方向
+            const h = this.realBoxHeight / 2  //实际高度
+            const w = this.realBoxWidth / 2 //宽度
+            let { direction, waitTime } = this.options
+            let { step } = this
             if (direction === 1) { // 上
               if (Math.abs(this.yPos) >= h) {
                 this.$emit('ScrollEnd')
                 this.yPos = 0
               }
-              this.yPos -= this.options.step
+              this.yPos -= step
             } else if (direction === 0) { // 下
               if (this.yPos >= 0) {
                 this.$emit('ScrollEnd')
                 this.yPos = h * -1
               }
-              this.yPos += this.options.step
+              this.yPos += step
             } else if (direction === 2) { // 左
               if (Math.abs(this.xPos) >= w) {
                 this.$emit('ScrollEnd')
                 this.xPos = 0
               }
-              this.xPos -= this.options.step
+              this.xPos -= step
             } else if (direction === 3) { // 右
               if (this.xPos >= 0) {
                 this.$emit('ScrollEnd')
                 this.xPos = w * -1
               }
-              this.xPos += this.options.step
+              this.xPos += step
             }
             if (this.singleWaitTime) clearTimeout(this.singleWaitTime)
             if (!!this.realSingleStopHeight) { //是否启动了单行暂停配置
-              if (Math.abs(this.yPos) % this.realSingleStopHeight < 1) { // 符合条件暂停waitTime
+              if (Math.abs(this.yPos) % this.realSingleStopHeight < step) { // 符合条件暂停waitTime
                 this.singleWaitTime = setTimeout(() => {
                   this._move()
-                }, this.options.waitTime)
+                }, waitTime)
               } else {
                 this._move()
               }
             } else if (!!this.realSingleStopWidth) {
-              if (Math.abs(this.xPos) % this.realSingleStopWidth < 1) { // 符合条件暂停waitTime
+              if (Math.abs(this.xPos) % this.realSingleStopWidth < step) { // 符合条件暂停waitTime
                 this.singleWaitTime = setTimeout(() => {
                   this._move()
-                }, this.options.waitTime)
+                }, waitTime)
               } else {
                 this._move()
               }
@@ -295,33 +312,35 @@
       },
       _initMove () {
         this.$nextTick(() => {
-          this.height = this.$refs.wrap.offsetHeight
-          this.width = this.$refs.wrap.offsetWidth
-          // 水平滚动设置warp width
-          if (this.isHorizontal) {
-            let rate
-            if (!this.options.autoPlay) {
-              rate = 1
-            } else {
-              rate = 2
-            }
-            const w = this.$refs.slotList.offsetWidth * rate
-            this.$refs.realBox.style.width = w + 'px'
-            this.realBoxWidth = w
-          }
-          if (!this.options.autoPlay) {
-            this.ease = 'linear'
-            this.delay = this.options.switchDelay
-            return
-          }
           this._dataWarm(this.data)
           this.copyHtml = '' //清空copy
+          this.height = this.$refs.wrap.offsetHeight
+          this.width = this.$refs.wrap.offsetWidth
+          let slotListWidth = this.$refs.slotList.offsetWidth
+          const { switchDelay } = this.options
+          const { autoPlay, isHorizontal } = this
+          // 水平滚动设置warp width
+          if (isHorizontal && autoPlay) {
+            // 修正offsetWidth四舍五入
+            slotListWidth = slotListWidth * 2 + 1
+          }
+          this.$refs.realBox.style.width = slotListWidth + 'px'
+          this.realBoxWidth = slotListWidth
+          if (!autoPlay) {
+            this.ease = 'linear'
+            this.delay = switchDelay
+            return
+          }
+
           // 是否可以滚动判断
           if (this.scrollSwitch) {
             let timer
             if (timer) clearTimeout(timer)
             this.copyHtml = this.$refs.slotList.innerHTML
-            this._move()
+            setTimeout(() => {
+              this.realBoxHeight = this.$refs.realBox.offsetHeight
+              this._move()
+            }, 0);
           } else {
             this._cancle()
             this.yPos = this.xPos = 0

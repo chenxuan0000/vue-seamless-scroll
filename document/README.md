@@ -8,7 +8,7 @@
 </p>                                            
 <p align="center">
    🐾<a href="http://chenxuan1993.gitee.io/component-document/index_prod#/component/seamless-default">在线文档demo</a> |
-   🌾 <a href="https://chenxuan0000.github.io/vue-seamless-scroll/index.html" target="_blank">小demo</a> |
+   🌾 <a href="https://chenxuan0000.github.io/vue-seamless-scroll/index.html" target="_blank">demo</a> |
    📘 <a href="../README.md">English Document</a>
 </p>
 
@@ -37,7 +37,6 @@
 * [x] 基于requestAnimationFrame实现
 * [x] 配置多满足多样需求
 * [x] 目前支持上下左右无缝滚动，单步滚动，以及支持水平方向的手动切换功能
-* [x] 持续维护迭代
 
 ## 安装
 
@@ -48,7 +47,7 @@ npm install vue-seamless-scroll --save
 ```
 
 ### CDN
-`https://cdn.jsdelivr.net/npm/vue-seamless-scroll@1.1.12/dist/vue-seamless-scroll.min.js`
+`https://cdn.jsdelivr.net/npm/vue-seamless-scroll@1.1.17/dist/vue-seamless-scroll.min.js`
 
 ## 使用
 ### ES6
@@ -111,11 +110,17 @@ Example:
 |`singleWidth`|单步运动停止的宽度(默认值0是无缝不停止的滚动) direction => 2/3|`0`|`Number`|
 |`waitTime`|单步停止等待时间(默认值1000ms)|`1000`|`Number`|
 |`switchOffset`|左右切换按钮距离左右边界的边距(px)|`30`|`Number`|
-|`autoPlay`|是否自动播放使用switch切换时候需要置为false|`true`|`Boolean`|
+|`autoPlay`|1.1.17版本前手动切换时候需要置为false|`true`|`Boolean`|
 |`switchSingleStep`|手动单步切换step值(px)|`134`|`Number`|
 |`switchDelay`|单步切换的动画时间(ms)|`400`|`Number`|
 |`switchDisabledClass`|不可以点击状态的switch按钮父元素的类名|`disabled`|`String`|
 |`isSingleRemUnit`|singleHeight and singleWidth是否开启rem度量|`false`|`Boolean`|
+
+- 1.1.17更新
+
+|key|description|default|val|
+|:---|---|---|---|
+|`navigation`|左右方向的滚动是否显示控制器按钮，true的时候autoPlay自动变为false|`false`|`Boolean`|
 
 
 ## 回调事件
@@ -127,11 +132,12 @@ Example:
 
 > 1.最外层容器需要手动设置`width height overflow:hidden`
 
-> 2.左右的无缝滚动需要给主内容区域（即默认slot插槽提供）设定合适的`css width`属性(否则无法正确计算实际宽度)
+> 2.左右的无缝滚动需要给主内容区域（即默认slot插槽提供）设定合适的`css width`属性(否则无法正确计算实际宽度)。
+ 也可以通过给他设置为`display:flex;`无需设置`css width`属性
 
-> 3.step值不建议太小,不然会有卡顿效果
+> 3.step值不建议太小,不然会有卡顿效果(如果设置了单步滚动,step需是单步大小的约数,否则无法保证单步滚动结束的位置是否准确。~~~~~,比如单步设置的30,step不能为4)
 
-> 4.需要实现手动切换左右滚动的时候,必须设置`autoPlay:false`,目前不支持环路
+> 4.需要实现手动切换左右滚动的时候,必须设置`autoPlay:false`（1.1.17版本开始，只需要设置`navigation:false`）,目前不支持环路
 
 > 5.提供了`slot left-switch || right-switch`可以自由定义需要的按钮样式 外层有div已经定位了位置居中,距离两边侧的距离可以通过switchOffset参数调整
 

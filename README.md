@@ -34,10 +34,9 @@
 | IE9+ | &check;| &check; | &check; | &check; | &check; | &check;
 
 ## Features
-* [x] base on requestAnimationFrame
+* [x] base on requestAnimationFrame.
 * [x] the configuration meets a variety of requirements.
 * [x] current support for seamless scrolling, single-step scrolling, and manual switching support for horizontal direction.
-* [x] ongoing maintenance
 
 ## Installation
 
@@ -48,7 +47,7 @@ npm install vue-seamless-scroll --save
 ```
 
 ### CDN
-`https://cdn.jsdelivr.net/npm/vue-seamless-scroll@1.1.12/dist/vue-seamless-scroll.min.js`
+`https://cdn.jsdelivr.net/npm/vue-seamless-scroll@1.1.17/dist/vue-seamless-scroll.min.js`
 
 ## Usage
 ### ES6
@@ -111,13 +110,20 @@ Example:
 |`singleWidth`|one single stop width(default zero is seamless) => direction 2/3|`0`|`Number`|
 |`waitTime`|one single data stop wait time(ms)|`1000`|`Number`|
 |`switchOffset`|the left and right buttons distance from the left and right sides (px)|`30`|`Number`|
-|`autoPlay`|whether or not to automatically play the switch needs to be set to false|`true`|`Boolean`|
+|`autoPlay`|Less than 1.1.17 version needs to be set to false when manually switching|`true`|`Boolean`|
 |`switchSingleStep`|the size of a single step switch (px)|`134`|`Number`|
 |`switchDelay`|the animation time of a single step switch(ms)|`400`|`Number`|
 |`switchDisabledClass`|the className of the switch parent element that cannot be clicked|`disabled`|`String`|
 |`isSingleRemUnit`|singleHeight and singleWidth Whether to enable the rem metric|`false`|`Boolean`|
 
-## Events
+
+- update 1.1.17
+
+|key|description|default|val|
+|:---|---|---|---|
+|`navigation`|Whether the left and right scrolling shows the controller button, autoPlay automatically becomes false when true|`false`|`Boolean`|
+
+## CalBackEvents
 |name|description|calback params|
 |:---|---|---|
 |`ScrollEnd`|A roll-through callback event|`null`|
@@ -126,11 +132,11 @@ Example:
 
 > 1.The outermost container needs to be set manually`width height overflow:hidden`
 
-> 2.The left and right seamless rolling needs to be set for the main content area (that is, the default slot slots)`css width`(otherwise, the actual width cannot be calculated correctly)
+> 2.The left and right seamless rolling needs to be set for the main content area (that is, the default slot slots)`css width`(otherwise, the actual width cannot be calculated correctly). You can also set it to `display:flex;` without setting the `css width` property.
 
-> 3.The step value is not recommended to be too small, otherwise there will be carton effect.
+> 3.The step value is not recommended to be too small, otherwise there will be carton effect.(If single-step scrolling is set, the step needs to be a divisor of the single-step size, otherwise the position of the single-step scrolling end cannot be guaranteed to be accurate. ~~~~~, such as single step 30, step can not be 4)
 
-> 4.You need to set when you need to manually switch left and right to scroll`autoPlay:false`,(The loop is not currently supported.)
+> 4.You need to set when you need to manually switch left and right to scroll`autoPlay:false`(Starting with version 1.1.17, you only need to set `navigation:false`),(The loop is not currently supported.)
 
 > 5.Provides `slot left-switch || right-switch` you can freely define the button styles you want. The outer div is positioned in the middle,the distance from both sides can be adjusted by the switchOffset parameter.
 
