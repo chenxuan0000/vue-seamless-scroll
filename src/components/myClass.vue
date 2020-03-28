@@ -18,7 +18,10 @@
       <div ref="slotList" :style="float">
         <slot></slot>
       </div>
-      <div v-html="copyHtml" :style="float"></div>
+      <div :style="float">
+        <slot></slot>
+      </div>
+      <!-- <div v-html="copyHtml" :style="float"></div> -->
     </div>
   </div>
 </template>
