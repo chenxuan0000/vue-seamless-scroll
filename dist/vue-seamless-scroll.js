@@ -148,7 +148,7 @@ exports.default = {
     pos: function pos() {
       return {
         transform: 'translate(' + this.xPos + 'px,' + this.yPos + 'px)',
-        transition: 'all ' + (this.ease || 'ease-in') + ' ' + this.delay + 'ms',
+        transition: 'all ' + this.ease + ' ' + this.delay + 'ms',
         overflow: 'hidden'
       };
     },
@@ -304,17 +304,10 @@ exports.default = {
       }, this.delay);
     },
     enter: function enter() {
-      if (this.hoverStopSwitch) {
-        this.isHover = true;
-        if (this.singleWaitTime) clearTimeout(this.singleWaitTime);
-        this._cancle();
-      }
+      if (this.hoverStopSwitch) this._stopMove();
     },
     leave: function leave() {
-      if (this.hoverStopSwitch) {
-        this.isHover = false;
-        this._move();
-      }
+      if (this.hoverStopSwitch) this._startMove();
     },
     _move: function _move() {
       if (this.isHover) return;
@@ -379,21 +372,28 @@ exports.default = {
       var _this4 = this;
 
       this.$nextTick(function () {
-        _this4._dataWarm(_this4.data);
-        _this4.copyHtml = '';
-        _this4.height = _this4.$refs.wrap.offsetHeight;
-        _this4.width = _this4.$refs.wrap.offsetWidth;
-        var slotListWidth = _this4.$refs.slotList.offsetWidth;
         var switchDelay = _this4.options.switchDelay;
         var autoPlay = _this4.autoPlay,
             isHorizontal = _this4.isHorizontal;
 
-        if (isHorizontal && autoPlay) {
-          slotListWidth = slotListWidth * 2 + 1;
+        _this4._dataWarm(_this4.data);
+        _this4.copyHtml = '';
+        if (isHorizontal) {
+          _this4.height = _this4.$refs.wrap.offsetHeight;
+          _this4.width = _this4.$refs.wrap.offsetWidth;
+          var slotListWidth = _this4.$refs.slotList.offsetWidth;
+
+          if (autoPlay) {
+            slotListWidth = slotListWidth * 2 + 1;
+          }
+          _this4.$refs.realBox.style.width = slotListWidth + 'px';
+          _this4.realBoxWidth = slotListWidth;
         }
-        _this4.$refs.realBox.style.width = slotListWidth + 'px';
-        _this4.realBoxWidth = slotListWidth;
-        if (!autoPlay) {
+
+        if (autoPlay) {
+          _this4.ease = 'ease-in';
+          _this4.delay = 0;
+        } else {
           _this4.ease = 'linear';
           _this4.delay = switchDelay;
           return;
@@ -417,6 +417,15 @@ exports.default = {
       if (data.length > 100) {
         console.warn('\u6570\u636E\u8FBE\u5230\u4E86' + data.length + '\u6761\u6709\u70B9\u591A\u54E6~,\u53EF\u80FD\u4F1A\u9020\u6210\u90E8\u5206\u8001\u65E7\u6D4F\u89C8\u5668\u5361\u987F\u3002');
       }
+    },
+    _startMove: function _startMove() {
+      this.isHover = false;
+      this._move();
+    },
+    _stopMove: function _stopMove() {
+      this.isHover = true;
+      if (this.singleWaitTime) clearTimeout(this.singleWaitTime);
+      this._cancle();
     }
   },
   mounted: function mounted() {
@@ -431,12 +440,21 @@ exports.default = {
         this._cancle();
         this._initMove();
       }
+    },
+    autoPlay: function autoPlay(bol) {
+      if (bol) {
+        this._cancle();
+        this._initMove();
+      } else {
+        this._stopMove();
+      }
     }
   },
   beforeCreate: function beforeCreate() {
     this.reqFrame = null;
     this.singleWaitTime = null;
     this.isHover = false;
+    this.ease = 'ease-in';
   },
   beforeDestroy: function beforeDestroy() {
     this._cancle();

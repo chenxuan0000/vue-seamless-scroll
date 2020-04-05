@@ -25,6 +25,10 @@
 - [**`贡献`**](#贡献)
 
 ## 更新日志
+
+### 1.1.21
+  - fixed issues [#68](https://github.com/chenxuan0000/vue-seamless-scroll/issues/68) [#87](https://github.com/chenxuan0000/vue-seamless-scroll/issues/87) [#89](https://github.com/chenxuan0000/vue-seamless-scroll/issues/89)
+
 ### 1.1.20
   - 文档更新，源码微调。
 
@@ -57,7 +61,7 @@ npm install vue-seamless-scroll --save
 ```
 
 ### CDN
-`https://cdn.jsdelivr.net/npm/vue-seamless-scroll@1.1.20/dist/vue-seamless-scroll.min.js`
+`https://cdn.jsdelivr.net/npm/vue-seamless-scroll@latest/dist/vue-seamless-scroll.min.js`
 
 ## 使用
 ### ES6
