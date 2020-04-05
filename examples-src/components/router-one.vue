@@ -9,13 +9,7 @@
         <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limitMoveNum: 5
         <br />}
       </div>
-      <my-class
-        ref="demo1"
-        :data="listData"
-        class="warp"
-        :class-option="classOption"
-        @ScrollEnd="end"
-      >
+      <my-class :data="listData" class="warp" :class-option="classOption" @ScrollEnd="end">
         <ul class="item">
           <a
             target="_blank"
@@ -310,17 +304,16 @@
           'title': '无缝滚动第六行无缝滚动第六行',
           'date': '2017-12-16'
         }],
-        ulItem2Width: 0
+        ulItem2Width: 0,
+        classOption: {
+          autoPlay: false,
+          step: 0.5,
+          limitMoveNum: 5,
+        },
       }
     },
     props: {},
     computed: {
-      classOption () {
-        return {
-          step: 0.5,
-          limitMoveNum: 5,
-        }
-      },
       classOption1 () {
         return {
           limitMoveNum: 7
@@ -367,12 +360,6 @@
     },
     created () {
       setTimeout(() => {
-        this.$refs.demo1._stopMove()
-      }, 4000);
-      setTimeout(() => {
-        this.$refs.demo1._startMove()
-      }, 7000);
-      setTimeout(() => {
         this.listData5 = [1, 2, 3, 4, 5]
         this.listData4 = [1, 2, 3, 4, 5]
         this.listData8 = [1, 2, 3, 4, 5, 6]
@@ -409,6 +396,12 @@
           'date': '2017-12-16'
         }]
       }, 2000)
+      setTimeout(() => {
+        this.classOption.autoPlay = true
+      }, 3400);
+      setTimeout(() => {
+        this.classOption.autoPlay = false
+      }, 7400);
     }
   }
 </script>

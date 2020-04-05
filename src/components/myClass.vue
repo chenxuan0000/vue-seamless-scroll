@@ -87,7 +87,7 @@
       pos () {
         return {
           transform: `translate(${this.xPos}px,${this.yPos}px)`,
-          transition: `all ${this.ease || 'ease-in'} ${this.delay}ms`,
+          transition: `all ${this.ease} ${this.delay}ms`,
           overflow: 'hidden'
         }
       },
@@ -316,7 +316,10 @@
           }
           this.$refs.realBox.style.width = slotListWidth + 'px'
           this.realBoxWidth = slotListWidth
-          if (!autoPlay) {
+          if (autoPlay) {
+            this.ease = 'ease-in'
+            this.delay = 0
+          } else {
             this.ease = 'linear'
             this.delay = switchDelay
             return
@@ -364,12 +367,21 @@
           this._cancle()
           this._initMove()
         }
+      },
+      autoPlay (bol) {
+        if (bol) {
+          this._cancle()
+          this._initMove()
+        } else {
+          this._stopMove()
+        }
       }
     },
     beforeCreate () {
       this.reqFrame = null // move动画的animationFrame定时器
       this.singleWaitTime = null // single 单步滚动的定时器
       this.isHover = false // mouseenter mouseleave 控制this._move()的开关
+      this.ease = 'ease-in'
     },
     beforeDestroy () {
       this._cancle()
