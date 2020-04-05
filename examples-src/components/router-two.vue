@@ -117,7 +117,7 @@
           step: 1,
           limitMoveNum: 5,
           singleHeight: 30,
-          waitTime: 1000
+          waitTime: 1000,
         }
       }
     },

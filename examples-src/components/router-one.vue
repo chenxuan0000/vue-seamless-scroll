@@ -364,7 +364,6 @@
         this.listData4 = [1, 2, 3, 4, 5]
         this.listData8 = [1, 2, 3, 4, 5, 6]
         this.ulItem2Width = 670
-        this.listData3 = [1, 2, 3, 4, 5, 6, 7]
       }, 1500)
       setTimeout(() => {
         this.listData1 = this.listData2 = [{

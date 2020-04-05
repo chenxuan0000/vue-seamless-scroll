@@ -302,20 +302,23 @@
       },
       _initMove () {
         this.$nextTick(() => {
-          this._dataWarm(this.data)
-          this.copyHtml = '' //清空copy
-          this.height = this.$refs.wrap.offsetHeight
-          this.width = this.$refs.wrap.offsetWidth
-          let slotListWidth = this.$refs.slotList.offsetWidth
           const { switchDelay } = this.options
           const { autoPlay, isHorizontal } = this
-          // 水平滚动设置warp width
-          if (isHorizontal && autoPlay) {
-            // 修正offsetWidth四舍五入
-            slotListWidth = slotListWidth * 2 + 1
+          this._dataWarm(this.data)
+          this.copyHtml = '' //清空copy
+          if (isHorizontal) {
+            this.height = this.$refs.wrap.offsetHeight
+            this.width = this.$refs.wrap.offsetWidth
+            let slotListWidth = this.$refs.slotList.offsetWidth
+            // 水平滚动设置warp width
+            if (autoPlay) {
+              // 修正offsetWidth四舍五入
+              slotListWidth = slotListWidth * 2 + 1
+            }
+            this.$refs.realBox.style.width = slotListWidth + 'px'
+            this.realBoxWidth = slotListWidth
           }
-          this.$refs.realBox.style.width = slotListWidth + 'px'
-          this.realBoxWidth = slotListWidth
+
           if (autoPlay) {
             this.ease = 'ease-in'
             this.delay = 0
