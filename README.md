@@ -1,17 +1,12 @@
-# vue-seamless-scroll 
+# vue-seamless-scroll
 > A simple, Seamless scrolling for Vue.js
 
-[![Build Status](https://img.shields.io/appveyor/ci/gruntjs/grunt/master.svg) ![LICENSE MIT](https://img.shields.io/npm/l/express.svg)](https://www.npmjs.com/package/vue-seamless-scroll) ![](https://img.shields.io/npm/v/vue-seamless-scroll.svg)
-                                                                      
-<p align="center">
-    <img src="http://p2.qqyou.com/biaoqing/UploadPic/2013-2/1/2013020120565544702.gif" width="480"/>
-</p>                                             
 <p align="center">
    🐾<a href="http://chenxuan1993.gitee.io/component-document/index_prod#/component/seamless-default">online demo</a> |
    🌾 <a href="https://chenxuan0000.github.io/vue-seamless-scroll/index.html">sample demo</a> |
-   📘 <a href="./document/README.md">中文文档</a> 
+   📘 <a href="./document/README.md">中文文档</a>
 </p>
-                                        
+
 ## Content
 
 - [**`Update log`**](#update-log)
@@ -21,15 +16,18 @@
 - [**`Usage`**](#usage)
     - [**`ES6`**](#eS6)
     - [**`Normal use`**](#normal-use)
-- [**`Configure`**](#configure)  
-- [**`Events`**](#events)  
-- [**`Individual special configuration items`**](#individual-special-configuration-items) 
+- [**`Configure`**](#configure)
+- [**`Events`**](#events)
+- [**`Individual special configuration items`**](#individual-special-configuration-items)
 - [**`Changelog`**](#changelog)
 - [**`Issues solution`**](#issues-solution)
 - [**`Cares`**](#cares)
 - [**`Contribution`**](#contribution)
 
 ## Update log
+
+### 1.1.20
+  - Document update, source code fine-tuning.
 
 ### 1.1.17
  Bug fix
@@ -59,7 +57,7 @@ npm install vue-seamless-scroll --save
 ```
 
 ### CDN
-`https://cdn.jsdelivr.net/npm/vue-seamless-scroll@1.1.17/dist/vue-seamless-scroll.min.js`
+`https://cdn.jsdelivr.net/npm/vue-seamless-scroll@1.1.20/dist/vue-seamless-scroll.min.js`
 
 ## Usage
 ### ES6

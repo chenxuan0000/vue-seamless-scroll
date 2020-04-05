@@ -98,10 +98,7 @@ exports.default = {
       copyHtml: '',
       height: 0,
       width: 0,
-      realBoxWidth: 0,
-      reqFrame: null,
-      singleWaitTime: null,
-      isHover: false };
+      realBoxWidth: 0 };
   },
 
   props: {
@@ -436,8 +433,14 @@ exports.default = {
       }
     }
   },
+  beforeCreate: function beforeCreate() {
+    this.reqFrame = null;
+    this.singleWaitTime = null;
+    this.isHover = false;
+  },
   beforeDestroy: function beforeDestroy() {
     this._cancle();
+    clearTimeout(this.singleWaitTime);
   }
 };
 

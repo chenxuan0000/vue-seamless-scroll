@@ -265,7 +265,7 @@
         }, {
           'title': '无缝滚动第九行无缝滚动第九行',
           'date': '2017-12-16'
-        }],
+        },],
         listData1: [{
           'title': '无缝滚动第一行无缝滚动第一行',
           'date': '2017-12-16'
@@ -311,10 +311,8 @@
     computed: {
       classOption () {
         return {
-          step: 4,
+          step: 0.5,
           limitMoveNum: 5,
-          openTouch: false,
-          singleHeight: 30
         }
       },
       classOption1 () {
@@ -367,6 +365,7 @@
         this.listData4 = [1, 2, 3, 4, 5]
         this.listData8 = [1, 2, 3, 4, 5, 6]
         this.ulItem2Width = 670
+        this.listData3 = [1, 2, 3, 4, 5, 6, 7]
       }, 1500)
       setTimeout(() => {
         this.listData1 = this.listData2 = [{

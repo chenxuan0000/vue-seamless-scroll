@@ -1,11 +1,6 @@
-# vue-seamless-scroll 
+# vue-seamless-scroll
 > 一个简单的基于vue.js的无缝滚动
 
-[![Build Status](https://img.shields.io/appveyor/ci/gruntjs/grunt/master.svg) ![LICENSE MIT](https://img.shields.io/npm/l/express.svg)](https://www.npmjs.com/package/vue-seamless-scroll) ![](https://img.shields.io/npm/v/vue-seamless-scroll.svg)
-                                         
-<p align="center">
-    <img src="http://p2.qqyou.com/biaoqing/UploadPic/2013-2/1/2013020120565544702.gif" width="480"/>
-</p>                                            
 <p align="center">
    🐾<a href="http://chenxuan1993.gitee.io/component-document/index_prod#/component/seamless-default">在线文档demo</a> |
    🌾 <a href="https://chenxuan0000.github.io/vue-seamless-scroll/index.html" target="_blank">demo</a> |
@@ -30,6 +25,8 @@
 - [**`贡献`**](#贡献)
 
 ## 更新日志
+### 1.1.20
+  - 文档更新，源码微调。
 
 ### 1.1.17
 
@@ -60,7 +57,7 @@ npm install vue-seamless-scroll --save
 ```
 
 ### CDN
-`https://cdn.jsdelivr.net/npm/vue-seamless-scroll@1.1.17/dist/vue-seamless-scroll.min.js`
+`https://cdn.jsdelivr.net/npm/vue-seamless-scroll@1.1.20/dist/vue-seamless-scroll.min.js`
 
 ## 使用
 ### ES6

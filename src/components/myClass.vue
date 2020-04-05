@@ -22,6 +22,7 @@
     </div>
   </div>
 </template>
+
 <script>
   require('comutils/animationFrame')()
   const arrayEqual = require('comutils/arrayEqual')
@@ -37,9 +38,6 @@
         height: 0,
         width: 0, // 外容器宽度
         realBoxWidth: 0, // 内容实际宽度
-        reqFrame: null, // move动画的animationFrame定时器
-        singleWaitTime: null, // single 单步滚动的定时器
-        isHover: false // mouseenter mouseleave 控制this._move()的开关
       }
     },
     props: {
@@ -366,8 +364,14 @@
         }
       }
     },
+    beforeCreate () {
+      this.reqFrame = null // move动画的animationFrame定时器
+      this.singleWaitTime = null // single 单步滚动的定时器
+      this.isHover = false // mouseenter mouseleave 控制this._move()的开关
+    },
     beforeDestroy () {
       this._cancle()
+      clearTimeout(this.singleWaitTime)
     }
   }
 </script>
