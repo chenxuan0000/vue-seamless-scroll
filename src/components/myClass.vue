@@ -237,18 +237,10 @@
         }, this.delay)
       },
       enter () {
-        if (this.hoverStopSwitch) {
-          this.isHover = true //关闭_move
-          // 防止频频hover进出单步滚动,导致定时器乱掉
-          if (this.singleWaitTime) clearTimeout(this.singleWaitTime)
-          this._cancle()
-        }
+        if (this.hoverStopSwitch) this._stopMove()
       },
       leave () {
-        if (this.hoverStopSwitch) {
-          this.isHover = false //开启_move
-          this._move()
-        }
+        if (this.hoverStopSwitch) this._startMove()
       },
       _move () {
         // 鼠标移入时拦截_move()
@@ -349,6 +341,16 @@
         if (data.length > 100) {
           console.warn(`数据达到了${data.length}条有点多哦~,可能会造成部分老旧浏览器卡顿。`);
         }
+      },
+      _startMove () {
+        this.isHover = false //开启_move
+        this._move()
+      },
+      _stopMove () {
+        this.isHover = true //关闭_move
+        // 防止频频hover进出单步滚动,导致定时器乱掉
+        if (this.singleWaitTime) clearTimeout(this.singleWaitTime)
+        this._cancle()
       }
     },
     mounted () {

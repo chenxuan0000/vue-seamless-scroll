@@ -9,7 +9,13 @@
         <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;limitMoveNum: 5
         <br />}
       </div>
-      <my-class :data="listData" class="warp" :class-option="classOption" @ScrollEnd="end">
+      <my-class
+        ref="demo1"
+        :data="listData"
+        class="warp"
+        :class-option="classOption"
+        @ScrollEnd="end"
+      >
         <ul class="item">
           <a
             target="_blank"
@@ -360,6 +366,12 @@
       }
     },
     created () {
+      setTimeout(() => {
+        this.$refs.demo1._stopMove()
+      }, 4000);
+      setTimeout(() => {
+        this.$refs.demo1._startMove()
+      }, 7000);
       setTimeout(() => {
         this.listData5 = [1, 2, 3, 4, 5]
         this.listData4 = [1, 2, 3, 4, 5]
