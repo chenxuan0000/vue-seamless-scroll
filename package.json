@@ -4,10 +4,8 @@
 	"description": "A simple, Seamless scrolling for Vue.js",
 	"main": "dist/vue-seamless-scroll.min.js",
 	"scripts": {
-		"dev": "cross-env NODE_ENV=development webpack-dev-server --config ./build/webpack.dev.js --open --inline --hot",
 		"build:debug": "cross-env NODE_ENV=debug webpack --config build/webpack.dist.js",
 		"build:prod": "cross-env NODE_ENV=production webpack --config build/webpack.dist.js",
-		"build:examples": "webpack --config build/webpack.examples.js",
 		"build:all": "npm run build:debug && npm run build:prod && npm run build:examples",
 		"unit:test": "cross-env BABEL_ENV=test karma start --single-run"
 	},

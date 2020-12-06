@@ -1,0 +1,26 @@
+{
+  "name": "vue-seamless-scroll-website",
+  "version": "1.0.0",
+  "description": "vue-seamless-scroll website",
+  "author": "chenxuan",
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "docs:dev": "vuepress dev docs",
+    "docs:build": "vuepress build docs",
+    "docs:deploy": "sudo ./deploy.sh"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@vuepress/plugin-back-to-top": "^1.6.0",
+    "@vuepress/plugin-google-analytics": "^1.6.0",
+    "vue-seamless-scroll": "^1.1.21",
+    "vuepress-plugin-seo": "^0.1.4",
+    "vuepress-plugin-sitemap": "^2.3.1",
+    "vuepress": "^1.7.1",
+    "vuepress-plugin-serve": "^2.0.4"
+  },
+  "resolutions": {
+    "watchpack": "1.6.1"
+  }
+}
