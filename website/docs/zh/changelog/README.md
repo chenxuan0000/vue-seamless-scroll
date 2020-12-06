@@ -3,16 +3,17 @@ sidebar: auto
 ---
 # 更新日志
 
+## 1.1.23 (2020-12-06)
+
+*  fixed issues: [#138](https://github.com/chenxuan0000/vue-seamless-scroll/issues/138) [#136](https://github.com/chenxuan0000/vue-seamless-scroll/issues/136) [#127](https://github.com/chenxuan0000/vue-seamless-scroll/issues/127)
 ## 1.1.21 (2020-04-05)
 
 *  fixed issues: [#68](https://github.com/chenxuan0000/vue-seamless-scroll/issues/68) [#87](https://github.com/chenxuan0000/vue-seamless-scroll/issues/87) [#89](https://github.com/chenxuan0000/vue-seamless-scroll/issues/89)
 
 
-
 ## 1.1.20 (2020-04-05)
 
 *  文档更新，源码微调
-
 
 ## 1.1.17 (2019-07-29)
 

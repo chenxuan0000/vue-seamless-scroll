@@ -216,6 +216,10 @@ exports.default = {
     }
   },
   methods: {
+    reset: function reset() {
+      this._cancle();
+      this._initMove();
+    },
     leftSwitchClick: function leftSwitchClick() {
       if (!this.leftSwitchState) return;
 
@@ -437,14 +441,12 @@ exports.default = {
       this._dataWarm(newData);
 
       if (!arrayEqual(newData, oldData)) {
-        this._cancle();
-        this._initMove();
+        this.reset();
       }
     },
     autoPlay: function autoPlay(bol) {
       if (bol) {
-        this._cancle();
-        this._initMove();
+        this.reset();
       } else {
         this._stopMove();
       }

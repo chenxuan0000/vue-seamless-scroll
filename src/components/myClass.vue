@@ -1,9 +1,19 @@
 <template>
   <div ref="wrap">
-    <div :style="leftSwitch" v-if="navigation" :class="leftSwitchClass" @click="leftSwitchClick">
+    <div
+      :style="leftSwitch"
+      v-if="navigation"
+      :class="leftSwitchClass"
+      @click="leftSwitchClick"
+    >
       <slot name="left-switch"></slot>
     </div>
-    <div :style="rightSwitch" v-if="navigation" :class="rightSwitchClass" @click="rightSwitchClick">
+    <div
+      :style="rightSwitch"
+      v-if="navigation"
+      :class="rightSwitchClass"
+      @click="rightSwitchClick"
+    >
       <slot name="right-switch"></slot>
     </div>
     <div
@@ -156,6 +166,10 @@
       }
     },
     methods: {
+      reset () {
+        this._cancle()
+        this._initMove()
+      },
       leftSwitchClick () {
         if (!this.leftSwitchState) return
         // 小于单步距离
@@ -357,7 +371,7 @@
         // 防止频频hover进出单步滚动,导致定时器乱掉
         if (this.singleWaitTime) clearTimeout(this.singleWaitTime)
         this._cancle()
-      }
+      },
     },
     mounted () {
       this._initMove()
@@ -367,14 +381,12 @@
         this._dataWarm(newData)
         //监听data是否有变更
         if (!arrayEqual(newData, oldData)) {
-          this._cancle()
-          this._initMove()
+          this.reset()
         }
       },
       autoPlay (bol) {
         if (bol) {
-          this._cancle()
-          this._initMove()
+          this.reset()
         } else {
           this._stopMove()
         }

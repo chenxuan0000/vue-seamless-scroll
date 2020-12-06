@@ -1,8 +1,8 @@
-/examples
-/examples-src
+/website/*
 /LICENSE
-/README.md
+/tests/*
 /.babelrc
+/karma.conf.js
 /.idea
 /node_modules
 /build

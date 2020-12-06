@@ -6,15 +6,17 @@
   "license": "MIT",
   "private": false,
   "scripts": {
-    "docs:dev": "vuepress dev docs",
-    "docs:build": "vuepress build docs",
+    "docs:dev": "sudo vuepress dev docs",
+    "docs:build": "sudo vuepress build docs",
     "docs:deploy": "sudo ./deploy.sh"
   },
-  "dependencies": {},
+  "dependencies": {
+    "echarts": "^4.0.0",
+    "vue-seamless-scroll": "^1.1.21"
+  },
   "devDependencies": {
     "@vuepress/plugin-back-to-top": "^1.6.0",
     "@vuepress/plugin-google-analytics": "^1.6.0",
-    "vue-seamless-scroll": "^1.1.21",
     "vuepress-plugin-seo": "^0.1.4",
     "vuepress-plugin-sitemap": "^2.3.1",
     "vuepress": "^1.7.1",
