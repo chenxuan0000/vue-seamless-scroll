@@ -4,4 +4,4 @@ npm-debug.log
 .idea/
 coverage/
 package-lock.json
-/website/public/*
+/website/public

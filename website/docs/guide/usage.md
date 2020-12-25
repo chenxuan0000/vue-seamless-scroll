@@ -8,7 +8,8 @@
 import Vue from 'vue'
 import scroll from 'vue-seamless-scroll'
 Vue.use(scroll)
-vue-seamless-scroll
+
+// Or you can set the globally registered component name yourself. The default registered component name is vue-tableau-slider
 Vue.use(scroll,{componentName: 'scroll-seamless'})
 
 // 2.install alone
