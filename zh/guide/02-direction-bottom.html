@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>02 - 向下滚动 | vue-seamless-scroll</title>
+    <meta name="generator" content="VuePress 1.7.1">
+    <link rel="icon" href="/vue-seamless-scroll/favicon.ico">
+    <meta name="description" content="一个简单的基于vue.js的无缝滚动">
+    
+    <link rel="preload" href="/vue-seamless-scroll/assets/css/0.styles.7a7ce972.css" as="style"><link rel="preload" href="/vue-seamless-scroll/assets/js/app.e6add531.js" as="script"><link rel="preload" href="/vue-seamless-scroll/assets/js/4.9443f729.js" as="script"><link rel="preload" href="/vue-seamless-scroll/assets/js/43.b12c5f61.js" as="script"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/10.044c202a.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/11.0d8d3acd.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/12.854458d6.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/13.f372ccbc.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/14.ee65a065.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/15.d36b6094.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/16.fd662dcc.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/17.e15d206e.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/18.3905f91a.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/19.199011dd.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/20.60d5b3d7.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/21.a23f0991.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/22.adb154cf.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/23.0ae3f686.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/24.e78fdd6c.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/25.9ec75b8d.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/26.fb8a8125.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/27.5a8755fb.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/28.212a5fe3.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/29.bbaa6555.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/3.90f6539a.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/30.f2f31f45.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/31.fb204240.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/32.0e5c5de3.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/33.1f1e2abb.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/34.204c443a.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/35.7e5eda2a.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/36.de74c051.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/37.df6629ae.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/38.874d9de3.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/39.8902017f.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/40.66a50291.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/41.7a1474af.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/42.435f2267.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/44.7397b1ef.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/45.79224337.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/46.110e43c4.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/47.a013474e.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/48.c75dca23.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/49.ccf19be1.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/5.4c810dc1.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/50.0f44a2eb.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/51.2fed45df.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/52.474de411.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/53.2f5abe52.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/54.f7fb638e.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/55.1ac332fa.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/56.f768f786.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/57.d2aa2722.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/58.3faf7da5.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/59.e1c0308b.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/6.7d81d8b9.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/7.d9d26d03.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/8.141cb8b9.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/9.0d24bff0.js"><link rel="prefetch" href="/vue-seamless-scroll/assets/js/vendors~docsearch.04b5518a.js">
+    <link rel="stylesheet" href="/vue-seamless-scroll/assets/css/0.styles.7a7ce972.css">
+  </head>
+  <body>
+    <div id="app" data-server-rendered="true"><div class="theme-container"><header class="navbar"><div class="sidebar-button"><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" role="img" viewBox="0 0 448 512" class="icon"><path fill="currentColor" d="M436 124H12c-6.627 0-12-5.373-12-12V80c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12zm0 160H12c-6.627 0-12-5.373-12-12v-32c0-6.627 5.373-12 12-12h424c6.627 0 12 5.373 12 12v32c0 6.627-5.373 12-12 12z"></path></svg></div> <a href="/vue-seamless-scroll/zh/" class="home-link router-link-active"><!----> <span class="site-name">vue-seamless-scroll</span></a> <div class="links"><div class="search-box"><input aria-label="Search" autocomplete="off" spellcheck="false" value=""> <!----></div> <nav class="nav-links can-hide"><div class="nav-item"><a href="/vue-seamless-scroll/zh/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><a href="/vue-seamless-scroll/zh/guide/" class="nav-link router-link-active">
+  指南
+</a></div><div class="nav-item"><a href="/vue-seamless-scroll/zh/changelog/" class="nav-link">
+  更新日志
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">选择语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">选择语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/vue-seamless-scroll/guide/02-direction-bottom.html" class="nav-link">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/vue-seamless-scroll/zh/guide/02-direction-bottom.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  简体中文
+</a></li></ul></div></div> <a href="https://github.com/chenxuan0000/vue-seamless-scroll" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav></div></header> <div class="sidebar-mask"></div> <aside class="sidebar"><nav class="nav-links"><div class="nav-item"><a href="/vue-seamless-scroll/zh/" class="nav-link">
+  主页
+</a></div><div class="nav-item"><a href="/vue-seamless-scroll/zh/guide/" class="nav-link router-link-active">
+  指南
+</a></div><div class="nav-item"><a href="/vue-seamless-scroll/zh/changelog/" class="nav-link">
+  更新日志
+</a></div><div class="nav-item"><div class="dropdown-wrapper"><button type="button" aria-label="Select language" class="dropdown-title"><span class="title">选择语言</span> <span class="arrow down"></span></button> <button type="button" aria-label="Select language" class="mobile-dropdown-title"><span class="title">选择语言</span> <span class="arrow right"></span></button> <ul class="nav-dropdown" style="display:none;"><li class="dropdown-item"><!----> <a href="/vue-seamless-scroll/guide/02-direction-bottom.html" class="nav-link">
+  English
+</a></li><li class="dropdown-item"><!----> <a href="/vue-seamless-scroll/zh/guide/02-direction-bottom.html" aria-current="page" class="nav-link router-link-exact-active router-link-active">
+  简体中文
+</a></li></ul></div></div> <a href="https://github.com/chenxuan0000/vue-seamless-scroll" target="_blank" rel="noopener noreferrer" class="repo-link">
+    GitHub
+    <span><svg xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" x="0px" y="0px" viewBox="0 0 100 100" width="15" height="15" class="icon outbound"><path fill="currentColor" d="M18.8,85.1h56l0,0c2.2,0,4-1.8,4-4v-32h-8v28h-48v-48h28v-8h-32l0,0c-2.2,0-4,1.8-4,4v56C14.8,83.3,16.6,85.1,18.8,85.1z"></path> <polygon fill="currentColor" points="45.7,48.7 51.3,54.3 77.2,28.5 77.2,37.2 85.2,37.2 85.2,14.9 62.8,14.9 62.8,22.9 71.5,22.9"></polygon></svg> <span class="sr-only">(opens new window)</span></span></a></nav>  <ul class="sidebar-links"><li><section class="sidebar-group depth-0"><p class="sidebar-heading"><span>指南</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue-seamless-scroll/zh/guide/" aria-current="page" class="sidebar-link">安装</a></li><li><a href="/vue-seamless-scroll/zh/guide/usage.html" class="sidebar-link">使用</a></li><li><a href="/vue-seamless-scroll/zh/guide/properties.html" class="sidebar-link">组件配置</a></li><li><a href="/vue-seamless-scroll/zh/guide/events.html" class="sidebar-link">回调事件</a></li><li><a href="/vue-seamless-scroll/zh/guide/note.html" class="sidebar-link">注意项</a></li><li><a href="/vue-seamless-scroll/zh/guide/issuses.html" class="sidebar-link">常见Issues</a></li></ul></section></li><li><section class="sidebar-group depth-0"><p class="sidebar-heading open"><span>示例</span> <!----></p> <ul class="sidebar-links sidebar-group-items"><li><a href="/vue-seamless-scroll/zh/guide/01-basic.html" class="sidebar-link">01 - 默认配置</a></li><li><a href="/vue-seamless-scroll/zh/guide/02-direction-bottom.html" aria-current="page" class="active sidebar-link">02 - 向下滚动</a></li><li><a href="/vue-seamless-scroll/zh/guide/03-direction-right.html" class="sidebar-link">03 - 向右滚动</a></li><li><a href="/vue-seamless-scroll/zh/guide/04-step.html" class="sidebar-link">04 - 滚动速度</a></li><li><a href="/vue-seamless-scroll/zh/guide/05-hoverStop.html" class="sidebar-link">05 - 禁用鼠标悬停停止</a></li><li><a href="/vue-seamless-scroll/zh/guide/06-singleStop.html" class="sidebar-link">06 - 单步停顿</a></li><li><a href="/vue-seamless-scroll/zh/guide/07-singleStopTime.html" class="sidebar-link">07 - 单行停顿时间(singleHeight,waitTime)</a></li><li><a href="/vue-seamless-scroll/zh/guide/08-switch.html" class="sidebar-link">08 - switch控制切换</a></li><li><a href="/vue-seamless-scroll/zh/guide/09-echart.html" class="sidebar-link">09 - echart图表无缝滚动</a></li><li><a href="/vue-seamless-scroll/zh/guide/10-array-property-update.html" class="sidebar-link">10 - 复杂结构数组属性更新问题</a></li><li><a href="/vue-seamless-scroll/zh/guide/11-array-length-update.html" class="sidebar-link">11 - 滚动列表动态追加数据</a></li></ul></section></li></ul> </aside> <main class="page"> <div class="theme-default-content content__default"><h1 id="_02-向下滚动"><a href="#_02-向下滚动" class="header-anchor">#</a> 02 - 向下滚动</h1> <!----> <div class="language-vue extra-class"><pre class="language-vue"><code><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>template</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>vue-seamless-scroll</span>
+    <span class="token attr-name">:data</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>listData<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name">:class-option</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>classOption<span class="token punctuation">&quot;</span></span>
+    <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>warp<span class="token punctuation">&quot;</span></span>
+  <span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>ul</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>item<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>li</span> <span class="token attr-name">v-for</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>(item, index) in listData<span class="token punctuation">&quot;</span></span> <span class="token attr-name">:key</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>index<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>title<span class="token punctuation">&quot;</span></span> <span class="token attr-name">v-text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>item.title<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+        <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>span</span> <span class="token attr-name">class</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>date<span class="token punctuation">&quot;</span></span> <span class="token attr-name">v-text</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>item.date<span class="token punctuation">&quot;</span></span><span class="token punctuation">&gt;</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>span</span><span class="token punctuation">&gt;</span></span>
+      <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>li</span><span class="token punctuation">&gt;</span></span>
+    <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>ul</span><span class="token punctuation">&gt;</span></span>
+  <span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>vue-seamless-scroll</span><span class="token punctuation">&gt;</span></span>
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>template</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span><span class="token punctuation">&gt;</span></span><span class="token script"><span class="token language-javascript">
+  <span class="token keyword">import</span> vueSeamlessScroll <span class="token keyword">from</span> <span class="token string">'vue-seamless-scroll'</span>
+
+  <span class="token keyword">export</span> <span class="token keyword">default</span> <span class="token punctuation">{</span>
+    name<span class="token operator">:</span> <span class="token string">'Example01Basic'</span><span class="token punctuation">,</span>
+    components<span class="token operator">:</span> <span class="token punctuation">{</span>
+      vueSeamlessScroll
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+    <span class="token function">data</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+      <span class="token keyword">return</span> <span class="token punctuation">{</span>
+        listData<span class="token operator">:</span> <span class="token punctuation">[</span><span class="token punctuation">{</span>
+          <span class="token string">'title'</span><span class="token operator">:</span> <span class="token string">'无缝滚动第一行无缝滚动第一行'</span><span class="token punctuation">,</span>
+          <span class="token string">'date'</span><span class="token operator">:</span> <span class="token string">'2017-12-16'</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+          <span class="token string">'title'</span><span class="token operator">:</span> <span class="token string">'无缝滚动第二行无缝滚动第二行'</span><span class="token punctuation">,</span>
+          <span class="token string">'date'</span><span class="token operator">:</span> <span class="token string">'2017-12-16'</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+          <span class="token string">'title'</span><span class="token operator">:</span> <span class="token string">'无缝滚动第三行无缝滚动第三行'</span><span class="token punctuation">,</span>
+          <span class="token string">'date'</span><span class="token operator">:</span> <span class="token string">'2017-12-16'</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+          <span class="token string">'title'</span><span class="token operator">:</span> <span class="token string">'无缝滚动第四行无缝滚动第四行'</span><span class="token punctuation">,</span>
+          <span class="token string">'date'</span><span class="token operator">:</span> <span class="token string">'2017-12-16'</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+          <span class="token string">'title'</span><span class="token operator">:</span> <span class="token string">'无缝滚动第五行无缝滚动第五行'</span><span class="token punctuation">,</span>
+          <span class="token string">'date'</span><span class="token operator">:</span> <span class="token string">'2017-12-16'</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+          <span class="token string">'title'</span><span class="token operator">:</span> <span class="token string">'无缝滚动第六行无缝滚动第六行'</span><span class="token punctuation">,</span>
+          <span class="token string">'date'</span><span class="token operator">:</span> <span class="token string">'2017-12-16'</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+          <span class="token string">'title'</span><span class="token operator">:</span> <span class="token string">'无缝滚动第七行无缝滚动第七行'</span><span class="token punctuation">,</span>
+          <span class="token string">'date'</span><span class="token operator">:</span> <span class="token string">'2017-12-16'</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+          <span class="token string">'title'</span><span class="token operator">:</span> <span class="token string">'无缝滚动第八行无缝滚动第八行'</span><span class="token punctuation">,</span>
+          <span class="token string">'date'</span><span class="token operator">:</span> <span class="token string">'2017-12-16'</span>
+        <span class="token punctuation">}</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>
+          <span class="token string">'title'</span><span class="token operator">:</span> <span class="token string">'无缝滚动第九行无缝滚动第九行'</span><span class="token punctuation">,</span>
+          <span class="token string">'date'</span><span class="token operator">:</span> <span class="token string">'2017-12-16'</span>
+        <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token punctuation">,</span>
+        classOption<span class="token operator">:</span> <span class="token punctuation">{</span>
+          direction<span class="token operator">:</span> <span class="token number">0</span>
+        <span class="token punctuation">}</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span><span class="token punctuation">,</span>
+  <span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span>
+
+<span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>style</span> <span class="token attr-name">lang</span><span class="token attr-value"><span class="token punctuation attr-equals">=</span><span class="token punctuation">&quot;</span>scss<span class="token punctuation">&quot;</span></span> <span class="token attr-name">scoped</span><span class="token punctuation">&gt;</span></span><span class="token style"><span class="token language-css">
+  <span class="token selector">.warp</span> <span class="token punctuation">{</span>
+    <span class="token property">height</span><span class="token punctuation">:</span> 270px<span class="token punctuation">;</span>
+    <span class="token property">width</span><span class="token punctuation">:</span> 360px<span class="token punctuation">;</span>
+    <span class="token property">margin</span><span class="token punctuation">:</span> 0 auto<span class="token punctuation">;</span>
+    <span class="token property">overflow</span><span class="token punctuation">:</span> hidden<span class="token selector">;
+    ul</span> <span class="token punctuation">{</span>
+      <span class="token property">list-style</span><span class="token punctuation">:</span> none<span class="token punctuation">;</span>
+      <span class="token property">padding</span><span class="token punctuation">:</span> 0<span class="token punctuation">;</span>
+      <span class="token property">margin</span><span class="token punctuation">:</span> 0 auto<span class="token selector">;
+      li,
+      a</span> <span class="token punctuation">{</span>
+        <span class="token property">display</span><span class="token punctuation">:</span> block<span class="token punctuation">;</span>
+        <span class="token property">height</span><span class="token punctuation">:</span> 30px<span class="token punctuation">;</span>
+        <span class="token property">line-height</span><span class="token punctuation">:</span> 30px<span class="token punctuation">;</span>
+        <span class="token property">display</span><span class="token punctuation">:</span> flex<span class="token punctuation">;</span>
+        <span class="token property">justify-content</span><span class="token punctuation">:</span> space-between<span class="token punctuation">;</span>
+        <span class="token property">font-size</span><span class="token punctuation">:</span> 15px<span class="token punctuation">;</span>
+      <span class="token punctuation">}</span>
+    <span class="token punctuation">}</span>
+  <span class="token punctuation">}</span>
+</span></span><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>style</span><span class="token punctuation">&gt;</span></span>
+
+</code></pre></div></div> <footer class="page-edit"><!----> <!----></footer> <div class="page-nav"><p class="inner"><span class="prev">
+      ←
+      <a href="/vue-seamless-scroll/zh/guide/01-basic.html" class="prev">
+        01 - 默认配置
+      </a></span> <span class="next"><a href="/vue-seamless-scroll/zh/guide/03-direction-right.html">
+        03 - 向右滚动
+      </a>
+      →
+    </span></p></div> </main></div><div class="global-ui"></div></div>
+    <script src="/vue-seamless-scroll/assets/js/app.e6add531.js" defer></script><script src="/vue-seamless-scroll/assets/js/4.9443f729.js" defer></script><script src="/vue-seamless-scroll/assets/js/43.b12c5f61.js" defer></script>
+  </body>
+</html>
