@@ -258,7 +258,7 @@
       },
       _move () {
         // 鼠标移入时拦截_move()
-        if (this.isHover) return
+        if (this.isHover || !this.scrollSwitch) return
         this._cancle() //进入move立即先清除动画 防止频繁touchMove导致多动画同时进行
         this.reqFrame = requestAnimationFrame(
           function () {
@@ -378,6 +378,7 @@
     },
     watch: {
       data (newData, oldData) {
+        console.log("数据有变化。。。。。。")
         this._dataWarm(newData)
         //监听data是否有变更
         if (!arrayEqual(newData, oldData)) {
