@@ -35,7 +35,7 @@
 
 <script>
   require('comutils/animationFrame')()
-  const arrayEqual = require('comutils/arrayEqual')
+  //const arrayEqual = require('comutils/arrayEqual')
   const copyObj = require('comutils/copyObj')
   export default {
     name: 'vue-seamless-scroll',
