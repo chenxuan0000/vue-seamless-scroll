@@ -378,12 +378,11 @@
     },
     watch: {
       data (newData, oldData) {
-        console.log("数据有变化。。。。。。")
-        this._dataWarm(newData)
+       // this._dataWarm(newData)
         //监听data是否有变更
-        if (!arrayEqual(newData, oldData)) {
+       // if (!arrayEqual(newData, oldData)) {
           this.reset()
-        }
+     //   }
       },
       autoPlay (bol) {
         if (bol) {

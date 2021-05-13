@@ -184,6 +184,7 @@ exports.default = {
       return this.data.length >= this.options.limitMoveNum;
     },
     hoverStopSwitch: function hoverStopSwitch() {
+      console.log("hoverStopSwitch:" + (this.options.hoverStop && this.autoPlay && this.scrollSwitch));
       return this.options.hoverStop && this.autoPlay && this.scrollSwitch;
     },
     canTouchScroll: function canTouchScroll() {
@@ -303,6 +304,7 @@ exports.default = {
       }
       if (timer) clearTimeout(timer);
       timer = setTimeout(function () {
+        console.log("touchEnd");
         _this2.delay = 0;
         _this2._move();
       }, this.delay);
@@ -375,12 +377,14 @@ exports.default = {
     _initMove: function _initMove() {
       var _this4 = this;
 
+      console.log("_initMove ==== ");
       this.$nextTick(function () {
         var switchDelay = _this4.options.switchDelay;
         var autoPlay = _this4.autoPlay,
             isHorizontal = _this4.isHorizontal;
 
         _this4._dataWarm(_this4.data);
+        console.log("_initMove ==== 1");
         _this4.copyHtml = '';
         if (isHorizontal) {
           _this4.height = _this4.$refs.wrap.offsetHeight;
@@ -393,7 +397,7 @@ exports.default = {
           _this4.$refs.realBox.style.width = slotListWidth + 'px';
           _this4.realBoxWidth = slotListWidth;
         }
-
+        console.log("_initMove ==== 2");
         if (autoPlay) {
           _this4.ease = 'ease-in';
           _this4.delay = 0;
@@ -402,8 +406,10 @@ exports.default = {
           _this4.delay = switchDelay;
           return;
         }
+        console.log("_initMove ==== 3");
 
         if (_this4.scrollSwitch) {
+          console.log("可以进行滚动");
           var timer = void 0;
           if (timer) clearTimeout(timer);
           _this4.copyHtml = _this4.$refs.slotList.innerHTML;
@@ -412,6 +418,7 @@ exports.default = {
             _this4._move();
           }, 0);
         } else {
+          console.log("不可进行滚动");
           _this4._cancle();
           _this4.yPos = _this4.xPos = 0;
         }
@@ -423,6 +430,7 @@ exports.default = {
       }
     },
     _startMove: function _startMove() {
+      console.log("_startMove");
       this.isHover = false;
       this._move();
     },
@@ -437,14 +445,12 @@ exports.default = {
   },
 
   watch: {
-    data: function data(newData, oldData) {
-      console.log("数据有变化。。。。。。");
-      this._dataWarm(newData);
+    data: {
+      handler: function handler(newData, oldData) {
+        console.log("数据监控。。。。。。");
 
-      if (!arrayEqual(newData, oldData)) {
         this.reset();
-      }
-    },
+      } },
     autoPlay: function autoPlay(bol) {
       if (bol) {
         this.reset();
