@@ -314,7 +314,7 @@ exports.default = {
       if (this.hoverStopSwitch) this._startMove();
     },
     _move: function _move() {
-      if (this.isHover) return;
+      if (this.isHover || !this.scrollSwitch) return;
       this._cancle();
       this.reqFrame = requestAnimationFrame(function () {
         var _this3 = this;
@@ -438,11 +438,7 @@ exports.default = {
 
   watch: {
     data: function data(newData, oldData) {
-      this._dataWarm(newData);
-
-      if (!arrayEqual(newData, oldData)) {
-        this.reset();
-      }
+      this.reset();
     },
     autoPlay: function autoPlay(bol) {
       if (bol) {
