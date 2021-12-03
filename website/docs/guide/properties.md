@@ -33,7 +33,7 @@ step 值不建议太小,不然会有卡顿效果(如果设置了单步滚动,ste
 
 - type: `Boolean`
 - required: `false`
-- default：`false`
+- default：`true`
 
 是否启用鼠标 hover 控制。
 
