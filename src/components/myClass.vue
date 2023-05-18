@@ -167,7 +167,7 @@
     },
     methods: {
       reset () {
-        this._cancle()
+        this._cancel()
         this._initMove()
       },
       leftSwitchClick () {
@@ -188,7 +188,7 @@
         }
         this.xPos -= this.options.switchSingleStep
       },
-      _cancle () {
+      _cancel () {
         cancelAnimationFrame(this.reqFrame || '')
       },
       touchStart (e) {
@@ -205,10 +205,10 @@
         if (!!singleHeight && !!singleWidth) {
           if (timer) clearTimeout(timer)
           timer = setTimeout(() => {
-            this._cancle()
+            this._cancel()
           }, waitTime + 20)
         } else {
-          this._cancle()
+          this._cancel()
         }
       },
       touchMove (e) {
@@ -259,7 +259,7 @@
       _move () {
         // 鼠标移入时拦截_move()
         if (this.isHover) return
-        this._cancle() //进入move立即先清除动画 防止频繁touchMove导致多动画同时进行
+        this._cancel() //进入move立即先清除动画 防止频繁touchMove导致多动画同时进行
         this.reqFrame = requestAnimationFrame(
           function () {
             const h = this.realBoxHeight / 2  //实际高度
@@ -352,7 +352,7 @@
               this._move()
             }, 0);
           } else {
-            this._cancle()
+            this._cancel()
             this.yPos = this.xPos = 0
           }
         })
@@ -370,7 +370,7 @@
         this.isHover = true //关闭_move
         // 防止频频hover进出单步滚动,导致定时器乱掉
         if (this.singleWaitTime) clearTimeout(this.singleWaitTime)
-        this._cancle()
+        this._cancel()
       },
     },
     mounted () {
@@ -399,7 +399,7 @@
       this.ease = 'ease-in'
     },
     beforeDestroy () {
-      this._cancle()
+      this._cancel()
       clearTimeout(this.singleWaitTime)
     }
   }
