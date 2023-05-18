@@ -28,7 +28,9 @@
       <div ref="slotList" :style="float">
         <slot></slot>
       </div>
-      <div v-html="copyHtml" :style="float"></div>
+      <div :style="float">
+        <slot v-if="showVirtualList"></slot>
+      </div>
     </div>
   </div>
 </template>
@@ -44,7 +46,7 @@
         xPos: 0,
         yPos: 0,
         delay: 0,
-        copyHtml: '',
+        showVirtualList: false,
         height: 0,
         width: 0, // 外容器宽度
         realBoxWidth: 0, // 内容实际宽度
@@ -319,7 +321,7 @@
           const { switchDelay } = this.options
           const { autoPlay, isHorizontal } = this
           this._dataWarm(this.data)
-          this.copyHtml = '' //清空copy
+          this.showVirtualList = false
           if (isHorizontal) {
             this.height = this.$refs.wrap.offsetHeight
             this.width = this.$refs.wrap.offsetWidth
@@ -346,7 +348,7 @@
           if (this.scrollSwitch) {
             let timer
             if (timer) clearTimeout(timer)
-            this.copyHtml = this.$refs.slotList.innerHTML
+            this.showVirtualList = true
             setTimeout(() => {
               this.realBoxHeight = this.$refs.realBox.offsetHeight
               this._move()
