@@ -28,7 +28,9 @@
       <div ref="slotList" :style="float">
         <slot></slot>
       </div>
-      <div v-html="copyHtml" :style="float"></div>
+      <div :style="float">
+        <slot v-if="showVirtualList"></slot>
+      </div>
     </div>
   </div>
 </template>
@@ -44,7 +46,7 @@
         xPos: 0,
         yPos: 0,
         delay: 0,
-        copyHtml: '',
+        showVirtualList: false,
         height: 0,
         width: 0, // 外容器宽度
         realBoxWidth: 0, // 内容实际宽度
@@ -167,7 +169,7 @@
     },
     methods: {
       reset () {
-        this._cancle()
+        this._cancel()
         this._initMove()
       },
       leftSwitchClick () {
@@ -188,7 +190,7 @@
         }
         this.xPos -= this.options.switchSingleStep
       },
-      _cancle () {
+      _cancel () {
         cancelAnimationFrame(this.reqFrame || '')
       },
       touchStart (e) {
@@ -205,10 +207,10 @@
         if (!!singleHeight && !!singleWidth) {
           if (timer) clearTimeout(timer)
           timer = setTimeout(() => {
-            this._cancle()
+            this._cancel()
           }, waitTime + 20)
         } else {
-          this._cancle()
+          this._cancel()
         }
       },
       touchMove (e) {
@@ -259,7 +261,7 @@
       _move () {
         // 鼠标移入时拦截_move()
         if (this.isHover) return
-        this._cancle() //进入move立即先清除动画 防止频繁touchMove导致多动画同时进行
+        this._cancel() //进入move立即先清除动画 防止频繁touchMove导致多动画同时进行
         this.reqFrame = requestAnimationFrame(
           function () {
             const h = this.realBoxHeight / 2  //实际高度
@@ -319,7 +321,7 @@
           const { switchDelay } = this.options
           const { autoPlay, isHorizontal } = this
           this._dataWarm(this.data)
-          this.copyHtml = '' //清空copy
+          this.showVirtualList = false
           if (isHorizontal) {
             this.height = this.$refs.wrap.offsetHeight
             this.width = this.$refs.wrap.offsetWidth
@@ -346,13 +348,13 @@
           if (this.scrollSwitch) {
             let timer
             if (timer) clearTimeout(timer)
-            this.copyHtml = this.$refs.slotList.innerHTML
+            this.showVirtualList = true
             setTimeout(() => {
               this.realBoxHeight = this.$refs.realBox.offsetHeight
               this._move()
             }, 0);
           } else {
-            this._cancle()
+            this._cancel()
             this.yPos = this.xPos = 0
           }
         })
@@ -370,7 +372,7 @@
         this.isHover = true //关闭_move
         // 防止频频hover进出单步滚动,导致定时器乱掉
         if (this.singleWaitTime) clearTimeout(this.singleWaitTime)
-        this._cancle()
+        this._cancel()
       },
     },
     mounted () {
@@ -399,7 +401,7 @@
       this.ease = 'ease-in'
     },
     beforeDestroy () {
-      this._cancle()
+      this._cancel()
       clearTimeout(this.singleWaitTime)
     }
   }
