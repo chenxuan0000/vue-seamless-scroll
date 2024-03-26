@@ -28,7 +28,7 @@
       <div ref="slotList" :style="float">
         <slot></slot>
       </div>
-      <div v-html="copyHtml" :style="float"></div>
+      <div v-if="scrollSwitch" :style="float"><slot></slot></div>
     </div>
   </div>
 </template>
@@ -44,7 +44,6 @@
         xPos: 0,
         yPos: 0,
         delay: 0,
-        copyHtml: '',
         height: 0,
         width: 0, // 外容器宽度
         realBoxWidth: 0, // 内容实际宽度
@@ -260,6 +259,7 @@
         // 鼠标移入时拦截_move()
         if (this.isHover) return
         this._cancle() //进入move立即先清除动画 防止频繁touchMove导致多动画同时进行
+        if (!this.scrollSwitch) return; // 因宏任务，故修复组件bug造成死循环
         this.reqFrame = requestAnimationFrame(
           function () {
             const h = this.realBoxHeight / 2  //实际高度
@@ -319,7 +319,7 @@
           const { switchDelay } = this.options
           const { autoPlay, isHorizontal } = this
           this._dataWarm(this.data)
-          this.copyHtml = '' //清空copy
+
           if (isHorizontal) {
             this.height = this.$refs.wrap.offsetHeight
             this.width = this.$refs.wrap.offsetWidth
